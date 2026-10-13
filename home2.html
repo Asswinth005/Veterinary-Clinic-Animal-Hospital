@@ -477,6 +477,16 @@
       background: rgba(13, 148, 136, 0.15);
       color: #5eead4;
     }
+    .dropdown-item-vet.active {
+      background: rgba(13, 148, 136, 0.1);
+      color: #0d9488;
+      font-weight: 700;
+    }
+    .dark .dropdown-item-vet.active {
+      background: rgba(13, 148, 136, 0.22);
+      color: #5eead4;
+      font-weight: 700;
+    }
     .dropdown-item-vet i {
       margin-right: 0.75rem;
       width: 18px;
@@ -582,7 +592,7 @@
           </button>
           <div class="dropdown-vet">
             <a class="dropdown-item-vet" href="index.html"> Home 1</a>
-            <a class="dropdown-item-vet text-teal-700 font-semibold bg-teal-50/80" href="home2.html"> Home 2</a>
+            <a class="dropdown-item-vet active" href="home2.html"> Home 2</a>
           </div>
         </div>
         <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="about.html">About</a>
@@ -624,13 +634,13 @@
     <div id="mobile-menu" class="mobile-menu-vet xl:hidden rounded-b-3xl border-t border-teal-100/50 dark:border-teal-800/30">
       <div class="py-5 px-4 space-y-1.5">
         <div class="py-1">
-          <button onclick="document.getElementById('home-mobile-drop').classList.toggle('hidden'); document.getElementById('home-mobile-icon').classList.toggle('rotate-180')" class="w-full flex items-center justify-between py-3.5 px-4 font-semibold text-teal-700 bg-teal-50 dark:bg-teal-900/30 rounded-2xl transition cursor-pointer">
+          <button onclick="document.getElementById('home-mobile-drop').classList.toggle('hidden'); document.getElementById('home-mobile-icon').classList.toggle('rotate-180')" class="w-full flex items-center justify-between py-3.5 px-4 font-semibold text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-900/30 rounded-2xl transition cursor-pointer">
             <span>Home</span>
             <i id="home-mobile-icon" class="fas fa-chevron-down text-xs opacity-60 transition-transform duration-300"></i>
           </button>
           <div id="home-mobile-drop" class="hidden pl-2 space-y-1 mt-1.5 mb-2">
             <a class="block py-3 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="index.html">Home 1</a>
-            <a class="block py-3 px-4 font-medium text-teal-700 bg-teal-50 dark:bg-teal-900/30 rounded-2xl transition" href="home2.html">Home 2</a>
+            <a class="block py-3 px-4 font-medium text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-900/30 rounded-2xl transition" href="home2.html">Home 2</a>
           </div>
         </div>
         <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="about.html">About</a>
