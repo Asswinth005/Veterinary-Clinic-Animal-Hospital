@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PawCare · Our Services — Veterinary Clinic & Animal Hospital</title>
+
+  <!-- Favicon suite (simplified paw icon) -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='22' r='6' fill='%230d9488'/%3E%3Ccircle cx='8' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='24' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='12' cy='8' r='3.5' fill='%230d9488'/%3E%3Ccircle cx='20' cy='8' r='3.5' fill='%230d9488'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='22' r='6' fill='%230d9488'/%3E%3Ccircle cx='8' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='24' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='12' cy='8' r='3.5' fill='%230d9488'/%3E%3Ccircle cx='20' cy='8' r='3.5' fill='%230d9488'/%3E%3C/svg%3E" />
+
+  <!-- Tailwind CSS with CDN -->
+  <script src="tailwind.js"></script>
+
+  <!-- Prevent theme flash on page load -->
+  <script>
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+
+  <!-- Custom Tailwind Configuration — same palette as reference -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            coral: {
+              50: '#fff5f2',
+              100: '#ffe6df',
+              200: '#ffc9b8',
+              300: '#ffa38a',
+              400: '#ff7a5c',
+              500: '#ff5a36',
+              600: '#ed3b14',
+              700: '#c42d0e',
+              800: '#9c2812',
+              900: '#7f2513',
+            },
+            sand: {
+              50: '#fefdfb',
+              100: '#fdf9f0',
+              200: '#faf0dd',
+              300: '#f5e2c0',
+              400: '#edcd97',
+              500: '#e3b46e',
+              600: '#d49b4a',
+              700: '#b87e36',
+              800: '#96632e',
+              900: '#7a5229',
+            },
+            ink: {
+              50: '#f6f7f9',
+              100: '#eceef2',
+              200: '#d5dae1',
+              300: '#b0bac7',
+              400: '#8595a8',
+              500: '#66788d',
+              600: '#516074',
+              700: '#424e5e',
+              800: '#3a4350',
+              900: '#343a45',
+            },
+            mint: '#d1fae5',
+            fontFamily: {
+              'display': ['"Quicksand"', 'sans-serif'],
+              'body': ['"Inter"', 'system-ui', 'sans-serif'],
+            },
+          },
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Fonts — Quicksand + Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    body {
+      background-color: #fefdfb;
+      color: #343a45;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+    .dark body {
+      background-color: #1a1f2e;
+      color: #eceef2;
+    }
+
+    /* Elegant scrollbar */
+    body::-webkit-scrollbar { width: 6px; }
+    body::-webkit-scrollbar-track { background: #fefdfb; }
+    body::-webkit-scrollbar-thumb { background: #0d9488; border-radius: 20px; }
+
+    /* ===== SERVICES PAGE — UNIQUE DESIGN ELEMENTS ===== */
+
+    /* Page hero — split with angled overlay */
+    .services-hero {
+      position: relative;
+      padding-top: 8.5rem;
+      padding-bottom: 7.5rem;
+      background: #0f766e;
+      overflow: hidden;
+    }
+    @media (min-width: 640px) {
+      .services-hero {
+        padding-top: 9.5rem;
+        padding-bottom: 8.5rem;
+      }
+    }
+    .services-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #115e59 0%, #0d9488 50%, #14b8a6 100%);
+      z-index: 0;
+    }
+    .services-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23fefdfb' fill-opacity='1' d='M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z'%3E%3C/path%3E%3C/svg%3E") no-repeat center bottom;
+      background-size: cover;
+      z-index: 2;
+    }
+    .dark .services-hero::after {
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%231a1f2e' fill-opacity='1' d='M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z'%3E%3C/path%3E%3C/svg%3E") no-repeat center bottom;
+      background-size: cover;
+    }
+
+    /* Floating paw prints */
+    .paw-float {
+      position: absolute;
+      opacity: 0.07;
+      font-size: 7rem;
+      color: white;
+      animation: floatSlow 7s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* Service card — magazine style with number badge */
+    .mag-service-card {
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid rgba(13,148,136,0.1);
+      transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .dark .mag-service-card {
+      background: #232a3d;
+      border-color: rgba(13,148,136,0.2);
+    }
+    .mag-service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px -15px rgba(13,148,136,0.22);
+      border-color: rgba(13,148,136,0.35);
+    }
+    .mag-service-card .num-badge {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #0d9488;
+      border: 2px solid rgba(13,148,136,0.2);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      z-index: 3;
+      transition: all 0.4s;
+    }
+    .dark .mag-service-card .num-badge {
+      background: #0f766e;
+      color: #ffffff;
+      border-color: rgba(94,234,212,0.35);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    }
+    .mag-service-card:hover .num-badge {
+      background: #14b8a6;
+      color: white;
+      border-color: #14b8a6;
+      transform: rotate(-10deg) scale(1.1);
+    }
+
+    /* Feature row — horizontal split service */
+    .feature-row {
+      background: #ffffff;
+      border-radius: 28px;
+      border: 1px solid rgba(13,148,136,0.1);
+      overflow: hidden;
+      transition: all 0.4s;
+      display: flex;
+      flex-direction: column;
+    }
+    .dark .feature-row {
+      background: #232a3d;
+      border-color: rgba(13,148,136,0.2);
+    }
+    @media (min-width: 768px) {
+      .feature-row {
+        flex-direction: row;
+        align-items: stretch;
+      }
+      .feature-row.reverse {
+        flex-direction: row-reverse;
+      }
+    }
+    .feature-row:hover {
+      box-shadow: 0 25px 60px -15px rgba(13,148,136,0.2);
+      border-color: rgba(13,148,136,0.3);
+      transform: translateY(-4px);
+    }
+    .feature-row .fr-img {
+      position: relative;
+      overflow: hidden;
+      min-height: 240px;
+    }
+    @media (min-width: 768px) {
+      .feature-row .fr-img {
+        width: 40%;
+        min-height: auto;
+      }
+    }
+    .feature-row .fr-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s;
+    }
+    .feature-row:hover .fr-img img {
+      transform: scale(1.06);
+    }
+    .feature-row .fr-img .fr-label {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: white;
+      color: #0d9488;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .dark .feature-row .fr-img .fr-label {
+      background: #0f766e;
+      color: white;
+    }
+
+    /* Price tag — pill */
+    .price-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
+      color: #0f766e;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      border: 1px solid rgba(13,148,136,0.15);
+    }
+    .dark .price-pill {
+      background: linear-gradient(135deg, #115e59, #134e4a);
+      color: #5eead4;
+      border-color: rgba(45,212,191,0.2);
+    }
+
+    /* Category filter buttons */
+    .filter-btn {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      border: 2px solid rgba(13,148,136,0.25);
+      color: #0d9488;
+      background: transparent;
+      transition: all 0.3s;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .dark .filter-btn {
+      color: #5eead4;
+      border-color: rgba(45,212,191,0.3);
+    }
+    .filter-btn:hover {
+      background: rgba(13,148,136,0.08);
+      border-color: #14b8a6;
+    }
+    .filter-btn.active {
+      background: #0d9488;
+      color: white;
+      border-color: #0d9488;
+      box-shadow: 0 6px 18px rgba(13,148,136,0.3);
+    }
+    .dark .filter-btn.active {
+      background: #14b8a6;
+      color: #0f172a;
+      border-color: #14b8a6;
+    }
+
+    /* Add-on tile — compact */
+    .addon-tile {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid rgba(13,148,136,0.1);
+      transition: all 0.35s;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+    }
+    .dark .addon-tile {
+      background: #232a3d;
+      border-color: rgba(13,148,136,0.2);
+    }
+    .addon-tile:hover {
+      transform: translateY(-6px);
+      border-color: #14b8a6;
+      box-shadow: 0 18px 40px -12px rgba(13,148,136,0.2);
+    }
+
+    /* Insurance / partner logo strip */
+    .partner-strip {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem 3rem;
+    }
+    .partner-strip .partner-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      opacity: 1;
+    }
+    .partner-strip .partner-item:hover {
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    /* CTA banner — angled */
+    .cta-angle {
+      position: relative;
+      background: linear-gradient(135deg, #0f766e, #0d9488, #14b8a6);
+      overflow: hidden;
+    }
+    .cta-angle::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .cta-angle::after {
+      content: '';
+      position: absolute;
+      bottom: -60%;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255,90,54,0.1);
+      border-radius: 50%;
+    }
+
+    /* Accordion — same as reference */
+    .faq-vet {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid rgba(13, 148, 136, 0.12);
+      transition: all 0.3s ease;
+    }
+    .dark .faq-vet {
+      background: #232a3d;
+      border-color: rgba(13, 148, 136, 0.25);
+    }
+    .faq-vet:hover {
+      border-color: rgba(13, 148, 136, 0.35);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.08);
+    }
+
+    /* Buttons (same as reference) */
+    .btn-teal {
+      background: #0d9488;
+      color: white;
+      font-weight: 600;
+      border-radius: 9999px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 14px rgba(13,148,136,0.3);
+      letter-spacing: 0.3px;
+      font-family: 'Quicksand', sans-serif;
+    }
+    .btn-teal:hover {
+      background: #0f766e;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(13,148,136,0.4);
+    }
+    .btn-coral {
+      background: #ff5a36;
+      color: white;
+      font-weight: 600;
+      border-radius: 9999px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 14px rgba(255,90,54,0.3);
+      font-family: 'Quicksand', sans-serif;
+    }
+    .btn-coral:hover {
+      background: #ed3b14;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(255,90,54,0.4);
+    }
+    .btn-ghost-vet {
+      border: 2px solid rgba(255,255,255,0.6);
+      color: white;
+      background: transparent;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: all 0.3s;
+      font-family: 'Quicksand', sans-serif;
+    }
+    .btn-ghost-vet:hover {
+      background: white;
+      color: #0d9488;
+      border-color: white;
+      transform: scale(1.03);
+    }
+
+    /* Navigation (copied exactly) */
+    .nav-link-vet {
+      position: relative;
+      font-weight: 500;
+      transition: all 0.25s;
+      text-decoration: none !important;
+      font-family: 'Quicksand', sans-serif;
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+    }
+    .nav-link-vet:hover {
+      background: rgba(13, 148, 136, 0.08);
+      color: #0d9488;
+    }
+    .nav-link-vet.active {
+      color: #0d9488 !important;
+      font-weight: 700;
+      background: rgba(13, 148, 136, 0.1);
+    }
+
+    .dropdown-vet {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 0.5rem 0;
+      box-shadow: 0 24px 48px rgba(13, 148, 136, 0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: all 0.25s;
+      z-index: 1000;
+      border: 1px solid rgba(13, 148, 136, 0.12);
+    }
+    .dropdown-vet::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+    }
+    .dark .dropdown-vet {
+      background: #232a3d;
+      border-color: rgba(13, 148, 136, 0.25);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+    }
+    .dropdown-parent:hover .dropdown-vet,
+    .dropdown-parent:focus-within .dropdown-vet,
+    .dropdown-parent.open .dropdown-vet {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-item-vet {
+      display: flex;
+      align-items: center;
+      padding: 0.6rem 1.4rem;
+      transition: all 0.2s;
+      color: #343a45;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      margin: 0 0.4rem;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 500;
+    }
+    .dark .dropdown-item-vet {
+      color: #eceef2;
+    }
+    .dropdown-item-vet:hover {
+      background: rgba(13, 148, 136, 0.08);
+      color: #0d9488;
+      padding-left: 1.7rem;
+    }
+    .dark .dropdown-item-vet:hover {
+      background: rgba(13, 148, 136, 0.15);
+      color: #5eead4;
+    }
+    .dropdown-item-vet i {
+      margin-right: 0.75rem;
+      width: 18px;
+      color: #0d9488;
+    }
+
+    .mobile-menu-vet {
+      background: #ffffff;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .dark .mobile-menu-vet {
+      background: #232a3d;
+    }
+    .mobile-menu-vet.open {
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .social-vet {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(13, 148, 136, 0.1);
+      color: #0d9488;
+      transition: all 0.3s;
+    }
+    .social-vet:hover {
+      background: #0d9488;
+      color: white;
+      transform: translateY(-3px) scale(1.05);
+    }
+    .dark .social-vet {
+      background: rgba(13, 148, 136, 0.2);
+      color: #5eead4;
+    }
+    .dark .social-vet:hover {
+      background: #0d9488;
+      color: white;
+    }
+
+    /* RTL adjustments */
+    [dir="rtl"] .ml-auto { margin-left: 0 !important; margin-right: auto !important; }
+    [dir="rtl"] .ms-1 { margin-left: 0 !important; margin-right: 0.25rem !important; }
+    [dir="rtl"] .dropdown-vet { left: auto; right: 0; }
+    [dir="rtl"] .dropdown-item-vet i { margin-right: 0; margin-left: 0.75rem; }
+    [dir="rtl"] .mag-service-card .num-badge { right: auto; left: 1.25rem; }
+
+    .text-balance { text-wrap: balance; }
+
+    /* Custom SVG fallback for Font Awesome Pro fa-scalpel */
+    .fa-scalpel, i.fa-scalpel {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.125em;
+      background-color: currentColor;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill-rule='evenodd' d='M218 294L426 86c10-10 26-10 36 0l4 4c10 10 10 26 0 36L258 334l-16-16 8-8-16-16zM324 196l14 14-7 7-14-14zM354 166l14 14-7 7-14-14zM384 136l14 14-7 7-14-14zM60 452L212 300l18 18-26 26c-44 44-94 91-144 108zM125 385l50-50 10 10-50 50z'/%3E%3C/svg%3E") no-repeat center / contain;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill-rule='evenodd' d='M218 294L426 86c10-10 26-10 36 0l4 4c10 10 10 26 0 36L258 334l-16-16 8-8-16-16zM324 196l14 14-7 7-14-14zM354 166l14 14-7 7-14-14zM384 136l14 14-7 7-14-14zM60 452L212 300l18 18-26 26c-44 44-94 91-144 108zM125 385l50-50 10 10-50 50z'/%3E%3C/svg%3E") no-repeat center / contain;
+    }
+    .fa-scalpel::before {
+      content: '' !important;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ======== NAVIGATION — exactly copied from reference ======== -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl border-b border-teal-100/50 dark:border-teal-800/30">
+  <div class="container mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-20 md:h-22 relative">
+
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3 shrink-0 group">
+        <div class="w-11 h-11 bg-teal-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" class="w-6 h-6" fill="none">
+            <circle cx="18" cy="22" r="5" fill="white" opacity="0.95"/>
+            <circle cx="10" cy="15" r="3.5" fill="white" opacity="0.95"/>
+            <circle cx="26" cy="15" r="3.5" fill="white" opacity="0.95"/>
+            <circle cx="14" cy="9" r="3" fill="white" opacity="0.95"/>
+            <circle cx="22" cy="9" r="3" fill="white" opacity="0.95"/>
+          </svg>
+        </div>
+        <span class="flex flex-col items-start leading-tight">
+          <span class="text-xl md:text-2xl font-display font-bold tracking-tight text-teal-800 dark:text-teal-200">PawCare</span>
+          <span class="text-coral-500 text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase -mt-0.5">Veterinary Clinic</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden xl:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+        <div class="dropdown-parent relative">
+          <button type="button" class="nav-link-vet font-medium flex items-center gap-1 py-2 text-[15px] text-teal-800 dark:text-teal-200">
+            Home <i class="fas fa-chevron-down text-[10px] opacity-60"></i>
+          </button>
+          <div class="dropdown-vet">
+            <a class="dropdown-item-vet" href="index.html"> Home 1</a>
+            <a class="dropdown-item-vet" href="home2.html"> Home 2</a>
+          </div>
+        </div>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="about.html">About</a>
+        <a class="nav-link-vet active text-teal-800 dark:text-teal-200 text-[15px]" href="services.html">Services</a>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="vets.html">Vets</a>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="membership.html">Membership</a>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="contact.html">Contact</a>
+
+        <div class="dropdown-parent relative">
+          <button type="button" class="nav-link-vet text-teal-800 dark:text-teal-200 font-medium flex items-center gap-1 py-2 text-[15px]">
+            Portal <i class="fas fa-chevron-down text-[10px] opacity-60"></i>
+          </button>
+          <div class="dropdown-vet">
+            <a class="dropdown-item-vet" href="client.html">Client</a>
+            <a class="dropdown-item-vet" href="admin.html"> Admin</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right actions -->
+      <div class="flex items-center gap-2 xl:gap-3 ms-auto">
+        <a href="login.html" class="hidden xl:inline-flex btn-teal py-2.5 px-6 text-sm items-center gap-2">
+          <i class="fas fa-user-circle"></i> Login
+        </a>
+        <button id="theme-toggle" class="hidden xl:flex w-10 h-10 rounded-full bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 hover:scale-110 transition items-center justify-center">
+          <i class="fas fa-moon dark:hidden text-sm"></i>
+          <i class="fas fa-sun hidden dark:inline text-sm"></i>
+        </button>
+        <button id="rtl-toggle" class="hidden xl:flex w-10 h-10 rounded-full bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 hover:scale-110 transition items-center justify-center font-bold text-sm">
+          ⇄
+        </button>
+        <button id="mobile-toggle" class="xl:hidden w-11 h-11 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg shrink-0 hover:bg-teal-700 transition">
+          <i class="fas fa-bars text-base"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu-vet xl:hidden rounded-b-3xl border-t border-teal-100/50 dark:border-teal-800/30">
+      <div class="py-5 px-4 space-y-1.5">
+        <div class="py-1">
+          <button onclick="document.getElementById('home-mobile-drop').classList.toggle('hidden'); document.getElementById('home-mobile-icon').classList.toggle('rotate-180')" class="w-full flex items-center justify-between py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition cursor-pointer">
+            <span>Home</span>
+            <i id="home-mobile-icon" class="fas fa-chevron-down text-xs opacity-60 transition-transform duration-300"></i>
+          </button>
+          <div id="home-mobile-drop" class="hidden pl-2 space-y-1 mt-1.5 mb-2">
+            <a class="block py-3 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="index.html">Home 1</a>
+            <a class="block py-3 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="home2.html">Home 2</a>
+          </div>
+        </div>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="about.html">About</a>
+        <a class="block py-3.5 px-4 font-semibold text-teal-700 bg-teal-50 dark:bg-teal-900/30 rounded-2xl transition" href="services.html">Services</a>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="vets.html">Vets</a>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="membership.html">Membership</a>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="contact.html">Contact</a>
+
+        <div class="py-1">
+          <button onclick="document.getElementById('dashboard-mobile-drop').classList.toggle('hidden'); document.getElementById('dashboard-mobile-icon').classList.toggle('rotate-180')" class="w-full flex items-center justify-between py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition cursor-pointer">
+            <span>Portal</span>
+            <i id="dashboard-mobile-icon" class="fas fa-chevron-down text-xs opacity-60 transition-transform duration-300"></i>
+          </button>
+          <div id="dashboard-mobile-drop" class="hidden pl-2 space-y-1 mt-1.5 mb-2">
+            <a class="block py-3 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="client.html">Pet Owner</a>
+            <a class="block py-3 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="admin.html">Admin</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3 pt-5 mt-3 border-t border-teal-100 dark:border-teal-800/40">
+          <a class="text-center btn-teal py-3 font-semibold flex items-center justify-center gap-2" href="login.html">
+            <i class="fas fa-user-circle"></i> Pet Owner Login
+          </a>
+          <div class="flex gap-3">
+            <button id="mobile-theme-toggle" class="flex-1 py-2.5 rounded-full bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 text-sm font-medium flex items-center gap-2 justify-center">
+              <i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i> Theme
+            </button>
+            <button id="mobile-rtl-toggle" class="flex-1 py-2.5 rounded-full bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 text-sm font-medium flex items-center gap-2 justify-center">
+              ⇄ RTL
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ======== SERVICES HERO — DEEP TEAL WITH WAVE ======== -->
+<section class="services-hero">
+  <!-- Floating paw decorations -->
+  <div class="paw-float" style="top: 18%; left: 4%; animation-delay: 0s;">🐾</div>
+  <div class="paw-float" style="top: 55%; right: 6%; animation-delay: 2s; font-size: 9rem;">🐾</div>
+  <div class="paw-float" style="bottom: 20%; left: 20%; animation-delay: 4s; font-size: 5rem;">🐾</div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-8 border border-white/20">
+        <i class="fas fa-stethoscope text-coral-300"></i> Comprehensive Veterinary Services
+      </span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] mb-6 text-white break-words">
+        Everything Your Pet<br/>
+        <span class="text-coral-300">Needs to Thrive</span>
+      </h1>
+      <p class="text-base sm:text-lg md:text-xl text-white/90 font-light mb-10 max-w-2xl mx-auto leading-relaxed">
+        From routine wellness exams to advanced surgery and 24/7 urgent care — we offer a full spectrum of veterinary medicine under one roof, delivered with compassion.
+      </p>
+      <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
+        <a href="contact.html" class="btn-coral px-8 py-4 text-sm sm:text-base inline-flex items-center justify-center gap-2 shadow-xl">
+          <i class="fas fa-calendar-check"></i> Book a Service
+        </a>
+        <a href="#all-services" class="btn-ghost-vet px-8 py-4 text-sm sm:text-base inline-flex items-center justify-center gap-2">
+          <i class="fas fa-list-check"></i> Browse Services
+        </a>
+      </div>
+
+      <!-- Quick highlight cards inside hero (glassmorphic styling) -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 mt-10 sm:mt-12 max-w-5xl mx-auto text-left">
+        <div class="bg-white/15 dark:bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4.5 border border-white/20 shadow-lg flex items-center gap-2.5 sm:gap-3.5 hover:bg-white/20 transition duration-300 group">
+          <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white/20 text-teal-100 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
+            <i class="fas fa-clock text-sm sm:text-base"></i>
+          </div>
+          <div class="min-w-0">
+            <p class="text-[10px] sm:text-xs text-white/75 font-medium truncate">Same-day</p>
+            <p class="text-xs sm:text-sm font-bold text-white font-display truncate">Appointments</p>
+          </div>
+        </div>
+        <div class="bg-white/15 dark:bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4.5 border border-white/20 shadow-lg flex items-center gap-2.5 sm:gap-3.5 hover:bg-white/20 transition duration-300 group">
+          <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-coral-400/30 text-coral-200 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
+            <i class="fas fa-shield-heart text-sm sm:text-base"></i>
+          </div>
+          <div class="min-w-0">
+            <p class="text-[10px] sm:text-xs text-white/75 font-medium truncate">Certified</p>
+            <p class="text-xs sm:text-sm font-bold text-white font-display truncate">Fear-Free</p>
+          </div>
+        </div>
+        <div class="bg-white/15 dark:bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4.5 border border-white/20 shadow-lg flex items-center gap-2.5 sm:gap-3.5 hover:bg-white/20 transition duration-300 group">
+          <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white/20 text-teal-100 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
+            <i class="fas fa-flask text-sm sm:text-base"></i>
+          </div>
+          <div class="min-w-0">
+            <p class="text-[10px] sm:text-xs text-white/75 font-medium truncate">Rapid</p>
+            <p class="text-xs sm:text-sm font-bold text-white font-display truncate">In-house Lab</p>
+          </div>
+        </div>
+        <div class="bg-white/15 dark:bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4.5 border border-white/20 shadow-lg flex items-center gap-2.5 sm:gap-3.5 hover:bg-white/20 transition duration-300 group">
+          <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-coral-400/30 text-coral-200 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
+            <i class="fas fa-truck-medical text-sm sm:text-base"></i>
+          </div>
+          <div class="min-w-0">
+            <p class="text-[10px] sm:text-xs text-white/75 font-medium truncate">Always</p>
+            <p class="text-xs sm:text-sm font-bold text-white font-display truncate">Urgent Care</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== MAGAZINE-STYLE SERVICE GRID ======== -->
+<section id="all-services" class="py-24 bg-sand-50 dark:bg-[#1a1f2e] relative overflow-hidden">
+  <div class="absolute top-20 left-0 w-full h-px border-t-2 border-dashed border-teal-200/30 dark:border-teal-800/20"></div>
+  
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div>
+        <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+          <span class="w-10 h-0.5 bg-teal-500"></span> Full Service Menu <span class="w-10 h-0.5 bg-teal-500"></span>
+        </span>
+        <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+          Explore Our <span class="text-coral-500">Services</span>
+        </h2>
+        <p class="text-ink-500 dark:text-ink-300 mt-3 text-base max-w-lg">Comprehensive care for dogs, cats, and small companion animals.</p>
+      </div>
+    </div>
+
+    <!-- Filter buttons (decorative / interactive) -->
+    <div class="flex flex-wrap gap-3 mb-12">
+      <button class="filter-btn active" data-filter="all">All Services</button>
+      <button class="filter-btn" data-filter="preventive">Preventive</button>
+      <button class="filter-btn" data-filter="surgical">Surgical</button>
+      <button class="filter-btn" data-filter="diagnostic">Diagnostic</button>
+      <button class="filter-btn" data-filter="wellness">Wellness</button>
+    </div>
+
+    <!-- Magazine grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+      <!-- Card 1: Wellness Exams -->
+      <div class="mag-service-card" data-category="preventive wellness">
+        <span class="num-badge">01</span>
+        <div class="relative overflow-hidden h-52 shrink-0 bg-teal-800/20">
+          <img src="assets/h1.jpg" alt="Wellness Exam" class="w-full h-full object-cover transition duration-700 hover:scale-105"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-900/50 to-transparent"></div>
+          <span class="absolute bottom-4 left-4 bg-coral-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full tracking-wider uppercase">Preventive</span>
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="flex items-center gap-1 mb-3">
+            <i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star-half-stroke text-amber-400 text-[10px]"></i>
+            <span class="text-ink-400 dark:text-ink-300 text-[11px] ml-1.5 font-medium">(4.9) · 320</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-ink-800 dark:text-sand-100 mb-2">Wellness Exams</h3>
+          <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed mb-5 flex-1">Nose-to-tail physical, weight & nutrition review, and personalized preventive plan for lifelong health.</p>
+          <div class="flex items-center justify-between pt-5 border-t border-teal-100/60 dark:border-teal-800/40 mt-auto">
+            <span class="price-pill">$89</span>
+            <a href="contact.html" class="text-coral-500 text-xs font-bold tracking-wide uppercase hover:underline flex items-center gap-1.5">
+              Book <i class="fas fa-arrow-right text-[9px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Vaccinations -->
+      <div class="mag-service-card" data-category="preventive">
+        <span class="num-badge">02</span>
+        <div class="relative overflow-hidden h-52 shrink-0 bg-teal-800/20">
+          <img src="assets/d2.jpg" alt="Vaccinations" class="w-full h-full object-cover transition duration-700 hover:scale-105"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-900/50 to-transparent"></div>
+          <span class="absolute bottom-4 left-4 bg-teal-600 text-white text-[10px] font-bold px-3 py-1.5 rounded-full tracking-wider uppercase">Core</span>
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="flex items-center gap-1 mb-3">
+            <i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i>
+            <span class="text-ink-400 dark:text-ink-300 text-[11px] ml-1.5 font-medium">(5.0) · 280</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-ink-800 dark:text-sand-100 mb-2">Vaccinations</h3>
+          <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed mb-5 flex-1">Core & lifestyle vaccines, parasite prevention, and titre testing for tailored immunity.</p>
+          <div class="flex items-center justify-between pt-5 border-t border-teal-100/60 dark:border-teal-800/40 mt-auto">
+            <span class="price-pill">$45+</span>
+            <a href="contact.html" class="text-coral-500 text-xs font-bold tracking-wide uppercase hover:underline flex items-center gap-1.5">
+              Book <i class="fas fa-arrow-right text-[9px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Surgery -->
+      <div class="mag-service-card" data-category="surgical">
+        <span class="num-badge">03</span>
+        <div class="relative overflow-hidden h-52 shrink-0 bg-teal-800/20">
+          <img src="assets/facility-1.jpg" alt="Surgery" class="w-full h-full object-cover transition duration-700 hover:scale-105"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-900/50 to-transparent"></div>
+          <span class="absolute bottom-4 left-4 bg-coral-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full tracking-wider uppercase">Advanced</span>
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="flex items-center gap-1 mb-3">
+            <i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i>
+            <span class="text-ink-400 dark:text-ink-300 text-[11px] ml-1.5 font-medium">(5.0) · 190</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-ink-800 dark:text-sand-100 mb-2">Surgery</h3>
+          <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed mb-5 flex-1">Spay/neuter, soft-tissue, orthopedic procedures with full anesthetic monitoring.</p>
+          <div class="flex items-center justify-between pt-5 border-t border-teal-100/60 dark:border-teal-800/40 mt-auto">
+            <span class="price-pill">$349+</span>
+            <a href="contact.html" class="text-coral-500 text-xs font-bold tracking-wide uppercase hover:underline flex items-center gap-1.5">
+              Book <i class="fas fa-arrow-right text-[9px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Dentistry -->
+      <div class="mag-service-card" data-category="surgical preventive">
+        <span class="num-badge">04</span>
+        <div class="relative overflow-hidden h-52 shrink-0 bg-teal-800/20">
+          <img src="assets/d1.jpg" alt="Dentistry" class="w-full h-full object-cover transition duration-700 hover:scale-105"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-900/50 to-transparent"></div>
+          <span class="absolute bottom-4 left-4 bg-sand-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full tracking-wider uppercase">Dental</span>
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="flex items-center gap-1 mb-3">
+            <i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i>
+            <span class="text-ink-400 dark:text-ink-300 text-[11px] ml-1.5 font-medium">(4.9) · 210</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-ink-800 dark:text-sand-100 mb-2">Dentistry</h3>
+          <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed mb-5 flex-1">Ultrasonic cleaning, polishing, extractions, and dental X-rays for oral health.</p>
+          <div class="flex items-center justify-between pt-5 border-t border-teal-100/60 dark:border-teal-800/40 mt-auto">
+            <span class="price-pill">$229</span>
+            <a href="contact.html" class="text-coral-500 text-xs font-bold tracking-wide uppercase hover:underline flex items-center gap-1.5">
+              Book <i class="fas fa-arrow-right text-[9px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: Diagnostics -->
+      <div class="mag-service-card" data-category="diagnostic">
+        <span class="num-badge">05</span>
+        <div class="relative overflow-hidden h-52 shrink-0 bg-teal-800/20">
+          <img src="assets/h3.jpg" alt="Diagnostics" class="w-full h-full object-cover transition duration-700 hover:scale-105"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-900/50 to-transparent"></div>
+          <span class="absolute bottom-4 left-4 bg-teal-600 text-white text-[10px] font-bold px-3 py-1.5 rounded-full tracking-wider uppercase">Imaging</span>
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="flex items-center gap-1 mb-3">
+            <i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i>
+            <span class="text-ink-400 dark:text-ink-300 text-[11px] ml-1.5 font-medium">(4.8) · 240</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-ink-800 dark:text-sand-100 mb-2">Diagnostics & Imaging</h3>
+          <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed mb-5 flex-1">Digital X-ray, ultrasound, endoscopy, and full in-house lab work for same-day answers.</p>
+          <div class="flex items-center justify-between pt-5 border-t border-teal-100/60 dark:border-teal-800/40 mt-auto">
+            <span class="price-pill">$129+</span>
+            <a href="contact.html" class="text-coral-500 text-xs font-bold tracking-wide uppercase hover:underline flex items-center gap-1.5">
+              Book <i class="fas fa-arrow-right text-[9px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6: Urgent Care -->
+      <div class="mag-service-card" data-category="diagnostic wellness">
+        <span class="num-badge">06</span>
+        <div class="relative overflow-hidden h-52 shrink-0 bg-teal-800/20">
+          <img src="assets/feature-dental.jpg" alt="Urgent Care" class="w-full h-full object-cover transition duration-700 hover:scale-105"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-900/50 to-transparent"></div>
+          <span class="absolute bottom-4 left-4 bg-coral-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full tracking-wider uppercase">Urgent</span>
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="flex items-center gap-1 mb-3">
+            <i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star-half-stroke text-amber-400 text-[10px]"></i>
+            <span class="text-ink-400 dark:text-ink-300 text-[11px] ml-1.5 font-medium">(4.7) · 180</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-ink-800 dark:text-sand-100 mb-2">Urgent Care</h3>
+          <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed mb-5 flex-1">Same-day appointments for injuries, sudden illness, and after-hours emergency triage.</p>
+          <div class="flex items-center justify-between pt-5 border-t border-teal-100/60 dark:border-teal-800/40 mt-auto">
+            <span class="price-pill">$99+</span>
+            <a href="contact.html" class="text-coral-500 text-xs font-bold tracking-wide uppercase hover:underline flex items-center gap-1.5">
+              Call Now <i class="fas fa-arrow-right text-[9px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FEATURED SERVICE — HORIZONTAL SPLIT ROWS ======== -->
+<section class="py-24 bg-white dark:bg-[#1a1f2e] relative overflow-hidden">
+  <div class="absolute -top-32 -right-32 w-96 h-96 bg-teal-100/20 dark:bg-teal-900/10 rounded-full blur-3xl pointer-events-none"></div>
+  
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-16">
+      <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+        <span class="w-10 h-0.5 bg-teal-500"></span> Signature Services <span class="w-10 h-0.5 bg-teal-500"></span>
+      </span>
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+        Deep Dive Into <span class="text-coral-500">Key Care Areas</span>
+      </h2>
+      <p class="text-ink-500 dark:text-ink-300 mt-4 max-w-xl mx-auto text-base">
+        A closer look at the specialties our team is most passionate about.
+      </p>
+    </div>
+
+    <div class="space-y-8 max-w-6xl mx-auto">
+      <!-- Feature Row 1 -->
+      <div class="feature-row">
+        <div class="fr-img bg-teal-800/20">
+          <img src="assets/feature-surgery.jpg" alt="Advanced Surgery"/>
+          <span class="fr-label">Surgical Suite</span>
+        </div>
+        <div class="p-8 md:p-10 flex flex-col justify-center flex-1">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300 flex items-center justify-center">
+              <svg class="w-5 h-5" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M218 294L426 86c10-10 26-10 36 0l4 4c10 10 10 26 0 36L258 334l-16-16 8-8-16-16zM324 196l14 14-7 7-14-14zM354 166l14 14-7 7-14-14zM384 136l14 14-7 7-14-14zM60 452L212 300l18 18-26 26c-44 44-94 91-144 108zM125 385l50-50 10 10-50 50z"/></svg>
+            </div>
+            <span class="text-teal-600 dark:text-teal-400 text-xs font-bold uppercase tracking-wider">Surgical Excellence</span>
+          </div>
+          <h3 class="font-display font-bold text-2xl md:text-3xl text-ink-800 dark:text-sand-100 mb-3">Advanced Surgery & Anesthesia</h3>
+          <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed mb-6">
+            Our surgical suite features multi-parameter monitoring (ECG, blood pressure, oxygen, temperature), dedicated IV fluids, and a veterinary nurse assigned to every patient. We use advanced pain management including local nerve blocks for comfort before, during, and after procedures.
+          </p>
+          <ul class="space-y-2 mb-6">
+            <li class="flex items-center gap-2 text-sm text-ink-600 dark:text-ink-200">
+              <i class="fas fa-check-circle text-teal-500 text-xs"></i> Pre-anesthetic blood work included
+            </li>
+            <li class="flex items-center gap-2 text-sm text-ink-600 dark:text-ink-200">
+              <i class="fas fa-check-circle text-teal-500 text-xs"></i> Dedicated anesthetist monitoring
+            </li>
+            <li class="flex items-center gap-2 text-sm text-ink-600 dark:text-ink-200">
+              <i class="fas fa-check-circle text-teal-500 text-xs"></i> Heated surgery table & warm air blanket
+            </li>
+          </ul>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="contact.html" class="btn-teal px-6 py-3 text-sm inline-flex items-center gap-2">
+              <i class="fas fa-calendar-check"></i> Schedule Consult
+            </a>
+            <span class="price-pill">$349+</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Row 2 (reversed) -->
+      <div class="feature-row reverse">
+        <div class="fr-img bg-teal-800/20">
+          <img src="assets/d1.jpg" alt="Dental Care"/>
+          <span class="fr-label">Dental Suite</span>
+        </div>
+        <div class="p-8 md:p-10 flex flex-col justify-center flex-1">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-coral-100 dark:bg-coral-900/40 text-coral-500 dark:text-coral-300 flex items-center justify-center">
+              <i class="fas fa-tooth"></i>
+            </div>
+            <span class="text-coral-500 text-xs font-bold uppercase tracking-wider">Dental Health</span>
+          </div>
+          <h3 class="font-display font-bold text-2xl md:text-3xl text-ink-800 dark:text-sand-100 mb-3">Dentistry & Oral Surgery</h3>
+          <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed mb-6">
+            By age 3, over 80% of dogs and 70% of cats show signs of dental disease. Our dental suite provides ultrasonic scaling, polishing, digital dental X-rays, and extractions — all under safe anesthesia with full monitoring. We also provide home dental care kits and coaching.
+          </p>
+          <ul class="space-y-2 mb-6">
+            <li class="flex items-center gap-2 text-sm text-ink-600 dark:text-ink-200">
+              <i class="fas fa-check-circle text-coral-500 text-xs"></i> Full-mouth dental X-rays
+            </li>
+            <li class="flex items-center gap-2 text-sm text-ink-600 dark:text-ink-200">
+              <i class="fas fa-check-circle text-coral-500 text-xs"></i> Ultrasonic scaling & polishing
+            </li>
+            <li class="flex items-center gap-2 text-sm text-ink-600 dark:text-ink-200">
+              <i class="fas fa-check-circle text-coral-500 text-xs"></i> Home care kit included
+            </li>
+          </ul>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="contact.html" class="btn-coral px-6 py-3 text-sm inline-flex items-center gap-2">
+              <i class="fas fa-calendar-check"></i> Book Dental
+            </a>
+            <span class="price-pill">$229</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Row 3 -->
+      <div class="feature-row">
+        <div class="fr-img bg-teal-800/20">
+          <img src="assets/feature-diagnostics.jpg" alt="Diagnostics"/>
+          <span class="fr-label">Imaging Suite</span>
+        </div>
+        <div class="p-8 md:p-10 flex flex-col justify-center flex-1">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300 flex items-center justify-center">
+              <i class="fas fa-x-ray"></i>
+            </div>
+            <span class="text-teal-600 dark:text-teal-400 text-xs font-bold uppercase tracking-wider">Diagnostics</span>
+          </div>
+          <h3 class="font-display font-bold text-2xl md:text-3xl text-ink-800 dark:text-sand-100 mb-3">Advanced Imaging & Lab Work</h3>
+          <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed mb-6">
+            Our in-house laboratory delivers blood chemistry, CBC, cytology, and urinalysis results in under 30 minutes. Digital radiography and ultrasound allow us to see inside without delay — critical for urgent cases and accurate diagnoses.
+          </p>
+          <ul class="space-y-2 mb-6">
+            <li class="flex items-center gap-2 text-sm text-ink-600 dark:text-ink-200">
+              <i class="fas fa-check-circle text-teal-500 text-xs"></i> Digital X-ray & ultrasound
+            </li>
+            <li class="flex items-center gap-2 text-sm text-ink-600 dark:text-ink-200">
+              <i class="fas fa-check-circle text-teal-500 text-xs"></i> In-house bloodwork in 30 minutes
+            </li>
+            <li class="flex items-center gap-2 text-sm text-ink-600 dark:text-ink-200">
+              <i class="fas fa-check-circle text-teal-500 text-xs"></i> Same-day results & treatment plan
+            </li>
+          </ul>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="contact.html" class="btn-teal px-6 py-3 text-sm inline-flex items-center gap-2">
+              <i class="fas fa-calendar-check"></i> Request Diagnostics
+            </a>
+            <span class="price-pill">$129+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== ADD-ON SERVICES — COMPACT TILES ======== -->
+<section class="py-24 bg-sand-100 dark:bg-[#1f2536] relative overflow-hidden">
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-16">
+      <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+        <span class="w-10 h-0.5 bg-teal-500"></span> Add-Ons & Extras <span class="w-10 h-0.5 bg-teal-500"></span>
+      </span>
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+        Complementary <span class="text-coral-500">Care Options</span>
+      </h2>
+      <p class="text-ink-500 dark:text-ink-300 mt-4 max-w-xl mx-auto text-base">
+        Enhance your pet's visit with these additional services.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-6xl mx-auto">
+      <!-- Add-on 1 -->
+      <div class="addon-tile">
+        <div class="w-12 h-12 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300 flex items-center justify-center text-lg mb-4">
+          <i class="fas fa-microchip"></i>
+        </div>
+        <h4 class="font-display font-bold text-sm text-ink-800 dark:text-sand-100 mb-1">Microchipping</h4>
+        <p class="text-ink-400 dark:text-ink-400 text-[11px] mb-3">Permanent ID</p>
+        <span class="text-teal-600 dark:text-teal-300 font-display font-bold text-lg mt-auto">$45</span>
+      </div>
+      <!-- Add-on 2 -->
+      <div class="addon-tile">
+        <div class="w-12 h-12 rounded-full bg-coral-100 dark:bg-coral-900/40 text-coral-500 dark:text-coral-300 flex items-center justify-center text-lg mb-4">
+          <i class="fas fa-bug"></i>
+        </div>
+        <h4 class="font-display font-bold text-sm text-ink-800 dark:text-sand-100 mb-1">Parasite Screen</h4>
+        <p class="text-ink-400 dark:text-ink-400 text-[11px] mb-3">Fecal & heartworm</p>
+        <span class="text-teal-600 dark:text-teal-300 font-display font-bold text-lg mt-auto">$55</span>
+      </div>
+      <!-- Add-on 3 -->
+      <div class="addon-tile">
+        <div class="w-12 h-12 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300 flex items-center justify-center text-lg mb-4">
+          <i class="fas fa-scissors"></i>
+        </div>
+        <h4 class="font-display font-bold text-sm text-ink-800 dark:text-sand-100 mb-1">Nail Trim</h4>
+        <p class="text-ink-400 dark:text-ink-400 text-[11px] mb-3">Gentle & quick</p>
+        <span class="text-teal-600 dark:text-teal-300 font-display font-bold text-lg mt-auto">$25</span>
+      </div>
+      <!-- Add-on 4 -->
+      <div class="addon-tile">
+        <div class="w-12 h-12 rounded-full bg-coral-100 dark:bg-coral-900/40 text-coral-500 dark:text-coral-300 flex items-center justify-center text-lg mb-4">
+          <i class="fas fa-ear-listen"></i>
+        </div>
+        <h4 class="font-display font-bold text-sm text-ink-800 dark:text-sand-100 mb-1">Ear Cleaning</h4>
+        <p class="text-ink-400 dark:text-ink-400 text-[11px] mb-3">Prevent infections</p>
+        <span class="text-teal-600 dark:text-teal-300 font-display font-bold text-lg mt-auto">$30</span>
+      </div>
+      <!-- Add-on 5 -->
+      <div class="addon-tile">
+        <div class="w-12 h-12 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300 flex items-center justify-center text-lg mb-4">
+          <i class="fas fa-droplet"></i>
+        </div>
+        <h4 class="font-display font-bold text-sm text-ink-800 dark:text-sand-100 mb-1">Anal Gland</h4>
+        <p class="text-ink-400 dark:text-ink-400 text-[11px] mb-3">Expression</p>
+        <span class="text-teal-600 dark:text-teal-300 font-display font-bold text-lg mt-auto">$28</span>
+      </div>
+      <!-- Add-on 6 -->
+      <div class="addon-tile">
+        <div class="w-12 h-12 rounded-full bg-coral-100 dark:bg-coral-900/40 text-coral-500 dark:text-coral-300 flex items-center justify-center text-lg mb-4">
+          <i class="fas fa-syringe"></i>
+        </div>
+        <h4 class="font-display font-bold text-sm text-ink-800 dark:text-sand-100 mb-1">Allergy Shot</h4>
+        <p class="text-ink-400 dark:text-ink-400 text-[11px] mb-3">Cytopoint®</p>
+        <span class="text-teal-600 dark:text-teal-300 font-display font-bold text-lg mt-auto">$75</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== PRICING COMPARISON — 3 TIER CARDS ======== -->
+<section class="py-24 bg-white dark:bg-[#1a1f2e] relative overflow-hidden">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-teal-100/20 dark:bg-teal-900/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-16">
+      <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+        <span class="w-10 h-0.5 bg-teal-500"></span> Wellness Plans <span class="w-10 h-0.5 bg-teal-500"></span>
+      </span>
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+        Pick Your <span class="text-coral-500">Care Plan</span>
+      </h2>
+      <p class="text-ink-500 dark:text-ink-300 mt-4 max-w-xl mx-auto text-base">
+        Monthly membership options that bundle preventive care and save you money.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-7 max-w-5xl mx-auto items-stretch">
+      <!-- Plan 1: Essential -->
+      <div class="bg-white dark:bg-[#232a3d] rounded-3xl p-8 border-2 border-teal-100 dark:border-teal-800/40 flex flex-col hover:border-teal-300 dark:hover:border-teal-600/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-teal-200/40 dark:hover:shadow-teal-900/40">
+        <div class="mb-6">
+          <div class="w-12 h-12 rounded-2xl bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300 flex items-center justify-center text-xl mb-4">
+            <i class="fas fa-paw"></i>
+          </div>
+          <h3 class="font-display font-bold text-2xl text-ink-800 dark:text-sand-100">Essential</h3>
+          <p class="text-ink-400 dark:text-ink-400 text-sm mt-1">Perfect for young, healthy pets</p>
+        </div>
+        <div class="mb-6 pb-6 border-b border-teal-100 dark:border-teal-800/40">
+          <span class="text-4xl font-display font-bold text-teal-600 dark:text-teal-300">$29</span>
+          <span class="text-ink-400 dark:text-ink-400 text-sm">/month</span>
+        </div>
+        <ul class="space-y-3 mb-8 flex-1">
+          <li class="flex items-start gap-2 text-sm text-ink-600 dark:text-ink-200">
+            <i class="fas fa-check-circle text-teal-500 text-xs mt-1"></i> 1 annual wellness exam
+          </li>
+          <li class="flex items-start gap-2 text-sm text-ink-600 dark:text-ink-200">
+            <i class="fas fa-check-circle text-teal-500 text-xs mt-1"></i> Core vaccines (rabies, distemper)
+          </li>
+          <li class="flex items-start gap-2 text-sm text-ink-600 dark:text-ink-200">
+            <i class="fas fa-check-circle text-teal-500 text-xs mt-1"></i> Fecal parasite screen
+          </li>
+          <li class="flex items-start gap-2 text-sm text-ink-600 dark:text-ink-200">
+            <i class="fas fa-check-circle text-teal-500 text-xs mt-1"></i> 10% off other services
+          </li>
+        </ul>
+        <a href="membership.html" class="w-full text-center py-3 text-sm inline-flex items-center justify-center gap-2 rounded-full font-display font-semibold border-2 border-teal-600/40 dark:border-teal-400/40 text-teal-600 dark:text-teal-300 bg-transparent hover:bg-teal-600 hover:text-white hover:border-teal-600 dark:hover:bg-teal-600 dark:hover:text-white dark:hover:border-teal-600 transition-all duration-300 hover:scale-[1.03]">
+          Choose Essential <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+      <!-- Plan 2: Complete (featured) -->
+      <div class="relative bg-gradient-to-br from-teal-600 to-teal-700 dark:from-teal-700 dark:to-teal-800 rounded-3xl p-8 border-2 border-transparent flex flex-col shadow-2xl shadow-teal-300/50 dark:shadow-teal-900/50 transition-all duration-300 hover:-translate-y-2">
+        <div class="mb-6">
+          <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm text-white flex items-center justify-center text-xl mb-4">
+            <i class="fas fa-crown"></i>
+          </div>
+          <h3 class="font-display font-bold text-2xl text-white">Complete</h3>
+          <p class="text-white/80 text-sm mt-1">Best for adult pets & seniors</p>
+        </div>
+        <div class="mb-6 pb-6 border-b border-white/20">
+          <span class="text-4xl font-display font-bold text-white">$59</span>
+          <span class="text-white/70 text-sm">/month</span>
+        </div>
+        <ul class="space-y-3 mb-8 flex-1">
+          <li class="flex items-start gap-2 text-sm text-white/95">
+            <i class="fas fa-check-circle text-coral-300 text-xs mt-1"></i> 2 wellness exams per year
+          </li>
+          <li class="flex items-start gap-2 text-sm text-white/95">
+            <i class="fas fa-check-circle text-coral-300 text-xs mt-1"></i> All core + lifestyle vaccines
+          </li>
+          <li class="flex items-start gap-2 text-sm text-white/95">
+            <i class="fas fa-check-circle text-coral-300 text-xs mt-1"></i> Annual bloodwork panel
+          </li>
+          <li class="flex items-start gap-2 text-sm text-white/95">
+            <i class="fas fa-check-circle text-coral-300 text-xs mt-1"></i> Dental check + cleaning discount
+          </li>
+          <li class="flex items-start gap-2 text-sm text-white/95">
+            <i class="fas fa-check-circle text-coral-300 text-xs mt-1"></i> 15% off all other services
+          </li>
+        </ul>
+        <a href="membership.html" class="bg-white border-2 border-white text-teal-700 w-full text-center py-3 rounded-full font-bold hover:scale-[1.03] transition-all duration-300 inline-flex items-center justify-center gap-2 text-sm font-display">
+          Choose Complete <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+      <!-- Plan 3: Premium -->
+      <div class="bg-white dark:bg-[#232a3d] rounded-3xl p-8 border-2 border-teal-100 dark:border-teal-800/40 flex flex-col hover:border-teal-300 dark:hover:border-teal-600/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-teal-200/40 dark:hover:shadow-teal-900/40">
+        <div class="mb-6">
+          <div class="w-12 h-12 rounded-2xl bg-coral-100 dark:bg-coral-900/40 text-coral-500 dark:text-coral-300 flex items-center justify-center text-xl mb-4">
+            <i class="fas fa-star"></i>
+          </div>
+          <h3 class="font-display font-bold text-2xl text-ink-800 dark:text-sand-100">Premium</h3>
+          <p class="text-ink-400 dark:text-ink-400 text-sm mt-1">Total care, no surprises</p>
+        </div>
+        <div class="mb-6 pb-6 border-b border-teal-100 dark:border-teal-800/40">
+          <span class="text-4xl font-display font-bold text-coral-500 dark:text-coral-300">$89</span>
+          <span class="text-ink-400 dark:text-ink-400 text-sm">/month</span>
+        </div>
+        <ul class="space-y-3 mb-8 flex-1">
+          <li class="flex items-start gap-2 text-sm text-ink-600 dark:text-ink-200">
+            <i class="fas fa-check-circle text-coral-500 text-xs mt-1"></i> Unlimited wellness exams
+          </li>
+          <li class="flex items-start gap-2 text-sm text-ink-600 dark:text-ink-200">
+            <i class="fas fa-check-circle text-coral-500 text-xs mt-1"></i> All vaccines + titre testing
+          </li>
+          <li class="flex items-start gap-2 text-sm text-ink-600 dark:text-ink-200">
+            <i class="fas fa-check-circle text-coral-500 text-xs mt-1"></i> Comprehensive bloodwork 2x/year
+          </li>
+          <li class="flex items-start gap-2 text-sm text-ink-600 dark:text-ink-200">
+            <i class="fas fa-check-circle text-coral-500 text-xs mt-1"></i> Annual dental cleaning included
+          </li>
+          <li class="flex items-start gap-2 text-sm text-ink-600 dark:text-ink-200">
+            <i class="fas fa-check-circle text-coral-500 text-xs mt-1"></i> 20% off all other services
+          </li>
+          <li class="flex items-start gap-2 text-sm text-ink-600 dark:text-ink-200">
+            <i class="fas fa-check-circle text-coral-500 text-xs mt-1"></i> 24/7 telehealth access
+          </li>
+        </ul>
+        <a href="membership.html" class="w-full text-center py-3 text-sm inline-flex items-center justify-center gap-2 rounded-full font-display font-semibold border-2 border-teal-600/40 dark:border-teal-400/40 text-teal-600 dark:text-teal-300 bg-transparent hover:bg-teal-600 hover:text-white hover:border-teal-600 dark:hover:bg-teal-600 dark:hover:text-white dark:hover:border-teal-600 transition-all duration-300 hover:scale-[1.03]">
+          Choose Premium <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== PARTNER / INSURANCE STRIP ======== -->
+<section class="py-14 bg-sand-50 dark:bg-[#1f2536] border-y border-teal-100 dark:border-teal-900/30">
+  <div class="container mx-auto px-6">
+    <p class="text-center text-xs font-bold uppercase tracking-[0.2em] text-ink-400 dark:text-ink-400 mb-8">Accepted Insurance & Payment Partners</p>
+    <div class="partner-strip">
+      <div class="partner-item text-[#007681] dark:text-[#38bdf8]"><i class="fas fa-shield-halved text-lg text-[#E03C31] dark:text-[#f87171]"></i> Trupanion</div>
+      <div class="partner-item text-[#F37021] dark:text-[#fb923c]"><i class="fas fa-heart-pulse text-lg"></i> Healthy Paws</div>
+      <div class="partner-item text-[#0047BB] dark:text-[#60a5fa]"><i class="fas fa-paw text-lg"></i> Nationwide</div>
+      <div class="partner-item text-[#008375] dark:text-[#34d399]"><i class="fas fa-credit-card text-lg"></i> CareCredit</div>
+      <div class="partner-item text-[#5C4EE5] dark:text-[#818cf8]"><i class="fas fa-hand-holding-dollar text-lg"></i> Scratchpay</div>
+      <div class="partner-item text-[#D91B5C] dark:text-[#f472b6]"><i class="fas fa-building-columns text-lg"></i> Embrace</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FAQ — SAME STYLE AS REFERENCE ======== -->
+<section class="py-24 bg-white dark:bg-[#1a1f2e] relative overflow-hidden">
+  <div class="container mx-auto px-6 relative z-10 max-w-4xl">
+    <div class="text-center mb-16">
+      <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+        <span class="w-10 h-0.5 bg-teal-500"></span> Service Questions <span class="w-10 h-0.5 bg-teal-500"></span>
+      </span>
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+        Frequently Asked <span class="text-coral-500">Questions</span>
+      </h2>
+      <p class="text-ink-500 dark:text-ink-300 mt-3 text-base max-w-xl mx-auto">
+        Answers about our services, pricing, and what to expect.
+      </p>
+    </div>
+
+    <div class="space-y-4" id="services-faq-accordion">
+      <!-- Item 1 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>How do I know which service my pet needs?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">Start with a wellness exam. Our veterinarian will assess your pet's overall health, discuss any concerns, and recommend the appropriate services. We'll never push unnecessary treatments — we explain the "why" behind every recommendation.</p>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>Are prices fixed or do they vary?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">Listed prices are starting points for standard cases. Final cost depends on your pet's size, age, health status, and any complications. We always provide a written estimate before treatment and get your approval before proceeding.</p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>Do you offer emergency services without an appointment?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">Yes, for life-threatening emergencies we accept walk-ins during opening hours. Call ahead so we can prepare. After hours, our phone triage directs you to our 24/7 emergency partner hospital. Never wait if your pet is in distress.</p>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>Can I get a second opinion at PawCare?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">Absolutely. We welcome second opinions and will review your pet's full history, previous diagnostics, and treatment plan. Our goal is your pet's best outcome — even if that means confirming another vet's approach.</p>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>Do you treat exotic pets?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">We primarily treat dogs and cats, but we do see some small companion animals like rabbits, guinea pigs, and hamsters on a case-by-case basis. Call ahead so we can match you with the right veterinarian.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CTA — ANGLED DESIGN ======== -->
+<section class="cta-angle py-20 relative overflow-hidden">
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm mb-6">
+        <i class="fas fa-stethoscope text-white text-2xl"></i>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-5 leading-tight">
+        Not Sure Which Service <span class="text-coral-200">Your Pet Needs?</span>
+      </h2>
+      <p class="text-white/85 text-base md:text-lg mb-10 max-w-xl mx-auto">
+        Give us a call or book a consultation. Our team will guide you to the right care plan.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="contact.html" class="bg-white text-teal-700 px-8 py-3.5 rounded-full font-bold shadow-lg hover:scale-105 transition inline-flex items-center gap-2 text-sm font-display">
+          <i class="fas fa-phone"></i> Call (555) 727-4PAW
+        </a>
+        <a href="membership.html" class="border-2 border-white/60 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-white hover:text-teal-700 transition inline-flex items-center gap-2 text-sm font-display">
+          <i class="fas fa-crown"></i> Compare Memberships
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FOOTER — exactly copied from reference ======== -->
+<footer class="bg-white dark:bg-[#1a1f2e] text-ink-600 dark:text-ink-300 pt-16 pb-8 border-t border-teal-100 dark:border-teal-900/30">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div class="text-center md:text-start">
+        <a href="index.html" class="inline-flex items-center justify-center md:justify-start gap-3 mb-6 group hover:opacity-90 transition">
+          <div class="w-11 h-11 bg-teal-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" class="w-6 h-6" fill="none">
+              <circle cx="18" cy="22" r="5" fill="white" opacity="0.95"/>
+              <circle cx="10" cy="15" r="3.5" fill="white" opacity="0.95"/>
+              <circle cx="26" cy="15" r="3.5" fill="white" opacity="0.95"/>
+              <circle cx="14" cy="9" r="3" fill="white" opacity="0.95"/>
+              <circle cx="22" cy="9" r="3" fill="white" opacity="0.95"/>
+            </svg>
+          </div>
+          <span class="flex flex-col items-start leading-tight">
+            <span class="text-xl md:text-2xl font-display font-bold tracking-tight text-teal-800 dark:text-teal-200">PawCare</span>
+            <span class="text-coral-500 text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase -mt-0.5">Veterinary Clinic</span>
+          </span>
+        </a>
+        <p class="mb-5 text-ink-500 dark:text-ink-300 text-sm">Compassionate veterinary medicine. Modern care, warm hearts.</p>
+        <div class="flex justify-center md:justify-start gap-3">
+          <a href="#" class="social-vet" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-vet" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-vet" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="text-center md:text-start">
+        <h4 class="text-teal-800 dark:text-teal-300 font-display font-bold text-sm mb-5 uppercase tracking-widest">Services</h4>
+        <ul class="space-y-2.5">
+          <li><a href="services.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Vaccinations</a></li>
+          <li><a href="services.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Surgery</a></li>
+          <li><a href="services.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Dentistry</a></li>
+          <li><a href="services.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Diagnostics</a></li>
+        </ul>
+      </div>
+      <div class="text-center md:text-start">
+        <h4 class="text-teal-800 dark:text-teal-300 font-display font-bold text-sm mb-5 uppercase tracking-widest">Clinic</h4>
+        <ul class="space-y-2.5">
+          <li><a href="about.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">About</a></li>
+          <li><a href="vets.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Vets</a></li>
+          <li><a href="membership.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Membership</a></li>
+          <li></li>
+          <li><a href="client.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Pet Owner Portal</a></li>
+          <li><a href="admin.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Admin Portal</a></li>
+        </ul>
+      </div>
+      <div class="text-center md:text-start">
+        <h4 class="text-teal-800 dark:text-teal-300 font-display font-bold text-sm mb-5 uppercase tracking-widest">Visit</h4>
+        <ul class="space-y-3">
+          <li class="flex justify-center md:justify-start gap-3 text-ink-500 dark:text-ink-300 text-sm"><i class="fas fa-map-marker-alt text-teal-500 mt-0.5"></i><span>450 Pet Wellness Way, Animal District</span></li>
+          <li class="flex justify-center md:justify-start gap-3 text-ink-500 dark:text-ink-300 text-sm"><i class="fas fa-phone text-teal-500"></i><span>(555) 727-4PAW</span></li>
+          <li class="flex justify-center md:justify-start gap-3 text-ink-500 dark:text-ink-300 text-sm"><i class="fas fa-envelope text-teal-500"></i><span>hello@pawcarevet.com</span></li>
+          <li class="flex justify-center md:justify-start gap-3 text-ink-500 dark:text-ink-300 text-sm"><i class="fas fa-clock text-teal-500"></i><span>Mon–Fri 8am – 7pm · Sat 9am – 4pm</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-teal-100 dark:border-teal-900/30 text-center text-xs text-ink-400 dark:text-ink-400">
+      <p>&copy; 2026 PAWCARE VETERINARY CLINIC. <i class="fas fa-paw text-coral-400 mx-1"></i> Caring for pets, always.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ======== SCRIPTS ======== -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Theme toggle
+    const themeBtns = document.querySelectorAll('#theme-toggle, #mobile-theme-toggle');
+    themeBtns.forEach(btn => {
+      btn?.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      });
+    });
+    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+    // RTL
+    function setRTL(isRTL) {
+      const html = document.documentElement;
+      if (isRTL === 'rtl' || isRTL === true) { html.setAttribute('dir', 'rtl'); localStorage.setItem('dir', 'rtl'); } 
+      else { html.setAttribute('dir', 'ltr'); localStorage.setItem('dir', 'ltr'); }
+    }
+    const savedDir = localStorage.getItem('dir');
+    if (savedDir === 'rtl') document.documentElement.setAttribute('dir', 'rtl');
+    else document.documentElement.setAttribute('dir', 'ltr');
+
+    const rtlBtn = document.getElementById('rtl-toggle');
+    if (rtlBtn) {
+      rtlBtn.addEventListener('click', () => {
+        const currentDir = document.documentElement.getAttribute('dir');
+        setRTL(currentDir === 'rtl' ? 'ltr' : 'rtl');
+      });
+    }
+    const mobileRtlBtn = document.getElementById('mobile-rtl-toggle');
+    if (mobileRtlBtn) {
+      mobileRtlBtn.addEventListener('click', () => {
+        const currentDir = document.documentElement.getAttribute('dir');
+        setRTL(currentDir === 'rtl' ? 'ltr' : 'rtl');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileToggle = document.getElementById('mobile-toggle');
+        if (mobileMenu && mobileMenu.classList.contains('open')) {
+          mobileMenu.classList.remove('open');
+          if (mobileToggle && mobileToggle.querySelector('i')) {
+            mobileToggle.querySelector('i').classList.remove('fa-times');
+            mobileToggle.querySelector('i').classList.add('fa-bars');
+          }
+        }
+      });
+    }
+
+    // Mobile menu
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        const icon = mobileToggle.querySelector('i');
+        if (mobileMenu.classList.contains('open')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      });
+      mobileMenu.querySelectorAll('a:not(#mobile-rtl-toggle)').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          if (mobileToggle.querySelector('i')) {
+            mobileToggle.querySelector('i').classList.remove('fa-times');
+            mobileToggle.querySelector('i').classList.add('fa-bars');
+          }
+        });
+      });
+    }
+
+    // Desktop dropdown touch/click support (e.g. Nest Hub Max)
+    document.querySelectorAll('.dropdown-parent').forEach(parent => {
+      const btn = parent.querySelector('button');
+      if (btn) {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = parent.classList.contains('open');
+          document.querySelectorAll('.dropdown-parent.open').forEach(p => p.classList.remove('open'));
+          if (!isOpen) {
+            parent.classList.add('open');
+          } else {
+            btn.blur();
+          }
+        });
+      }
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.dropdown-parent.open').forEach(p => p.classList.remove('open'));
+    });
+
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const toggle = item.querySelector('.faq-toggle');
+      const content = item.querySelector('.faq-content');
+      const icon = item.querySelector('.faq-icon i');
+      toggle?.addEventListener('click', () => {
+        const isOpen = !content.classList.contains('hidden');
+        faqItems.forEach(other => {
+          other.querySelector('.faq-content')?.classList.add('hidden');
+          const otherIcon = other.querySelector('.faq-icon i');
+          if (otherIcon) {
+            otherIcon.classList.remove('fa-minus');
+            otherIcon.classList.add('fa-plus');
+          }
+        });
+        if (!isOpen) {
+          content.classList.remove('hidden');
+          if (icon) {
+            icon.classList.remove('fa-plus');
+            icon.classList.add('fa-minus');
+          }
+        }
+      });
+    });
+
+    // Service filter buttons (visual toggle only)
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PawCare · Veterinary Clinic & Animal Hospital</title>
+
+  <!-- Favicon suite (simplified paw icon) -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='22' r='6' fill='%230d9488'/%3E%3Ccircle cx='8' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='24' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='12' cy='8' r='3.5' fill='%230d9488'/%3E%3Ccircle cx='20' cy='8' r='3.5' fill='%230d9488'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='22' r='6' fill='%230d9488'/%3E%3Ccircle cx='8' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='24' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='12' cy='8' r='3.5' fill='%230d9488'/%3E%3Ccircle cx='20' cy='8' r='3.5' fill='%230d9488'/%3E%3C/svg%3E" />
+
+  <!-- Tailwind CSS with CDN -->
+  <script src="tailwind.js"></script>
+
+  <!-- Prevent theme flash on page load -->
+  <script>
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+
+  <!-- Custom Tailwind Configuration — fresh veterinary palette -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            /* New vibrant, friendly veterinary palette */
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            coral: {
+              50: '#fff5f2',
+              100: '#ffe6df',
+              200: '#ffc9b8',
+              300: '#ffa38a',
+              400: '#ff7a5c',
+              500: '#ff5a36',
+              600: '#ed3b14',
+              700: '#c42d0e',
+              800: '#9c2812',
+              900: '#7f2513',
+            },
+            sand: {
+              50: '#fefdfb',
+              100: '#fdf9f0',
+              200: '#faf0dd',
+              300: '#f5e2c0',
+              400: '#edcd97',
+              500: '#e3b46e',
+              600: '#d49b4a',
+              700: '#b87e36',
+              800: '#96632e',
+              900: '#7a5229',
+            },
+            ink: {
+              50: '#f6f7f9',
+              100: '#eceef2',
+              200: '#d5dae1',
+              300: '#b0bac7',
+              400: '#8595a8',
+              500: '#66788d',
+              600: '#516074',
+              700: '#424e5e',
+              800: '#3a4350',
+              900: '#343a45',
+            },
+            mint: '#d1fae5',
+            /* keep font families */
+            fontFamily: {
+              'display': ['"Quicksand"', 'sans-serif'],
+              'body': ['"Inter"', 'system-ui', 'sans-serif'],
+            },
+            animation: {
+              'float-slow': 'floatSlow 6s ease-in-out infinite',
+              'bounce-soft': 'bounceSoft 2s ease-in-out infinite',
+              'fade-up': 'fadeUp 0.7s ease-out',
+              'wag': 'wag 1s ease-in-out infinite',
+              'pulse-ring': 'pulseRing 2s ease-out infinite',
+            },
+            keyframes: {
+              floatSlow: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+              bounceSoft: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+              fadeUp: { '0%': { transform: 'translateY(24px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+              wag: { '0%, 100%': { transform: 'rotate(-4deg)' }, '50%': { transform: 'rotate(4deg)' } },
+              pulseRing: { '0%': { transform: 'scale(0.9)', opacity: '0.7' }, '100%': { transform: 'scale(1.3)', opacity: '0' } },
+            },
+          },
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Fonts — Quicksand (friendly) + Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    body {
+      background-color: #fefdfb;
+      color: #343a45;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+    .dark body {
+      background-color: #1a1f2e;
+      color: #eceef2;
+    }
+
+    /* Elegant scrollbar */
+    body::-webkit-scrollbar { width: 6px; }
+    body::-webkit-scrollbar-track { background: #fefdfb; }
+    body::-webkit-scrollbar-thumb { background: #0d9488; border-radius: 20px; }
+
+    /* ===== HERO — WAVE + FLOATING PAW ===== */
+    .hero-vet {
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f766e 0%, #0d9488 40%, #14b8a6 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .hero-vet::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23fefdfb' fill-opacity='1' d='M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z'%3E%3C/path%3E%3C/svg%3E") no-repeat center bottom;
+      background-size: cover;
+      z-index: 3;
+    }
+    .dark .hero-vet::before {
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%231a1f2e' fill-opacity='1' d='M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z'%3E%3C/path%3E%3C/svg%3E") no-repeat center bottom;
+      background-size: cover;
+    }
+    @media (max-width: 767px) {
+      .hero-vet::before {
+        height: 70px;
+      }
+    }
+
+    /* Floating paw prints decoration */
+    .paw-float {
+      position: absolute;
+      opacity: 0.08;
+      font-size: 8rem;
+      color: white;
+      animation: floatSlow 7s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    /* ===== CARD STYLES — soft, rounded, friendly ===== */
+    .service-card-vet {
+      background: #ffffff;
+      border-radius: 28px;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border: 1px solid rgba(13, 148, 136, 0.1);
+      box-shadow: 0 8px 30px rgba(13, 148, 136, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .dark .service-card-vet {
+      background: #232a3d;
+      border-color: rgba(13, 148, 136, 0.2);
+    }
+    .service-card-vet::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #14b8a6, #2dd4bf, #5eead4);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+    .service-card-vet:hover::after {
+      transform: scaleX(1);
+    }
+    .service-card-vet:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px -15px rgba(13, 148, 136, 0.25);
+      border-color: rgba(13, 148, 136, 0.3);
+    }
+
+    /* Vet team card — hexagon-inspired shape */
+    .vet-card {
+      background: #ffffff;
+      border-radius: 40px 40px 40px 40px;
+      border: 1px solid rgba(13, 148, 136, 0.1);
+      transition: all 0.4s;
+      overflow: hidden;
+      position: relative;
+    }
+    .dark .vet-card {
+      background: #232a3d;
+      border-color: rgba(13, 148, 136, 0.2);
+    }
+    .vet-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 25px 50px -12px rgba(13, 148, 136, 0.25);
+      border-color: #14b8a6;
+    }
+
+    /* Step card — playful numbering */
+    .step-card {
+      background: #ffffff;
+      border-radius: 24px;
+      border: 2px dashed rgba(13, 148, 136, 0.25);
+      transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+    .dark .step-card {
+      background: #232a3d;
+      border-color: rgba(13, 148, 136, 0.3);
+    }
+    .step-card:hover {
+      border-style: solid;
+      border-color: #14b8a6;
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -12px rgba(13, 148, 136, 0.2);
+    }
+
+    /* Testimonial — soft bubble */
+    .testimonial-vet {
+      background: #ffffff;
+      border-radius: 24px 24px 24px 4px;
+      padding: 2rem 1.75rem;
+      border: 1px solid rgba(13, 148, 136, 0.08);
+      box-shadow: 0 6px 24px rgba(13, 148, 136, 0.05);
+      transition: all 0.4s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+    .dark .testimonial-vet {
+      background: #232a3d;
+      border-color: rgba(13, 148, 136, 0.2);
+    }
+    .testimonial-vet:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px -10px rgba(13, 148, 136, 0.18);
+      border-color: rgba(13, 148, 136, 0.3);
+    }
+    .testimonial-vet::before {
+      content: '🐾';
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 1.8rem;
+      opacity: 0.15;
+    }
+
+    /* FAQ — soft rounded */
+    .faq-vet {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid rgba(13, 148, 136, 0.12);
+      transition: all 0.3s ease;
+    }
+    .dark .faq-vet {
+      background: #232a3d;
+      border-color: rgba(13, 148, 136, 0.25);
+    }
+    .faq-vet:hover {
+      border-color: rgba(13, 148, 136, 0.35);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.08);
+    }
+
+    /* Buttons — playful, rounded */
+    .btn-teal {
+      background: #0d9488;
+      color: white;
+      font-weight: 600;
+      border-radius: 9999px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 14px rgba(13, 148, 136, 0.3);
+      letter-spacing: 0.3px;
+      font-family: 'Quicksand', sans-serif;
+    }
+    .btn-teal:hover {
+      background: #0f766e;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(13, 148, 136, 0.4);
+    }
+    .btn-coral {
+      background: #ff5a36;
+      color: white;
+      font-weight: 600;
+      border-radius: 9999px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 14px rgba(255, 90, 54, 0.3);
+      font-family: 'Quicksand', sans-serif;
+    }
+    .btn-coral:hover {
+      background: #ed3b14;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(255, 90, 54, 0.4);
+    }
+    .btn-ghost-vet {
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      color: white;
+      background: transparent;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: all 0.3s;
+      font-family: 'Quicksand', sans-serif;
+    }
+    .btn-ghost-vet:hover {
+      background: white;
+      color: #0d9488;
+      border-color: white;
+      transform: scale(1.03);
+    }
+
+    /* Navigation — pill shaped */
+    .nav-link-vet {
+      position: relative;
+      font-weight: 500;
+      transition: all 0.25s;
+      text-decoration: none !important;
+      font-family: 'Quicksand', sans-serif;
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+    }
+    .nav-link-vet:hover {
+      background: rgba(13, 148, 136, 0.08);
+      color: #0d9488;
+    }
+    .nav-link-vet.active {
+      color: #0d9488 !important;
+      font-weight: 700;
+      background: rgba(13, 148, 136, 0.1);
+    }
+
+    /* Dropdown */
+    .dropdown-vet {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 0.5rem 0;
+      box-shadow: 0 24px 48px rgba(13, 148, 136, 0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: all 0.25s;
+      z-index: 1000;
+      border: 1px solid rgba(13, 148, 136, 0.12);
+    }
+    .dropdown-vet::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+    }
+    .dark .dropdown-vet {
+      background: #232a3d;
+      border-color: rgba(13, 148, 136, 0.25);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+    }
+    .dropdown-parent:hover .dropdown-vet,
+    .dropdown-parent:focus-within .dropdown-vet,
+    .dropdown-parent.open .dropdown-vet {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-item-vet {
+      display: flex;
+      align-items: center;
+      padding: 0.6rem 1.4rem;
+      transition: all 0.2s;
+      color: #343a45;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      margin: 0 0.4rem;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 500;
+    }
+    .dark .dropdown-item-vet {
+      color: #eceef2;
+    }
+    .dropdown-item-vet:hover {
+      background: rgba(13, 148, 136, 0.08);
+      color: #0d9488;
+      padding-left: 1.7rem;
+    }
+    .dark .dropdown-item-vet:hover {
+      background: rgba(13, 148, 136, 0.15);
+      color: #5eead4;
+    }
+    .dropdown-item-vet i {
+      margin-right: 0.75rem;
+      width: 18px;
+      color: #0d9488;
+    }
+
+    /* Mobile menu */
+    .mobile-menu-vet {
+      background: #ffffff;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .dark .mobile-menu-vet {
+      background: #232a3d;
+    }
+    .mobile-menu-vet.open {
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    /* Stats */
+    .stat-vet {
+      padding: 2rem 1.25rem;
+      border-radius: 24px;
+      border: 1.5px solid rgba(13, 148, 136, 0.18);
+      box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      text-align: center;
+      position: relative;
+    }
+    .dark .stat-vet {
+      border-color: rgba(45, 212, 191, 0.25);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+    .stat-vet:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 35px -10px rgba(13, 148, 136, 0.2);
+      border-color: rgba(13, 148, 136, 0.4);
+    }
+
+    /* Social */
+    .social-vet {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(13, 148, 136, 0.1);
+      color: #0d9488;
+      transition: all 0.3s;
+    }
+    .social-vet:hover {
+      background: #0d9488;
+      color: white;
+      transform: translateY(-3px) scale(1.05);
+    }
+    .dark .social-vet {
+      background: rgba(13, 148, 136, 0.2);
+      color: #5eead4;
+    }
+    .dark .social-vet:hover {
+      background: #0d9488;
+      color: white;
+    }
+
+    /* RTL adjustments */
+    [dir="rtl"] .ml-auto { margin-left: 0 !important; margin-right: auto !important; }
+    [dir="rtl"] .ms-1 { margin-left: 0 !important; margin-right: 0.25rem !important; }
+    [dir="rtl"] .dropdown-vet { left: auto; right: 0; }
+    [dir="rtl"] .dropdown-item-vet i { margin-right: 0; margin-left: 0.75rem; }
+    [dir="rtl"] .testimonial-vet::before { right: auto; left: 1.5rem; }
+
+    .text-balance { text-wrap: balance; }
+  </style>
+</head>
+<body>
+
+<!-- ======== NAVIGATION — pill shaped, floating ======== -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl border-b border-teal-100/50 dark:border-teal-800/30">
+  <div class="container mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-20 md:h-22 relative">
+
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3 shrink-0 group">
+        <div class="w-11 h-11 bg-teal-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" class="w-6 h-6" fill="none">
+            <circle cx="18" cy="22" r="5" fill="white" opacity="0.95"/>
+            <circle cx="10" cy="15" r="3.5" fill="white" opacity="0.95"/>
+            <circle cx="26" cy="15" r="3.5" fill="white" opacity="0.95"/>
+            <circle cx="14" cy="9" r="3" fill="white" opacity="0.95"/>
+            <circle cx="22" cy="9" r="3" fill="white" opacity="0.95"/>
+          </svg>
+        </div>
+        <span class="flex flex-col items-start leading-tight">
+          <span class="text-xl md:text-2xl font-display font-bold tracking-tight text-teal-800 dark:text-teal-200">PawCare</span>
+          <span class="text-coral-500 text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase -mt-0.5">Veterinary Clinic</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden xl:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+        <div class="dropdown-parent relative">
+          <button type="button" class="nav-link-vet active font-medium flex items-center gap-1 py-2 text-[15px] text-teal-800 dark:text-teal-200">
+            Home <i class="fas fa-chevron-down text-[10px] opacity-60"></i>
+          </button>
+          <div class="dropdown-vet">
+            <a class="dropdown-item-vet text-teal-700 font-semibold bg-teal-50/80" href="index.html"> Home 1</a>
+            <a class="dropdown-item-vet" href="home2.html"> Home 2</a>
+          </div>
+        </div>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="about.html">About</a>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="services.html">Services</a>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="vets.html">Vets</a>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="membership.html">Membership</a>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="contact.html">Contact</a>
+
+        <div class="dropdown-parent relative">
+          <button type="button" class="nav-link-vet text-teal-800 dark:text-teal-200 font-medium flex items-center gap-1 py-2 text-[15px]">
+            Portal <i class="fas fa-chevron-down text-[10px] opacity-60"></i>
+          </button>
+          <div class="dropdown-vet">
+            <a class="dropdown-item-vet" href="client.html">Client</a>
+            <a class="dropdown-item-vet" href="admin.html"> Admin</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right actions -->
+      <div class="flex items-center gap-2 xl:gap-3 ms-auto">
+        <a href="login.html" class="hidden xl:inline-flex btn-teal py-2.5 px-6 text-sm items-center gap-2">
+          <i class="fas fa-user-circle"></i> Login
+        </a>
+        <button id="theme-toggle" class="hidden xl:flex w-10 h-10 rounded-full bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 hover:scale-110 transition items-center justify-center">
+          <i class="fas fa-moon dark:hidden text-sm"></i>
+          <i class="fas fa-sun hidden dark:inline text-sm"></i>
+        </button>
+        <button id="rtl-toggle" class="hidden xl:flex w-10 h-10 rounded-full bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 hover:scale-110 transition items-center justify-center font-bold text-sm">
+          ⇄
+        </button>
+        <button id="mobile-toggle" class="xl:hidden w-11 h-11 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg shrink-0 hover:bg-teal-700 transition">
+          <i class="fas fa-bars text-base"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu-vet xl:hidden rounded-b-3xl border-t border-teal-100/50 dark:border-teal-800/30">
+      <div class="py-5 px-4 space-y-1.5">
+        <div class="py-1">
+          <button onclick="document.getElementById('home-mobile-drop').classList.toggle('hidden'); document.getElementById('home-mobile-icon').classList.toggle('rotate-180')" class="w-full flex items-center justify-between py-3.5 px-4 font-semibold text-teal-700 bg-teal-50 dark:bg-teal-900/30 rounded-2xl transition cursor-pointer">
+            <span>Home</span>
+            <i id="home-mobile-icon" class="fas fa-chevron-down text-xs opacity-60 transition-transform duration-300"></i>
+          </button>
+          <div id="home-mobile-drop" class="hidden pl-2 space-y-1 mt-1.5 mb-2">
+            <a class="block py-3 px-4 font-medium text-teal-700 bg-teal-50 dark:bg-teal-900/30 rounded-2xl transition" href="index.html">Home 1</a>
+            <a class="block py-3 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="home2.html">Home 2</a>
+          </div>
+        </div>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="about.html">About</a>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="services.html">Services</a>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="vets.html">Vets</a>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="membership.html">Membership</a>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="contact.html">Contact</a>
+
+        <div class="py-1">
+          <button onclick="document.getElementById('dashboard-mobile-drop').classList.toggle('hidden'); document.getElementById('dashboard-mobile-icon').classList.toggle('rotate-180')" class="w-full flex items-center justify-between py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition cursor-pointer">
+            <span>Portal</span>
+            <i id="dashboard-mobile-icon" class="fas fa-chevron-down text-xs opacity-60 transition-transform duration-300"></i>
+          </button>
+          <div id="dashboard-mobile-drop" class="hidden pl-2 space-y-1 mt-1.5 mb-2">
+            <a class="block py-3 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="client.html">Pet Owner</a>
+            <a class="block py-3 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="admin.html">Admin</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3 pt-5 mt-3 border-t border-teal-100 dark:border-teal-800/40">
+          <a class="text-center btn-teal py-3 font-semibold flex items-center justify-center gap-2" href="login.html">
+            <i class="fas fa-user-circle"></i> Pet Owner Login
+          </a>
+          <div class="flex gap-3">
+            <button id="mobile-theme-toggle" class="flex-1 py-2.5 rounded-full bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 text-sm font-medium flex items-center gap-2 justify-center">
+              <i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i> Theme
+            </button>
+            <button id="mobile-rtl-toggle" class="flex-1 py-2.5 rounded-full bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 text-sm font-medium flex items-center gap-2 justify-center">
+              ⇄ RTL
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ======== HERO — WAVE + FLOATING ELEMENTS ======== -->
+<section class="hero-vet">
+  <!-- Floating paw decorations -->
+  <div class="paw-float" style="top: 15%; left: 5%; animation-delay: 0s;">🐾</div>
+  <div class="paw-float" style="top: 60%; right: 8%; animation-delay: 2s; font-size: 6rem;">🐾</div>
+  <div class="paw-float" style="bottom: 20%; left: 15%; animation-delay: 4s; font-size: 10rem;">🐾</div>
+
+  <div class="container mx-auto px-6 relative z-10 pt-28 sm:pt-32 lg:pt-32 pb-20 sm:pb-24">
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+      <!-- Left: Content -->
+      <div class="text-center lg:text-left animate-fade-up">
+        <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-white/20">
+          <i class="fas fa-heart-pulse text-coral-300"></i> Compassionate Care Since 2005
+        </span>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.1] mb-5 text-white break-words">
+          Healthy Pets,<br/>
+          <span class="text-coral-300">Happy Hearts</span>
+        </h1>
+        <p class="text-base sm:text-lg text-white/90 font-light mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+          Vaccinations, surgery, dental care &amp; wellness exams. Modern veterinary medicine delivered with a gentle, whole-pet approach.
+        </p>
+        <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start">
+          <a href="services.html" class="btn-coral px-7 py-3.5 text-sm sm:text-base inline-flex items-center justify-center gap-2 shadow-xl">
+            <i class="fas fa-stethoscope"></i> Our Services
+          </a>
+          <a href="contact.html" class="btn-ghost-vet px-7 py-3.5 text-sm sm:text-base inline-flex items-center justify-center gap-2">
+            <i class="fas fa-calendar-check"></i> Book Visit
+          </a>
+        </div>
+
+        <!-- Trust indicators -->
+        <div class="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-white/15 justify-center lg:justify-start">
+          <div class="flex items-center gap-2">
+            <i class="fas fa-star text-coral-300 text-sm"></i>
+            <span class="text-white/85 text-sm">4.9 · 3k+ reviews</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="fas fa-shield-halved text-coral-300 text-sm"></i>
+            <span class="text-white/85 text-sm">AAHA Accredited</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="fas fa-paw text-coral-300 text-sm"></i>
+            <span class="text-white/85 text-sm">Fear-Free Certified</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Hero image with organic shape -->
+      <div class="relative animate-fade-up flex justify-center lg:justify-end px-4 sm:px-0" style="animation-delay: 0.2s;">
+        <div class="relative w-full max-w-sm sm:max-w-md lg:max-w-[430px] mt-4 lg:mt-4">
+          <!-- Decorative circles -->
+          <div class="absolute -top-8 -left-8 w-32 h-32 bg-coral-400/20 rounded-full blur-2xl"></div>
+          <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-teal-300/20 rounded-full blur-2xl"></div>
+          
+          <!-- Floating top badge -->
+          <div class="absolute -top-3 right-2 sm:-top-4 sm:-right-4 z-20 bg-white dark:bg-ink-800 rounded-2xl py-2 px-3.5 sm:py-2.5 sm:px-4 shadow-xl flex items-center gap-2.5 border border-teal-100 dark:border-teal-800/40 animate-bounce" style="animation-duration: 3s;">
+            <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-xs font-bold text-ink-800 dark:text-sand-100 font-display">24/7 Emergency Care</span>
+          </div>
+
+          <div class="relative rounded-[2.5rem] sm:rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white/20 bg-teal-850/30 max-h-[380px] sm:max-h-[420px] lg:max-h-[440px]" style="aspect-ratio: 1/1;">
+            <img src="assets/h1.jpg" alt="Veterinarian caring for a dog" class="w-full h-full object-cover"/>
+          </div>
+          
+          <!-- Floating badge -->
+          <div class="absolute -bottom-4 left-2 sm:-bottom-5 sm:-left-5 z-20 bg-white dark:bg-ink-800 rounded-2xl p-3.5 sm:p-4 shadow-xl flex items-center gap-3 border border-teal-100 dark:border-teal-800/40">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 bg-teal-100 dark:bg-teal-900/50 rounded-full flex items-center justify-center">
+              <i class="fas fa-paw text-teal-600 dark:text-teal-300 text-base sm:text-lg"></i>
+            </div>
+            <div>
+              <p class="text-xs text-ink-500 dark:text-ink-300 font-medium">Happy Pets</p>
+              <p class="text-base sm:text-lg font-bold text-teal-700 dark:text-teal-200">12,000+</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== STATS — playful, colorful ======== -->
+<section class="py-16 bg-sand-100 dark:bg-[#1f2536] relative">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+      <div class="stat-vet bg-white dark:bg-ink-800">
+        <div class="text-3xl md:text-4xl font-display font-bold text-teal-600 dark:text-teal-300 mb-1">20+</div>
+        <div class="text-xs uppercase tracking-widest text-ink-500 dark:text-ink-300 font-semibold">Years of Care</div>
+      </div>
+      <div class="stat-vet bg-white dark:bg-ink-800">
+        <div class="text-3xl md:text-4xl font-display font-bold text-coral-500 dark:text-coral-300 mb-1">12k+</div>
+        <div class="text-xs uppercase tracking-widest text-ink-500 dark:text-ink-300 font-semibold">Pets Treated</div>
+      </div>
+      <div class="stat-vet bg-white dark:bg-ink-800">
+        <div class="text-3xl md:text-4xl font-display font-bold text-teal-600 dark:text-teal-300 mb-1">4.9★</div>
+        <div class="text-xs uppercase tracking-widest text-ink-500 dark:text-ink-300 font-semibold">Client Rating</div>
+      </div>
+      <div class="stat-vet bg-white dark:bg-ink-800">
+        <div class="text-3xl md:text-4xl font-display font-bold text-coral-500 dark:text-coral-300 mb-1">25+</div>
+        <div class="text-xs uppercase tracking-widest text-ink-500 dark:text-ink-300 font-semibold">Services</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SERVICES — playful cards with dashed accents ======== -->
+<section class="py-24 bg-sand-50 dark:bg-[#1a1f2e] relative overflow-hidden">
+  <!-- Decorative dashed path -->
+  <div class="absolute top-20 left-0 w-full h-px border-t-2 border-dashed border-teal-200/30 dark:border-teal-800/20"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+      <div class="animate-fade-up">
+        <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 px-0 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+          <span class="w-10 h-0.5 bg-teal-500"></span> What We Do <span class="w-10 h-0.5 bg-teal-500"></span>
+        </span>
+        <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+          Complete <span class="text-coral-500">Pet Care</span>
+        </h2>
+        <p class="text-ink-500 dark:text-ink-300 mt-3 text-base max-w-md">Advanced diagnostics, surgery, and preventive medicine for dogs and cats.</p>
+      </div>
+      <a href="services.html" class="shrink-0 inline-flex items-center gap-2 border-2 border-teal-500/40 text-teal-600 dark:text-teal-400 hover:bg-teal-500 hover:text-white px-7 py-3 rounded-full text-sm font-semibold transition duration-300 font-display">
+        View All <i class="fas fa-arrow-right text-xs"></i>
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 items-stretch">
+      <!-- Card 1: Vaccinations -->
+      <div class="service-card-vet group animate-fade-up h-full flex flex-col" style="animation-delay: 0.1s;">
+        <div class="relative overflow-hidden h-56 shrink-0 bg-teal-800/20">
+          <img src="assets/h2.jpg" alt="Vaccinations" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-900/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 bg-coral-500 text-white text-[10px] font-bold px-4 py-1.5 rounded-full tracking-wider uppercase shadow-lg">Preventive</span>
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="flex items-center gap-1 mb-3">
+            <i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star-half-stroke text-amber-400 text-[10px]"></i>
+            <span class="text-ink-400 dark:text-ink-300 text-[11px] ml-1.5 font-medium">(4.9) · 320</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-ink-800 dark:text-sand-100 mb-2">Vaccinations &amp; Wellness</h3>
+          <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed mb-5 flex-1">Core &amp; lifestyle vaccines, parasite prevention, and nose-to-tail wellness exams.</p>
+          <div class="flex items-center justify-between pt-5 border-t border-teal-100/60 dark:border-teal-800/40 mt-auto">
+            <span class="text-teal-600 dark:text-teal-300 font-display font-extrabold text-2xl">$89</span>
+            <a href="services.html" class="text-coral-500 text-xs font-bold tracking-wide uppercase hover:underline flex items-center gap-1.5">
+              Learn <i class="fas fa-arrow-right text-[9px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Surgery -->
+      <div class="service-card-vet group animate-fade-up h-full flex flex-col" style="animation-delay: 0.2s;">
+        <div class="relative overflow-hidden h-56 shrink-0 bg-teal-800/20">
+          <img src="assets/service-surgery.jpg" alt="Surgery" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-900/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 bg-teal-600 text-white text-[10px] font-bold px-4 py-1.5 rounded-full tracking-wider uppercase shadow-lg">Advanced</span>
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="flex items-center gap-1 mb-3">
+            <i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i>
+            <span class="text-ink-400 dark:text-ink-300 text-[11px] ml-1.5 font-medium">(5.0) · 190</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-ink-800 dark:text-sand-100 mb-2">Surgery &amp; Dentistry</h3>
+          <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed mb-5 flex-1">Spay/neuter, soft-tissue surgery, dental cleanings &amp; extractions with advanced monitoring.</p>
+          <div class="flex items-center justify-between pt-5 border-t border-teal-100/60 dark:border-teal-800/40 mt-auto">
+            <span class="text-teal-600 dark:text-teal-300 font-display font-extrabold text-2xl">$349</span>
+            <a href="services.html" class="text-coral-500 text-xs font-bold tracking-wide uppercase hover:underline flex items-center gap-1.5">
+              Learn <i class="fas fa-arrow-right text-[9px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Diagnostics -->
+      <div class="service-card-vet group animate-fade-up h-full flex flex-col" style="animation-delay: 0.3s;">
+        <div class="relative overflow-hidden h-56 shrink-0 bg-teal-800/20">
+          <img src="assets/h3.jpg" alt="Diagnostics" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-900/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 bg-sand-500 text-white text-[10px] font-bold px-4 py-1.5 rounded-full tracking-wider uppercase shadow-lg">Urgent</span>
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="flex items-center gap-1 mb-3">
+            <i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i><i class="fas fa-star text-amber-400 text-[10px]"></i>
+            <span class="text-ink-400 dark:text-ink-300 text-[11px] ml-1.5 font-medium">(4.8) · 240</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-ink-800 dark:text-sand-100 mb-2">Diagnostics &amp; Urgent Care</h3>
+          <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed mb-5 flex-1">Digital X-ray, ultrasound, in-house lab work &amp; same-day urgent care appointments.</p>
+          <div class="flex items-center justify-between pt-5 border-t border-teal-100/60 dark:border-teal-800/40 mt-auto">
+            <span class="text-teal-600 dark:text-teal-300 font-display font-extrabold text-2xl">$129</span>
+            <a href="services.html" class="text-coral-500 text-xs font-bold tracking-wide uppercase hover:underline flex items-center gap-1.5">
+              Learn <i class="fas fa-arrow-right text-[9px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== THE PET JOURNEY — playful steps with dashed borders ======== -->
+<section class="py-24 bg-gradient-to-b from-sand-50 to-teal-50/50 dark:from-[#1a1f2e] dark:to-[#1f2536] relative overflow-hidden">
+  <div class="absolute -top-32 -left-32 w-96 h-96 bg-teal-200/20 dark:bg-teal-800/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-coral-200/20 dark:bg-coral-800/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+      <div class="animate-fade-up">
+        <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 px-0 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+          <span class="w-10 h-0.5 bg-teal-500"></span> The Pet Journey <span class="w-10 h-0.5 bg-teal-500"></span>
+        </span>
+        <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+          Tailored <span class="text-coral-500">Care for Every Paw</span>
+        </h2>
+        <p class="text-ink-500 dark:text-ink-300 mt-3 text-base max-w-xl">
+          From first hello to golden years — we're with you and your pet at every step.
+        </p>
+      </div>
+      <div class="shrink-0 animate-fade-up">
+        <a href="contact.html" class="btn-teal px-8 py-3.5 text-sm inline-flex items-center gap-2 shadow-lg">
+          <i class="fas fa-calendar-check"></i> Book Appointment
+        </a>
+      </div>
+    </div>
+
+    <!-- 4 Journey Steps -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Step 1 -->
+      <div class="step-card overflow-hidden flex flex-col justify-between group">
+        <div class="relative h-44 overflow-hidden shrink-0 bg-teal-800/20">
+          <img src="assets/h4.jpg" alt="Wellness Exam" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-950/60 via-transparent to-transparent"></div>
+          <span class="absolute top-3 left-3 w-8 h-8 rounded-full bg-teal-600/90 text-white font-display font-bold text-xs flex items-center justify-center shadow-md backdrop-blur-sm">01</span>
+          <div class="absolute bottom-3 right-3 w-10 h-10 rounded-xl bg-white/90 dark:bg-ink-800/90 text-teal-600 dark:text-teal-300 flex items-center justify-center text-sm shadow-md backdrop-blur-sm">
+            <i class="fas fa-notes-medical"></i>
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="font-display font-bold text-xl text-ink-800 dark:text-sand-100 mb-2 group-hover:text-teal-600 transition-colors">
+            Wellness Exam
+          </h3>
+          <p class="text-sm text-ink-500 dark:text-ink-300 leading-relaxed mb-5 flex-1">
+            Comprehensive nose-to-tail physical, weight &amp; nutrition review, and personalized preventive plan.
+          </p>
+          <div class="pt-4 border-t border-teal-100 dark:border-teal-800/40 mt-auto">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-300 text-xs font-semibold tracking-wide">
+              <i class="fas fa-check-circle text-[11px]"></i> Preventive Care
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card overflow-hidden flex flex-col justify-between group">
+        <div class="relative h-44 overflow-hidden shrink-0 bg-teal-800/20">
+          <img src="assets/h5.jpg" alt="Diagnostics" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-950/60 via-transparent to-transparent"></div>
+          <span class="absolute top-3 left-3 w-8 h-8 rounded-full bg-teal-600/90 text-white font-display font-bold text-xs flex items-center justify-center shadow-md backdrop-blur-sm">02</span>
+          <div class="absolute bottom-3 right-3 w-10 h-10 rounded-xl bg-white/90 dark:bg-ink-800/90 text-teal-600 dark:text-teal-300 flex items-center justify-center text-sm shadow-md backdrop-blur-sm">
+            <i class="fas fa-flask"></i>
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="font-display font-bold text-xl text-ink-800 dark:text-sand-100 mb-2 group-hover:text-teal-600 transition-colors">
+            Diagnostics
+          </h3>
+          <p class="text-sm text-ink-500 dark:text-ink-300 leading-relaxed mb-5 flex-1">
+            In-house bloodwork, digital imaging, and advanced testing for accurate, same-day answers.
+          </p>
+          <div class="pt-4 border-t border-teal-100 dark:border-teal-800/40 mt-auto">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-300 text-xs font-semibold tracking-wide">
+              <i class="fas fa-check-circle text-[11px]"></i> Rapid Results
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card overflow-hidden flex flex-col justify-between group">
+        <div class="relative h-44 overflow-hidden shrink-0 bg-teal-800/20">
+          <img src="assets/h6.jpg" alt="Treatment & Surgery" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-950/60 via-transparent to-transparent"></div>
+          <span class="absolute top-3 left-3 w-8 h-8 rounded-full bg-teal-600/90 text-white font-display font-bold text-xs flex items-center justify-center shadow-md backdrop-blur-sm">03</span>
+          <div class="absolute bottom-3 right-3 w-10 h-10 rounded-xl bg-white/90 dark:bg-ink-800/90 text-teal-600 dark:text-teal-300 flex items-center justify-center text-sm shadow-md backdrop-blur-sm">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="font-display font-bold text-xl text-ink-800 dark:text-sand-100 mb-2 group-hover:text-teal-600 transition-colors">
+            Treatment &amp; Surgery
+          </h3>
+          <p class="text-sm text-ink-500 dark:text-ink-300 leading-relaxed mb-5 flex-1">
+            Evidence-based medical therapy, dentistry, or soft-tissue surgery in our modern surgical suite.
+          </p>
+          <div class="pt-4 border-t border-teal-100 dark:border-teal-800/40 mt-auto">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-300 text-xs font-semibold tracking-wide">
+              <i class="fas fa-check-circle text-[11px]"></i> Gentle Expertise
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-card overflow-hidden flex flex-col justify-between group">
+        <div class="relative h-44 overflow-hidden shrink-0 bg-teal-800/20">
+          <img src="assets/h7.jpg" alt="Follow-up & Rehab" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-950/60 via-transparent to-transparent"></div>
+          <span class="absolute top-3 left-3 w-8 h-8 rounded-full bg-teal-600/90 text-white font-display font-bold text-xs flex items-center justify-center shadow-md backdrop-blur-sm">04</span>
+          <div class="absolute bottom-3 right-3 w-10 h-10 rounded-xl bg-white/90 dark:bg-ink-800/90 text-teal-600 dark:text-teal-300 flex items-center justify-center text-sm shadow-md backdrop-blur-sm">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="font-display font-bold text-xl text-ink-800 dark:text-sand-100 mb-2 group-hover:text-teal-600 transition-colors">
+            Follow-up &amp; Rehab
+          </h3>
+          <p class="text-sm text-ink-500 dark:text-ink-300 leading-relaxed mb-5 flex-1">
+            Post-op check-ins, pain management, and rehabilitation support for a smooth recovery.
+          </p>
+          <div class="pt-4 border-t border-teal-100 dark:border-teal-800/40 mt-auto">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-300 text-xs font-semibold tracking-wide">
+              <i class="fas fa-check-circle text-[11px]"></i> Ongoing Support
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== VETS — circular photos, friendly cards ======== -->
+<section class="py-24 bg-white dark:bg-[#1a1f2e] relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-96 h-96 bg-teal-100/30 dark:bg-teal-900/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-16 animate-fade-up">
+      <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 px-0 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+        <span class="w-10 h-0.5 bg-teal-500"></span> Our Veterinarians <span class="w-10 h-0.5 bg-teal-500"></span>
+      </span>
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+        Meet the <span class="text-coral-500">Care Team</span>
+      </h2>
+      <p class="text-ink-500 dark:text-ink-300 mt-4 max-w-xl mx-auto text-lg">
+        Fear-Free certified veterinarians, surgeons &amp; nurses who treat every pet like family.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Vet 1 -->
+      <div class="vet-card group animate-fade-up text-center" style="animation-delay: 0.1s;">
+        <div class="pt-8 px-6">
+          <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-teal-100 dark:border-teal-800/50 shadow-lg group-hover:border-coral-300 transition-all duration-300 bg-teal-800/20">
+            <img src="assets/vet-1.jpg" alt="Dr. Maya Collins" class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-700"/>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-bold text-lg text-ink-800 dark:text-sand-100">Dr. Maya Collins</h3>
+          <p class="text-coral-500 text-xs font-semibold tracking-wider uppercase mt-1">Chief Veterinarian</p>
+          <p class="text-ink-400 dark:text-ink-300 text-xs mt-2">DVM, Fear-Free Certified · 15+ yrs</p>
+        </div>
+      </div>
+      <!-- Vet 2 -->
+      <div class="vet-card group animate-fade-up text-center" style="animation-delay: 0.2s;">
+        <div class="pt-8 px-6">
+          <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-teal-100 dark:border-teal-800/50 shadow-lg group-hover:border-coral-300 transition-all duration-300 bg-teal-800/20">
+            <img src="assets/vet-2.jpg" alt="Dr. James Park" class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-700"/>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-bold text-lg text-ink-800 dark:text-sand-100">Dr. James Park</h3>
+          <p class="text-coral-500 text-xs font-semibold tracking-wider uppercase mt-1">Surgeon</p>
+          <p class="text-ink-400 dark:text-ink-300 text-xs mt-2">DVM, DACVS · 12+ yrs</p>
+        </div>
+      </div>
+      <!-- Vet 3 -->
+      <div class="vet-card group animate-fade-up text-center" style="animation-delay: 0.3s;">
+        <div class="pt-8 px-6">
+          <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-teal-100 dark:border-teal-800/50 shadow-lg group-hover:border-coral-300 transition-all duration-300 bg-teal-800/20">
+            <img src="assets/vet-3.jpg" alt="Dr. Aisha Bello" class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-700"/>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-bold text-lg text-ink-800 dark:text-sand-100">Dr. Aisha Bello</h3>
+          <p class="text-coral-500 text-xs font-semibold tracking-wider uppercase mt-1">Internal Medicine</p>
+          <p class="text-ink-400 dark:text-ink-300 text-xs mt-2">DVM, DACVIM · 10+ yrs</p>
+        </div>
+      </div>
+      <!-- Vet 4 -->
+      <div class="vet-card group animate-fade-up text-center" style="animation-delay: 0.4s;">
+        <div class="pt-8 px-6">
+          <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-teal-100 dark:border-teal-800/50 shadow-lg group-hover:border-coral-300 transition-all duration-300 bg-teal-800/20">
+            <img src="assets/vet-4.jpg" alt="Dr. Emily Rivera" class="w-full h-full object-cover object-[center_35%] group-hover:scale-110 transition duration-700" style="object-position: center 35%;"/>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-bold text-lg text-ink-800 dark:text-sand-100">Dr. Emily Rivera</h3>
+          <p class="text-coral-500 text-xs font-semibold tracking-wider uppercase mt-1">Dentistry &amp; Wellness</p>
+          <p class="text-ink-400 dark:text-ink-300 text-xs mt-2">DVM, Fear-Free · 9+ yrs</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-14">
+      <a href="vets.html" class="btn-teal px-8 py-3.5 text-sm inline-flex items-center gap-2 shadow-lg">
+        Meet the Full Team <i class="fas fa-arrow-right text-xs"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ======== HOSPITAL TOUR & FACILITIES ======== -->
+<section class="py-20 bg-sand-50 dark:bg-[#1f2536] relative overflow-hidden border-t border-teal-100/50 dark:border-teal-900/30">
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-14 animate-fade-up">
+      <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 px-0 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+        <span class="w-10 h-0.5 bg-teal-500"></span> Fear-Free Facility <span class="w-10 h-0.5 bg-teal-500"></span>
+      </span>
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+        Designed for <span class="text-coral-500">Pet Comfort &amp; Healing</span>
+      </h2>
+      <p class="text-ink-500 dark:text-ink-300 mt-3 text-base max-w-xl mx-auto">
+        Tour our 8,000 sq ft state-of-the-art veterinary hospital equipped with separate dog &amp; cat waiting areas, sterile surgical suites, and advanced diagnostics.
+      </p>
+    </div>
+
+    <!-- Facility Photo Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="group relative rounded-3xl overflow-hidden shadow-lg border-4 border-white dark:border-ink-800 h-64 bg-teal-800/20">
+        <img src="assets/facility-2.jpg" alt="Welcoming Reception" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-4 left-4 right-4 text-white">
+          <span class="text-[10px] uppercase font-bold tracking-wider text-teal-300">Lobby &amp; Intake</span>
+          <h4 class="font-display font-bold text-base leading-tight mt-0.5">Stress-Free Reception</h4>
+        </div>
+      </div>
+
+      <div class="group relative rounded-3xl overflow-hidden shadow-lg border-4 border-white dark:border-ink-800 h-64 bg-teal-800/20">
+        <img src="assets/facility-1.jpg" alt="Surgical Suite" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-4 left-4 right-4 text-white">
+          <span class="text-[10px] uppercase font-bold tracking-wider text-coral-300">Sterile OR</span>
+          <h4 class="font-display font-bold text-base leading-tight mt-0.5">Advanced Surgical Suite</h4>
+        </div>
+      </div>
+
+      <div class="group relative rounded-3xl overflow-hidden shadow-lg border-4 border-white dark:border-ink-800 h-64 bg-teal-800/20">
+        <img src="assets/facility-3.jpg" alt="Private Exam Room" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-4 left-4 right-4 text-white">
+          <span class="text-[10px] uppercase font-bold tracking-wider text-teal-300">Exam Room</span>
+          <h4 class="font-display font-bold text-base leading-tight mt-0.5">Quiet Care Suites</h4>
+        </div>
+      </div>
+
+      <div class="group relative rounded-3xl overflow-hidden shadow-lg border-4 border-white dark:border-ink-800 h-64 bg-teal-800/20">
+        <img src="assets/facility-4.jpg" alt="In-House Laboratory" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-4 left-4 right-4 text-white">
+          <span class="text-[10px] uppercase font-bold tracking-wider text-amber-300">Diagnostics</span>
+          <h4 class="font-display font-bold text-base leading-tight mt-0.5">Rapid In-House Lab</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== TESTIMONIALS — playful bubbles ======== -->
+<section class="py-24 bg-sand-100 dark:bg-[#1f2536]">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 px-0 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+        <span class="w-10 h-0.5 bg-teal-500"></span> Happy Tails <span class="w-10 h-0.5 bg-teal-500"></span>
+      </span>
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+        Stories from <span class="text-coral-500">Pet Parents</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 items-stretch">
+      <!-- Testimonial 1 -->
+      <div class="testimonial-vet h-full flex flex-col justify-between animate-fade-up" style="animation-delay: 0.1s;">
+        <div>
+          <div class="flex gap-1 mb-4">
+            <i class="fas fa-star text-coral-400 text-xs"></i><i class="fas fa-star text-coral-400 text-xs"></i><i class="fas fa-star text-coral-400 text-xs"></i><i class="fas fa-star text-coral-400 text-xs"></i><i class="fas fa-star text-coral-400 text-xs"></i>
+          </div>
+          <p class="text-ink-600 dark:text-ink-200 text-sm leading-relaxed mb-6 italic font-display text-lg">"Dr. Collins treated my anxious rescue like her own. The Fear-Free approach made all the difference. Forever grateful."</p>
+        </div>
+        <div class="flex items-center gap-3 pt-4 border-t border-teal-100/60 dark:border-teal-800/40 mt-auto">
+          <img src="assets/review-jessica.jpg" alt="Jessica M." class="w-10 h-10 rounded-full object-cover border-2 border-teal-100 dark:border-teal-800/50 bg-teal-100 dark:bg-teal-900/40"/>
+          <div>
+            <strong class="text-ink-800 dark:text-sand-100 text-sm block font-display">Jessica M.</strong>
+            <span class="text-coral-500 text-[11px] font-medium">Dog mom to Luna</span>
+          </div>
+        </div>
+      </div>
+      <!-- Testimonial 2 -->
+      <div class="testimonial-vet h-full flex flex-col justify-between animate-fade-up" style="animation-delay: 0.2s;">
+        <div>
+          <div class="flex gap-1 mb-4">
+            <i class="fas fa-star text-coral-400 text-xs"></i><i class="fas fa-star text-coral-400 text-xs"></i><i class="fas fa-star text-coral-400 text-xs"></i><i class="fas fa-star text-coral-400 text-xs"></i><i class="fas fa-star text-coral-400 text-xs"></i>
+          </div>
+          <p class="text-ink-600 dark:text-ink-200 text-sm leading-relaxed mb-6 italic font-display text-lg">"Our cat needed emergency surgery. Dr. Park was calm, thorough, and saved her life. We can't thank PawCare enough."</p>
+        </div>
+        <div class="flex items-center gap-3 pt-4 border-t border-teal-100/60 dark:border-teal-800/40 mt-auto">
+          <img src="assets/review-mark.jpg" alt="Mark T." class="w-10 h-10 rounded-full object-cover border-2 border-teal-100 dark:border-teal-800/50 bg-teal-100 dark:bg-teal-900/40"/>
+          <div>
+            <strong class="text-ink-800 dark:text-sand-100 text-sm block font-display">Mark T.</strong>
+            <span class="text-coral-500 text-[11px] font-medium">Cat dad to Mittens</span>
+          </div>
+        </div>
+      </div>
+      <!-- Testimonial 3 -->
+      <div class="testimonial-vet h-full flex flex-col justify-between animate-fade-up" style="animation-delay: 0.3s;">
+        <div>
+          <div class="flex gap-1 mb-4">
+            <i class="fas fa-star text-coral-400 text-xs"></i><i class="fas fa-star text-coral-400 text-xs"></i><i class="fas fa-star text-coral-400 text-xs"></i><i class="fas fa-star text-coral-400 text-xs"></i><i class="fas fa-star text-coral-400 text-xs"></i>
+          </div>
+          <p class="text-ink-600 dark:text-ink-200 text-sm leading-relaxed mb-6 italic font-display text-lg">"The wellness membership is amazing value. Regular check-ups and vaccines keep my senior pup thriving."</p>
+        </div>
+        <div class="flex items-center gap-3 pt-4 border-t border-teal-100/60 dark:border-teal-800/40 mt-auto">
+          <img src="assets/review-priya.jpg" alt="Priya K." class="w-10 h-10 rounded-full object-cover border-2 border-teal-100 dark:border-teal-800/50 bg-teal-100 dark:bg-teal-900/40"/>
+          <div>
+            <strong class="text-ink-800 dark:text-sand-100 text-sm block font-display">Priya K.</strong>
+            <span class="text-coral-500 text-[11px] font-medium">Wellness member</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FAQ — soft, friendly accordion ======== -->
+<section class="py-24 bg-white dark:bg-[#1a1f2e] relative overflow-hidden">
+  <div class="container mx-auto px-6 relative z-10 max-w-4xl">
+    <div class="text-center mb-16 animate-fade-up">
+      <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 px-0 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+        <span class="w-10 h-0.5 bg-teal-500"></span> Pet Parent Questions <span class="w-10 h-0.5 bg-teal-500"></span>
+      </span>
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+        Frequently Asked <span class="text-coral-500">Questions</span>
+      </h2>
+      <p class="text-ink-500 dark:text-ink-300 mt-3 text-base max-w-xl mx-auto">
+        Everything you need to know about our safety standards, appointment prep, and compassionate care.
+      </p>
+    </div>
+
+    <!-- Accordion List -->
+    <div class="space-y-4" id="clinic-faq-accordion">
+      <!-- Item 1 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>How should I prepare my pet for their first visit?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">
+            Bring any previous medical records and a fresh stool sample if possible. Keep your pet on a leash or in a carrier. If your pet gets anxious in new places, let us know — we offer pre-visit calming protocols and Fear-Free handling techniques. Arrive 10 minutes early to fill out paperwork.
+          </p>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>What vaccinations does my pet need?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">
+            Core vaccines for dogs include rabies, distemper, parvovirus, and adenovirus. For cats: rabies, FVRCP, and FeLV (for kittens and at-risk adults). Lifestyle vaccines (like Bordetella or Lyme) are recommended based on exposure risk. We'll create a personalized schedule during your wellness exam.
+          </p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>What safety protocols do you follow for surgery?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">
+            Every surgical patient receives a pre-anesthetic blood panel, dedicated IV fluids, multi-parameter monitoring (ECG, blood pressure, oxygen, temperature), and a dedicated veterinary nurse. We use advanced pain management protocols including local blocks to minimize discomfort. Post-op recovery is closely supervised until your pet is awake and stable.
+          </p>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>Are you a Fear-Free certified clinic?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">
+            Yes! Our entire team is Fear-Free certified. That means we prioritize gentle handling, minimal restraint, calming pheromones, and treat-based rewards. We also offer pre-visit pharmaceuticals for extremely anxious pets when appropriate. Your pet's emotional well-being is just as important as their physical health.
+          </p>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>Do you offer payment plans or pet insurance assistance?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">
+            We accept all major credit cards, CareCredit, and Scratchpay for flexible financing. Our wellness membership plan spreads preventive care costs into affordable monthly payments. Our front desk team is happy to help you submit pet insurance claims and will provide itemized invoices for reimbursement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CTA — full width, vibrant ======== -->
+<section class="py-20 bg-gradient-to-r from-teal-600 to-teal-500 dark:from-teal-800 dark:to-teal-700 relative overflow-hidden">
+  <div class="absolute top-0 left-0 w-full h-full opacity-10" style="background-image: radial-gradient(circle at 20% 50%, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+  <div class="container mx-auto px-6 text-center relative z-10">
+    <div class="max-w-3xl mx-auto animate-fade-up">
+      <!-- Social Proof Avatars Pill -->
+      <div class="inline-flex items-center gap-3 bg-white/15 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-6 shadow-sm">
+        <div class="flex -space-x-2">
+          <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="assets/review-jessica.jpg" alt="Pet Parent">
+          <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="assets/review-mark.jpg" alt="Pet Parent">
+          <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="assets/review-priya.jpg" alt="Pet Parent">
+        </div>
+        <div class="text-left leading-tight text-white text-xs">
+          <div class="flex items-center gap-1 text-amber-300">
+            <i class="fas fa-star text-[10px]"></i>
+            <i class="fas fa-star text-[10px]"></i>
+            <i class="fas fa-star text-[10px]"></i>
+            <i class="fas fa-star text-[10px]"></i>
+            <i class="fas fa-star text-[10px]"></i>
+          </div>
+          <span class="font-medium text-white/90">Trusted by <strong class="text-white font-bold">1,200+</strong> Happy Pet Owners</span>
+        </div>
+      </div>
+
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-5">Give Your Pet the <span class="text-coral-200">Care They Deserve</span></h2>
+      <p class="text-white/85 text-lg mb-10 max-w-xl mx-auto">Book a wellness exam or consultation with one of our veterinarians today.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="contact.html" class="bg-white text-teal-700 px-8 py-3.5 rounded-full font-bold shadow-lg hover:scale-105 transition inline-flex items-center gap-2 text-sm font-display">
+          <i class="fas fa-calendar-check"></i> Book Appointment
+        </a>
+        <a href="membership.html" class="border-2 border-white/60 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-white hover:text-teal-700 transition inline-flex items-center gap-2 text-sm font-display">
+          <i class="fas fa-crown"></i> Wellness Membership
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FOOTER — fresh, clean ======== -->
+<footer class="bg-white dark:bg-[#1a1f2e] text-ink-600 dark:text-ink-300 pt-16 pb-8 border-t border-teal-100 dark:border-teal-900/30">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div class="text-center md:text-start">
+        <a href="index.html" class="inline-flex items-center justify-center md:justify-start gap-3 mb-6 group hover:opacity-90 transition">
+          <div class="w-11 h-11 bg-teal-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" class="w-6 h-6" fill="none">
+              <circle cx="18" cy="22" r="5" fill="white" opacity="0.95"/>
+              <circle cx="10" cy="15" r="3.5" fill="white" opacity="0.95"/>
+              <circle cx="26" cy="15" r="3.5" fill="white" opacity="0.95"/>
+              <circle cx="14" cy="9" r="3" fill="white" opacity="0.95"/>
+              <circle cx="22" cy="9" r="3" fill="white" opacity="0.95"/>
+            </svg>
+          </div>
+          <span class="flex flex-col items-start leading-tight">
+            <span class="text-xl md:text-2xl font-display font-bold tracking-tight text-teal-800 dark:text-teal-200">PawCare</span>
+            <span class="text-coral-500 text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase -mt-0.5">Veterinary Clinic</span>
+          </span>
+        </a>
+        <p class="mb-5 text-ink-500 dark:text-ink-300 text-sm">Compassionate veterinary medicine. Modern care, warm hearts.</p>
+        <div class="flex justify-center md:justify-start gap-3">
+          <a href="#" class="social-vet" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-vet" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-vet" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="text-center md:text-start">
+        <h4 class="text-teal-800 dark:text-teal-300 font-display font-bold text-sm mb-5 uppercase tracking-widest">Services</h4>
+        <ul class="space-y-2.5">
+          <li><a href="services.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Vaccinations</a></li>
+          <li><a href="services.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Surgery</a></li>
+          <li><a href="services.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Dentistry</a></li>
+          <li><a href="services.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Diagnostics</a></li>
+        </ul>
+      </div>
+      <div class="text-center md:text-start">
+        <h4 class="text-teal-800 dark:text-teal-300 font-display font-bold text-sm mb-5 uppercase tracking-widest">Clinic</h4>
+        <ul class="space-y-2.5">
+          <li><a href="about.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">About</a></li>
+          <li><a href="vets.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Vets</a></li>
+          <li><a href="membership.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Membership</a></li>
+          <li></li>
+          <li><a href="client.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Pet Owner Portal</a></li>
+          <li><a href="admin.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Admin Portal</a></li>
+        </ul>
+      </div>
+      <div class="text-center md:text-start">
+        <h4 class="text-teal-800 dark:text-teal-300 font-display font-bold text-sm mb-5 uppercase tracking-widest">Visit</h4>
+        <ul class="space-y-3">
+          <li class="flex justify-center md:justify-start gap-3 text-ink-500 dark:text-ink-300 text-sm"><i class="fas fa-map-marker-alt text-teal-500 mt-0.5"></i><span>450 Pet Wellness Way, Animal District</span></li>
+          <li class="flex justify-center md:justify-start gap-3 text-ink-500 dark:text-ink-300 text-sm"><i class="fas fa-phone text-teal-500"></i><span>(555) 727-4PAW</span></li>
+          <li class="flex justify-center md:justify-start gap-3 text-ink-500 dark:text-ink-300 text-sm"><i class="fas fa-envelope text-teal-500"></i><span>hello@pawcarevet.com</span></li>
+          <li class="flex justify-center md:justify-start gap-3 text-ink-500 dark:text-ink-300 text-sm"><i class="fas fa-clock text-teal-500"></i><span>Mon–Fri 8am – 7pm · Sat 9am – 4pm</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-teal-100 dark:border-teal-900/30 text-center text-xs text-ink-400 dark:text-ink-400">
+      <p>&copy; 2026 PAWCARE VETERINARY CLINIC. <i class="fas fa-paw text-coral-400 mx-1"></i> Caring for pets, always.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ======== SCRIPTS ======== -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Theme toggle
+    const themeBtns = document.querySelectorAll('#theme-toggle, #mobile-theme-toggle');
+    themeBtns.forEach(btn => {
+      btn?.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      });
+    });
+    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+    // RTL
+    function setRTL(isRTL) {
+      const html = document.documentElement;
+      if (isRTL === 'rtl' || isRTL === true) { html.setAttribute('dir', 'rtl'); localStorage.setItem('dir', 'rtl'); } 
+      else { html.setAttribute('dir', 'ltr'); localStorage.setItem('dir', 'ltr'); }
+    }
+    const savedDir = localStorage.getItem('dir');
+    if (savedDir === 'rtl') document.documentElement.setAttribute('dir', 'rtl');
+    else document.documentElement.setAttribute('dir', 'ltr');
+
+    const rtlBtn = document.getElementById('rtl-toggle');
+    if (rtlBtn) {
+      rtlBtn.addEventListener('click', () => {
+        const currentDir = document.documentElement.getAttribute('dir');
+        setRTL(currentDir === 'rtl' ? 'ltr' : 'rtl');
+      });
+    }
+    const mobileRtlBtn = document.getElementById('mobile-rtl-toggle');
+    if (mobileRtlBtn) {
+      mobileRtlBtn.addEventListener('click', () => {
+        const currentDir = document.documentElement.getAttribute('dir');
+        setRTL(currentDir === 'rtl' ? 'ltr' : 'rtl');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileToggle = document.getElementById('mobile-toggle');
+        if (mobileMenu && mobileMenu.classList.contains('open')) {
+          mobileMenu.classList.remove('open');
+          if (mobileToggle && mobileToggle.querySelector('i')) {
+            mobileToggle.querySelector('i').classList.remove('fa-times');
+            mobileToggle.querySelector('i').classList.add('fa-bars');
+          }
+        }
+      });
+    }
+
+    // Mobile menu
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        const icon = mobileToggle.querySelector('i');
+        if (mobileMenu.classList.contains('open')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      });
+      mobileMenu.querySelectorAll('a:not(#mobile-rtl-toggle)').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          if (mobileToggle.querySelector('i')) {
+            mobileToggle.querySelector('i').classList.remove('fa-times');
+            mobileToggle.querySelector('i').classList.add('fa-bars');
+          }
+        });
+      });
+    }
+
+    // Desktop dropdown touch/click support (e.g. Nest Hub Max)
+    document.querySelectorAll('.dropdown-parent').forEach(parent => {
+      const btn = parent.querySelector('button');
+      if (btn) {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = parent.classList.contains('open');
+          document.querySelectorAll('.dropdown-parent.open').forEach(p => p.classList.remove('open'));
+          if (!isOpen) {
+            parent.classList.add('open');
+          } else {
+            btn.blur();
+          }
+        });
+      }
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.dropdown-parent.open').forEach(p => p.classList.remove('open'));
+    });
+
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const toggle = item.querySelector('.faq-toggle');
+      const content = item.querySelector('.faq-content');
+      const icon = item.querySelector('.faq-icon i');
+      toggle?.addEventListener('click', () => {
+        const isOpen = !content.classList.contains('hidden');
+        faqItems.forEach(other => {
+          other.querySelector('.faq-content')?.classList.add('hidden');
+          const otherIcon = other.querySelector('.faq-icon i');
+          if (otherIcon) {
+            otherIcon.classList.remove('fa-minus');
+            otherIcon.classList.add('fa-plus');
+          }
+        });
+        if (!isOpen) {
+          content.classList.remove('hidden');
+          if (icon) {
+            icon.classList.remove('fa-plus');
+            icon.classList.add('fa-minus');
+          }
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth" data-theme="teal-coral">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet Owner Portal · PawCare Veterinary Clinic</title>
+
+    <!-- Favicon suite (paw icon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='22' r='6' fill='%230d9488'/%3E%3Ccircle cx='8' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='24' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='12' cy='8' r='3.5' fill='%230d9488'/%3E%3Ccircle cx='20' cy='8' r='3.5' fill='%230d9488'/%3E%3C/svg%3E" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='22' r='6' fill='%230d9488'/%3E%3Ccircle cx='8' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='24' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='12' cy='8' r='3.5' fill='%230d9488'/%3E%3Ccircle cx='20' cy='8' r='3.5' fill='%230d9488'/%3E%3C/svg%3E" />
+
+    <!-- Tailwind CSS -->
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-brand': 'var(--color-primary)',
+                        'teal-light': 'var(--color-primary-light)',
+                        'teal-dark': 'var(--color-primary-dark)',
+                        'teal-bright': 'var(--color-primary-bright)',
+                        'coral-accent': 'var(--color-accent)',
+                        'bg-sand': 'var(--color-bg-warm)',
+                        'ink-charcoal': 'var(--color-text-dark)',
+                        'dark-bg': '#1a1f2e',
+                        'dark-card': '#232a3d',
+                        'dark-surface': '#2d3548',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        'display': ['Quicksand', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'float-slow': 'floatSlow 6s ease-in-out infinite',
+                        'wag': 'wag 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        slideUp: { '0%': { transform: 'translateY(30px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        floatSlow: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-8px)' } },
+                        wag: { '0%, 100%': { transform: 'rotate(-4deg)' }, '50%': { transform: 'rotate(4deg)' } },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+        :root, [data-theme="teal-coral"] {
+            --color-primary: #0d9488;
+            --color-primary-light: #99f6e4;
+            --color-primary-dark: #0f766e;
+            --color-primary-bright: #2dd4bf;
+            --color-accent: #ff5a36;
+            --color-bg-warm: #fefdfb;
+            --color-text-dark: #343a45;
+            --color-rgb-primary: 13, 148, 136;
+            --color-rgb-bright: 45, 212, 191;
+            --color-rgb-coral: 255, 90, 54;
+        }
+
+        body { font-family: 'Inter', sans-serif; background-color: var(--color-bg-warm); color: var(--color-text-dark); transition: background-color 0.4s ease, color 0.4s ease; }
+        .dark body { background-color: #1a1f2e; color: #eceef2; }
+        h1,h2,h3,h4,h5,h6 { font-family: 'Quicksand', sans-serif; font-weight: 700; letter-spacing: -0.01em; }
+
+        .teal-gradient-text {
+            background: linear-gradient(135deg, #5eead4 0%, #14b8a6 50%, #0f766e 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .dark .text-teal-brand { color: var(--color-primary-bright) !important; }
+        .dark .border-teal-brand { border-color: var(--color-primary-bright) !important; }
+        .dark .bg-teal-brand { background-color: var(--color-primary-bright) !important; }
+        body::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0; top: 0; height: 100vh;
+            width: 280px;
+            background: #FFFFFF;
+            border-right: 1px solid rgba(var(--color-rgb-primary), 0.12);
+            transition: transform 0.3s ease;
+            z-index: 100;
+            overflow-y: auto;
+        }
+        .dark .sidebar { background: #1a1f2e; border-right-color: rgba(var(--color-rgb-bright), 0.15); }
+        @media (max-width: 768px) { .sidebar { transform: translateX(-100%); } .sidebar.open { transform: translateX(0); } }
+        .sidebar-overlay { position: fixed; top:0;left:0;right:0;bottom:0; background: rgba(0,0,0,0.5); z-index:99; display:none; }
+        .sidebar-overlay.open { display:block; }
+
+        .sidebar-item {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.85rem 1.5rem; margin: 0.25rem 0.75rem;
+            border-radius: 16px; color: var(--color-text-dark);
+            transition: all 0.2s; cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+        }
+        .dark .sidebar-item { color: #eceef2; }
+        .sidebar-item:hover { background: rgba(var(--color-rgb-primary), 0.08); color: var(--color-primary); }
+        .dark .sidebar-item:hover { background: rgba(var(--color-rgb-bright), 0.12); color: var(--color-primary-bright); }
+        .sidebar-item.active { background: var(--color-primary); color: #FFFFFF; }
+        .dark .sidebar-item.active { background: var(--color-primary-bright); color: #1a1f2e; }
+        .sidebar-item i { width: 24px; font-size: 1.1rem; }
+
+        .main-content { margin-left: 280px; padding: 1.5rem; min-height: 100vh; }
+        @media (max-width: 768px) { .main-content { margin-left: 0; padding-top: 70px; } }
+
+        .mobile-header {
+            display: none; position: fixed; top:0;left:0;right:0;
+            background: #FFFFFF; padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(var(--color-rgb-primary), 0.12);
+            z-index: 50; align-items: center; justify-content: space-between;
+        }
+        .dark .mobile-header { background: #1a1f2e; border-bottom-color: rgba(var(--color-rgb-bright), 0.15); }
+        @media (max-width: 768px) { .mobile-header { display: flex; } }
+
+        .toggle-btn {
+            width: 40px; height: 40px; border-radius: 12px;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: rgba(13, 148, 136, 0.1); color: #0d9488;
+            transition: all 0.2s ease; border: none; cursor: pointer;
+            font-size: 0.875rem; font-weight: bold;
+        }
+        .dark .toggle-btn { background: rgba(45, 212, 191, 0.15); color: #2dd4bf; }
+        .toggle-btn:hover { transform: scale(1.1); background: rgba(13, 148, 136, 0.2); }
+        .dark .toggle-btn:hover { background: rgba(45, 212, 191, 0.25); }
+
+        .card-design {
+            background: #FFFFFF; border-radius: 24px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(var(--color-rgb-primary), 0.1);
+            box-shadow: 0 6px 18px rgba(13,148,136,0.04);
+        }
+        .dark .card-design { background: #232a3d; border-color: rgba(var(--color-rgb-bright), 0.15); }
+        .card-design:hover { border-color: var(--color-primary); }
+
+        .btn-primary-design {
+            background: var(--color-primary); color: #FFFFFF;
+            font-weight: 700; border-radius: 9999px; transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(var(--color-rgb-primary), 0.3);
+            white-space: nowrap; border: none;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .btn-primary-design:hover { background: var(--color-primary-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(var(--color-rgb-primary), 0.4); color: #FFFFFF; }
+        .dark .btn-primary-design { background: var(--color-primary-bright); color: #1a1f2e; }
+        .dark .btn-primary-design:hover { background: var(--color-primary); color: #FFFFFF; }
+
+        .btn-outline-design {
+            border: 1.5px solid var(--color-primary); color: var(--color-primary);
+            background: transparent; border-radius: 9999px; font-weight: 600;
+            transition: all 0.3s; white-space: nowrap;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .btn-outline-design:hover { background: var(--color-primary); color: #FFFFFF; transform: translateY(-2px); }
+        .dark .btn-outline-design { border-color: var(--color-primary-bright); color: var(--color-primary-bright); }
+        .dark .btn-outline-design:hover { background: var(--color-primary-bright); color: #1a1f2e; }
+
+        .btn-coral-design {
+            background: var(--color-accent); color: #FFFFFF;
+            font-weight: 700; border-radius: 9999px; transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(var(--color-rgb-coral), 0.3);
+            font-family: 'Quicksand', sans-serif;
+        }
+        .btn-coral-design:hover { background: #ed3b14; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(var(--color-rgb-coral), 0.4); color: #FFFFFF; }
+
+        .stat-card {
+            background: #FFFFFF; border-radius: 24px; padding: 1.2rem;
+            border: 1px solid rgba(var(--color-rgb-primary), 0.1);
+            transition: all 0.3s;
+            display: flex; flex-direction: column; justify-content: space-between; height: 100%;
+        }
+        .dark .stat-card { background: #232a3d; border-color: rgba(var(--color-rgb-bright), 0.15); }
+        .stat-card:hover { transform: translateY(-3px); border-color: var(--color-primary); box-shadow: 0 12px 28px -10px rgba(13,148,136,0.15); }
+
+        .status-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.3rem 0.75rem; border-radius: 9999px;
+            font-size: 0.7rem; font-weight: 700;
+            white-space: nowrap; flex-shrink: 0;
+            line-height: 1; text-align: center;
+            align-self: center; height: fit-content;
+        }
+        .status-confirmed { background: #ccfbf1; color: #0f766e; }
+        .status-scheduled { background: #faf0dd; color: #b87e36; }
+        .status-completed { background: #d1fae5; color: #065f46; }
+        .status-pending { background: #ffe6df; color: #c42d0e; }
+        .status-active { background: #e0f2fe; color: #0369a1; }
+        .status-expiring { background: #ffe6df; color: #c42d0e; }
+        .dark .status-confirmed { background: #134e4a; color: #5eead4; }
+        .dark .status-scheduled { background: #3d3129; color: #edcd97; }
+        .dark .status-completed { background: #134e4a; color: #6ee7b7; }
+        .dark .status-pending { background: #3d2a24; color: #ffa38a; }
+        .dark .status-active { background: #1e3a5f; color: #93c5fd; }
+        .dark .status-expiring { background: #3d2a24; color: #ffa38a; }
+
+        .form-input {
+            width: 100%; padding: 0.75rem 1rem;
+            border-radius: 14px; border: 1.5px solid rgba(var(--color-rgb-primary), 0.2);
+            background: #FFFFFF; transition: all 0.3s;
+            color: var(--color-text-dark); font-family: 'Inter', sans-serif;
+        }
+        .dark .form-input { background: #1a1f2e; border-color: rgba(var(--color-rgb-bright), 0.2); color: #eceef2; }
+        .form-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 4px rgba(var(--color-rgb-primary), 0.15); }
+        .form-label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.4rem; color: var(--color-text-dark); }
+        .dark .form-label { color: #eceef2; }
+
+        input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.85; transition: all 0.2s ease; }
+        input[type="date"]::-webkit-calendar-picker-indicator:hover { opacity: 1; }
+        .dark input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) brightness(1.2); opacity: 0.9; }
+
+        .progress-bar { height: 8px; background: rgba(var(--color-rgb-primary), 0.12); border-radius: 10px; overflow: hidden; }
+        .dark .progress-bar { background: rgba(var(--color-rgb-bright), 0.15); }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #14b8a6, #2dd4bf); border-radius: 10px; transition: width 0.6s ease; }
+        .dark .progress-fill { background: linear-gradient(90deg, #2dd4bf, #5eead4); }
+
+        .receipt-item { padding: 0.75rem 0; border-bottom: 1px solid rgba(var(--color-rgb-primary), 0.08); }
+        .dark .receipt-item { border-bottom-color: rgba(var(--color-rgb-bright), 0.1); }
+
+        .page-content.hidden { display: none; }
+
+        /* Pet avatar */
+        .pet-avatar {
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; flex-shrink: 0;
+            border: 2px solid var(--color-primary);
+            background: rgba(var(--color-rgb-primary), 0.1);
+        }
+
+        /* RTL support */
+        [dir="rtl"] .sidebar { left: auto; right: 0; border-right: none; border-left: 1px solid rgba(var(--color-rgb-primary), 0.12); }
+        [dir="rtl"] .main-content { margin-left: 0; margin-right: 280px; }
+        [dir="rtl"] .sidebar-item i { margin-right: 0; margin-left: 0.75rem; }
+        @media (max-width: 768px) {
+            [dir="rtl"] .sidebar { transform: translateX(100%); }
+            [dir="rtl"] .sidebar.open { transform: translateX(0); }
+            [dir="rtl"] .main-content { margin-right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="flex items-center gap-3">
+            <button id="menuToggle" class="toggle-btn"><i class="fas fa-bars"></i></button>
+            <a href="index.html" class="flex items-center gap-2.5 group shrink-0">
+                <div class="w-9 h-9 rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition duration-300" style="background-color: #0d9488 !important; min-width: 36px; min-height: 36px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" class="w-5 h-5" fill="none">
+                        <circle cx="18" cy="22" r="5" fill="white" opacity="0.95"/>
+                        <circle cx="10" cy="15" r="3.5" fill="white" opacity="0.95"/>
+                        <circle cx="26" cy="15" r="3.5" fill="white" opacity="0.95"/>
+                        <circle cx="14" cy="9" r="3" fill="white" opacity="0.95"/>
+                        <circle cx="22" cy="9" r="3" fill="white" opacity="0.95"/>
+                    </svg>
+                </div>
+                <span class="flex flex-col items-start leading-tight">
+                    <span class="text-base font-display font-bold tracking-tight text-ink-charcoal dark:text-white">PawCare</span>
+                    <span class="text-[9px] font-bold tracking-[0.15em] uppercase -mt-0.5" style="color: #ff5a36 !important;">Pet Portal</span>
+                </span>
+            </a>
+        </div>
+        <div class="flex gap-2">
+            <button id="theme-toggle-mobile" class="toggle-btn" title="Dark / Light">
+                <i class="fas fa-moon dark:hidden text-sm"></i>
+                <i class="fas fa-sun hidden dark:inline text-sm"></i>
+            </button>
+            <button id="rtl-toggle-mobile" class="toggle-btn font-bold text-sm" title="RTL / LTR">
+                &#8644;
+            </button>
+        </div>
+    </div>
+
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="p-5 border-b border-[rgba(var(--color-rgb-primary),0.12)] dark:border-[rgba(var(--color-rgb-bright),0.15)]">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition duration-300" style="background-color: #0d9488 !important; min-width: 44px; min-height: 44px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" class="w-6 h-6" fill="none">
+                        <circle cx="18" cy="22" r="5" fill="white" opacity="0.95"/>
+                        <circle cx="10" cy="15" r="3.5" fill="white" opacity="0.95"/>
+                        <circle cx="26" cy="15" r="3.5" fill="white" opacity="0.95"/>
+                        <circle cx="14" cy="9" r="3" fill="white" opacity="0.95"/>
+                        <circle cx="22" cy="9" r="3" fill="white" opacity="0.95"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="flex flex-col items-start leading-tight">
+                        <span class="text-xl font-display font-bold tracking-tight text-ink-charcoal dark:text-white">PawCare</span>
+                        <span class="text-[10px] font-bold tracking-[0.15em] uppercase -mt-0.5" style="color: #ff5a36 !important;">Veterinary Clinic</span>
+                    </span>
+                    <p class="text-xs text-ink-charcoal/60 dark:text-gray-400 mt-1">Pet Owner Portal</p>
+                </div>
+            </a>
+        </div>
+        <nav class="py-4">
+            <div class="sidebar-item active" data-page="dashboard"><i class="fas fa-paw"></i><span>Dashboard</span></div>
+            <div class="sidebar-item" data-page="appointments"><i class="fas fa-calendar-check"></i><span>My Appointments</span></div>
+            <div class="sidebar-item" data-page="new-booking"><i class="fas fa-plus-circle"></i><span>Book a Visit</span></div>
+            <div class="sidebar-item" data-page="pets"><i class="fas fa-dog"></i><span>My Pets</span></div>
+            <div class="sidebar-item" data-page="vaccinations"><i class="fas fa-syringe"></i><span>Vaccinations</span></div>
+            <div class="sidebar-item" data-page="records"><i class="fas fa-file-medical"></i><span>Medical Records</span></div>
+            <div class="sidebar-item" data-page="documents"><i class="fas fa-file-invoice"></i><span>Invoices</span></div>
+        </nav>
+        <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-[rgba(var(--color-rgb-primary),0.12)] dark:border-[rgba(var(--color-rgb-bright),0.15)]">
+            <a href="login.html" class="flex items-center justify-center gap-2 w-full p-2.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] hover:bg-teal-brand transition font-semibold text-sm text-ink-charcoal dark:text-gray-200 hover:text-white font-display">
+                <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="card-design p-4 md:p-6 flex justify-between items-center flex-wrap gap-3 mb-6">
+            <div>
+                <h1 class="text-2xl font-display font-bold" id="page-title">Dashboard</h1>
+                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400" id="page-subtitle">Welcome back, Isabella</p>
+            </div>
+            <div class="hidden lg:flex items-center gap-4">
+                <button id="theme-toggle" class="toggle-btn" title="Dark / Light">
+                    <i class="fas fa-moon dark:hidden text-sm"></i>
+                    <i class="fas fa-sun hidden dark:inline text-sm"></i>
+                </button>
+                <button id="rtl-toggle" class="toggle-btn font-bold text-sm" title="RTL / LTR">
+                    &#8644;
+                </button>
+                <div class="flex items-center gap-3 border-l border-[rgba(var(--color-rgb-primary),0.12)] dark:border-[rgba(var(--color-rgb-bright),0.15)] pl-4">
+                    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-teal-brand shadow-sm shrink-0 bg-teal-brand flex items-center justify-center text-white text-lg">
+                        <img src="assets/user-isabella.jpg" alt="Isabella Rossi" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-left hidden lg:block">
+                        <p class="text-sm font-bold text-ink-charcoal dark:text-white leading-tight">Isabella Rossi</p>
+                        <p class="text-[10px] text-ink-charcoal/60 dark:text-gray-400">Pet Parent · 3 pets</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== DASHBOARD ========== -->
+        <div id="page-dashboard" class="page-content">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 items-stretch">
+                <div class="stat-card">
+                    <div class="flex items-start justify-between gap-2">
+                        <p class="text-xs text-ink-charcoal/60 dark:text-gray-400 leading-snug">Upcoming Visits</p>
+                        <div class="w-10 h-10 shrink-0 bg-[rgba(var(--color-rgb-primary),0.1)] rounded-full flex items-center justify-center"><i class="fas fa-calendar-check text-teal-brand"></i></div>
+                    </div>
+                    <p class="text-2xl font-bold text-ink-charcoal dark:text-white mt-2 leading-none">2</p>
+                </div>
+                <div class="stat-card">
+                    <div class="flex items-start justify-between gap-2">
+                        <p class="text-xs text-ink-charcoal/60 dark:text-gray-400 leading-snug">Pets Registered</p>
+                        <div class="w-10 h-10 shrink-0 bg-[rgba(var(--color-rgb-primary),0.1)] rounded-full flex items-center justify-center"><i class="fas fa-dog text-teal-brand"></i></div>
+                    </div>
+                    <p class="text-2xl font-bold text-ink-charcoal dark:text-white mt-2 leading-none">3</p>
+                </div>
+                <div class="stat-card">
+                    <div class="flex items-start justify-between gap-2">
+                        <p class="text-xs text-ink-charcoal/60 dark:text-gray-400 leading-snug">Vaccines Up-to-Date</p>
+                        <div class="w-10 h-10 shrink-0 bg-[rgba(var(--color-rgb-primary),0.1)] rounded-full flex items-center justify-center"><i class="fas fa-syringe text-teal-brand"></i></div>
+                    </div>
+                    <p class="text-2xl font-bold text-ink-charcoal dark:text-white mt-2 leading-none">2/3</p>
+                </div>
+                <div class="stat-card">
+                    <div class="flex items-start justify-between gap-2">
+                        <p class="text-xs text-ink-charcoal/60 dark:text-gray-400 leading-snug">Member Savings (YTD)</p>
+                        <div class="w-10 h-10 shrink-0 bg-[rgba(var(--color-rgb-primary),0.1)] rounded-full flex items-center justify-center"><i class="fas fa-crown text-teal-brand"></i></div>
+                    </div>
+                    <p class="text-2xl font-bold text-ink-charcoal dark:text-white mt-2 leading-none">$340</p>
+                </div>
+            </div>
+
+            <!-- Pet quick cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 items-stretch">
+                <div class="card-design p-4 xl:p-5 flex items-center gap-3.5 h-full">
+                    <div class="pet-avatar overflow-hidden shrink-0">
+                        <img src="assets/pet-luna.jpg" alt="Luna" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between gap-2 mb-1">
+                            <p class="font-display font-bold text-ink-charcoal dark:text-white truncate">Luna</p>
+                            <span class="status-badge status-active text-[10px]">Healthy</span>
+                        </div>
+                        <p class="text-xs text-ink-charcoal/60 dark:text-gray-400 truncate">Golden Retriever · 4 yrs</p>
+                    </div>
+                </div>
+                <div class="card-design p-4 xl:p-5 flex items-center gap-3.5 h-full">
+                    <div class="pet-avatar overflow-hidden shrink-0">
+                        <img src="assets/pet-milo.jpg" alt="Milo" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between gap-2 mb-1">
+                            <p class="font-display font-bold text-ink-charcoal dark:text-white truncate">Milo</p>
+                            <span class="status-badge status-active text-[10px]">Healthy</span>
+                        </div>
+                        <p class="text-xs text-ink-charcoal/60 dark:text-gray-400 truncate">Tabby Cat · 2 yrs</p>
+                    </div>
+                </div>
+                <div class="card-design p-4 xl:p-5 flex items-center gap-3.5 h-full">
+                    <div class="pet-avatar overflow-hidden shrink-0">
+                        <img src="assets/pet-biscuit.jpg" alt="Biscuit" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between gap-2 mb-1">
+                            <p class="font-display font-bold text-ink-charcoal dark:text-white truncate">Biscuit</p>
+                            <span class="status-badge status-pending text-[10px]">Vaccine Due</span>
+                        </div>
+                        <p class="text-xs text-ink-charcoal/60 dark:text-gray-400 truncate">Beagle · 8 yrs (senior)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="card-design p-6">
+                    <h3 class="font-display font-bold text-lg mb-4 text-ink-charcoal dark:text-white">Upcoming Appointments</h3>
+                    <div class="space-y-3">
+                        <div class="flex gap-3 pb-3 border-b border-[rgba(var(--color-rgb-primary),0.08)] dark:border-[rgba(var(--color-rgb-bright),0.1)]">
+                            <i class="fas fa-syringe text-teal-brand mt-1"></i>
+                            <div class="flex-1"><p class="text-sm font-medium text-ink-charcoal dark:text-white">Annual Wellness Exam — Luna</p><p class="text-xs text-ink-charcoal/60 dark:text-gray-400">May 22, 2026 · 2:30 PM · Dr. Maya Collins</p></div>
+                            <span class="status-badge status-confirmed text-xs">Confirmed</span>
+                        </div>
+                        <div class="flex gap-3 pb-3 border-b border-[rgba(var(--color-rgb-primary),0.08)] dark:border-[rgba(var(--color-rgb-bright),0.1)]">
+                            <i class="fas fa-tooth text-teal-brand mt-1"></i>
+                            <div class="flex-1"><p class="text-sm font-medium text-ink-charcoal dark:text-white">Dental Cleaning — Biscuit</p><p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Jun 4, 2026 · 10:00 AM · Dr. Emily Rivera</p></div>
+                            <span class="status-badge status-scheduled text-xs">Scheduled</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <i class="fas fa-vial text-teal-brand mt-1"></i>
+                            <div class="flex-1"><p class="text-sm font-medium text-ink-charcoal dark:text-white">Vaccine Booster — Milo</p><p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Jun 18, 2026 · 4:15 PM · Nurse Sarah Kim</p></div>
+                            <span class="status-badge status-pending text-xs">Action Needed</span>
+                        </div>
+                    </div>
+                    <button data-nav="appointments" class="btn-outline-design w-full mt-4 py-2 text-sm">View All Appointments</button>
+                </div>
+                <div class="card-design p-6">
+                    <h3 class="font-display font-bold text-lg mb-4 text-ink-charcoal dark:text-white">Quick Actions</h3>
+                    <div class="space-y-3">
+                        <button data-nav="new-booking" class="w-full text-left px-4 py-3 bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.1)] text-ink-charcoal dark:text-white rounded-2xl hover:bg-[rgba(var(--color-rgb-primary),0.2)] transition flex items-center gap-3 font-display font-semibold">
+                            <i class="fas fa-plus-circle text-teal-brand"></i><span>Book a New Visit</span>
+                        </button>
+                        <button data-nav="pets" class="w-full text-left px-4 py-3 bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.1)] text-ink-charcoal dark:text-white rounded-2xl hover:bg-[rgba(var(--color-rgb-primary),0.2)] transition flex items-center gap-3 font-display font-semibold">
+                            <i class="fas fa-dog text-teal-brand"></i><span>Manage My Pets</span>
+                        </button>
+                        <button data-nav="vaccinations" class="w-full text-left px-4 py-3 bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.1)] text-ink-charcoal dark:text-white rounded-2xl hover:bg-[rgba(var(--color-rgb-primary),0.2)] transition flex items-center gap-3 font-display font-semibold">
+                            <i class="fas fa-syringe text-teal-brand"></i><span>Vaccination Records</span>
+                        </button>
+                        <button data-nav="records" class="w-full text-left px-4 py-3 bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.1)] text-ink-charcoal dark:text-white rounded-2xl hover:bg-[rgba(var(--color-rgb-primary),0.2)] transition flex items-center gap-3 font-display font-semibold">
+                            <i class="fas fa-file-medical text-teal-brand"></i><span>Medical History</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Membership status card -->
+            <div class="card-design p-6 mt-6">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-[rgba(var(--color-rgb-primary),0.1)] text-teal-brand flex items-center justify-center text-xl">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-ink-charcoal dark:text-white">Wellness Membership — Complete Plan</h3>
+                            <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">15% off all services · 2 wellness exams/year · Annual bloodwork included</p>
+                        </div>
+                    </div>
+                    <button data-nav="pets" class="btn-primary-design text-xs px-5 py-2">Manage Membership</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== MY APPOINTMENTS ========== -->
+        <div id="page-appointments" class="page-content hidden">
+            <div class="card-design p-6">
+                <h3 class="font-display font-bold text-2xl mb-4 text-ink-charcoal dark:text-white">My Appointments</h3>
+                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400 mb-6">Track upcoming visits, past treatments, and follow-up care for all your pets.</p>
+                <div class="space-y-4">
+                    <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)]">
+                        <div class="flex flex-wrap justify-between items-start gap-3">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <img src="assets/pet-luna.jpg" alt="Luna" class="w-6 h-6 rounded-full object-cover border border-teal-brand/40 shrink-0">
+                                    <p class="font-display font-bold text-lg text-ink-charcoal dark:text-white">Annual Wellness Exam — Luna</p>
+                                </div>
+                                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">May 22, 2026 · 2:30 PM · Dr. Maya Collins</p>
+                                <div class="flex items-center gap-3 mt-2">
+                                    <span class="status-badge status-confirmed">Confirmed</span>
+                                    <span class="text-xs text-ink-charcoal/60 dark:text-gray-400">Location: Exam Room 4 · Main Clinic</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-clock mr-1"></i>Reschedule</button>
+                                <button class="btn-primary-design text-xs px-4 py-1.5"><i class="fas fa-eye mr-1"></i>Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)]">
+                        <div class="flex flex-wrap justify-between items-start gap-3">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <img src="assets/pet-biscuit.jpg" alt="Biscuit" class="w-6 h-6 rounded-full object-cover border border-teal-brand/40 shrink-0">
+                                    <p class="font-display font-bold text-lg text-ink-charcoal dark:text-white">Dental Cleaning — Biscuit</p>
+                                </div>
+                                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">Jun 4, 2026 · 10:00 AM · Dr. Emily Rivera</p>
+                                <div class="flex items-center gap-3 mt-2">
+                                    <span class="status-badge status-scheduled">Scheduled</span>
+                                    <span class="text-xs text-ink-charcoal/60 dark:text-gray-400">Location: Dental Suite · Main Clinic</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-clock mr-1"></i>Reschedule</button>
+                                <button class="btn-primary-design text-xs px-4 py-1.5"><i class="fas fa-eye mr-1"></i>Details</button>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="grid grid-cols-3 text-[10px] sm:text-xs text-ink-charcoal/60 dark:text-gray-400 mb-1.5 font-medium">
+                                <span class="text-left truncate">Pre-op bloodwork ✓</span>
+                                <span class="text-center truncate">Dental X-rays ✓</span>
+                                <span class="text-right truncate">Cleaning (upcoming)</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" style="width:66%"></div></div>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)]">
+                        <div class="flex flex-wrap justify-between items-start gap-3">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <img src="assets/pet-milo.jpg" alt="Milo" class="w-6 h-6 rounded-full object-cover border border-teal-brand/40 shrink-0">
+                                    <p class="font-display font-bold text-lg text-ink-charcoal dark:text-white">Vaccine Booster — Milo</p>
+                                </div>
+                                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">Jun 18, 2026 · 4:15 PM · Nurse Sarah Kim</p>
+                                <div class="flex items-center gap-3 mt-2">
+                                    <span class="status-badge status-pending">Action Needed</span>
+                                    <span class="text-xs text-ink-charcoal/60 dark:text-gray-400">Location: Exam Room 2 · Main Clinic</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-clock mr-1"></i>Reschedule</button>
+                                <button class="btn-primary-design text-xs px-4 py-1.5"><i class="fas fa-eye mr-1"></i>Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)] opacity-80">
+                        <div class="flex flex-wrap justify-between items-start gap-3">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <img src="assets/pet-luna.jpg" alt="Luna" class="w-6 h-6 rounded-full object-cover border border-teal-brand/40 shrink-0">
+                                    <p class="font-display font-bold text-lg text-ink-charcoal dark:text-white">Luna — Spay Recovery Follow-up</p>
+                                </div>
+                                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">Apr 30, 2026 · Completed · Dr. James Park</p>
+                                <div class="flex items-center gap-3 mt-2">
+                                    <span class="status-badge status-completed">Completed</span>
+                                    <span class="text-xs text-ink-charcoal/60 dark:text-gray-400">All healed, no complications</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-star mr-1"></i>Leave Review</button>
+                                <button class="btn-primary-design text-xs px-4 py-1.5"><i class="fas fa-rotate-right mr-1"></i>Rebook</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== NEW BOOKING ========== -->
+        <div id="page-new-booking" class="page-content hidden">
+            <div class="card-design p-6">
+                <h3 class="font-display font-bold text-2xl mb-4 text-ink-charcoal dark:text-white">Book a Visit</h3>
+                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400 mb-6">Select your pet, the service, and a date that works for you.</p>
+                <form onsubmit="event.preventDefault(); alert('Appointment request submitted! We will confirm shortly.');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="form-label">Pet <span style="color: #ff5a36;">*</span></label>
+                            <select class="form-input" required>
+                                <option value="">Select a pet</option>
+                                <option>🐕 Luna (Golden Retriever)</option>
+                                <option>🐱 Milo (Tabby Cat)</option>
+                                <option>🐶 Biscuit (Beagle)</option>
+                                <option>+ Add a new pet</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Service <span style="color: #ff5a36;">*</span></label>
+                            <select class="form-input" required>
+                                <option value="">Select a service</option>
+                                <option>Wellness Exam</option>
+                                <option>Vaccinations</option>
+                                <option>Dental Cleaning</option>
+                                <option>Sick Visit / Urgent Care</option>
+                                <option>Surgery Consultation</option>
+                                <option>Diagnostics / Imaging</option>
+                                <option>Follow-up Visit</option>
+                                <option>Nail Trim / Grooming Add-on</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Preferred Veterinarian</label>
+                            <select class="form-input">
+                                <option value="">No preference</option>
+                                <option>Dr. Maya Collins (Chief Veterinarian)</option>
+                                <option>Dr. James Park (Lead Surgeon)</option>
+                                <option>Dr. Aisha Bello (Internal Medicine)</option>
+                                <option>Dr. Emily Rivera (Dentistry & Wellness)</option>
+                                <option>Dr. Liam O'Brien (Emergency)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Preferred Date <span style="color: #ff5a36;">*</span></label>
+                            <input type="date" class="form-input" required />
+                        </div>
+                        <div>
+                            <label class="form-label">Preferred Time</label>
+                            <select class="form-input">
+                                <option>Morning (8am – 12pm)</option>
+                                <option>Afternoon (12pm – 4pm)</option>
+                                <option>Evening (4pm – 7pm)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Reason for Visit</label>
+                            <select class="form-input">
+                                <option>Routine / Preventive</option>
+                                <option>Not feeling well</option>
+                                <option>Injury</option>
+                                <option>Follow-up</option>
+                                <option>Behavior concern</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="form-label">Notes for Your Veterinarian</label>
+                            <textarea class="form-input" rows="3" placeholder="Any symptoms, concerns, or questions you'd like to discuss during your visit"></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="flex items-start gap-3 p-4 bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] rounded-2xl">
+                                <i class="fas fa-crown text-teal-brand mt-0.5"></i>
+                                <p class="text-xs text-ink-charcoal/75 dark:text-gray-300">
+                                    <strong>Wellness Member Benefit:</strong> Your 15% discount will be applied automatically. Wellness exams and core vaccines are covered under your Complete plan.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary-design w-full mt-6 py-3 text-lg font-bold inline-flex items-center justify-center gap-2">
+                        <i class="fas fa-calendar-check"></i> Request Appointment
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ========== MY PETS ========== -->
+        <div id="page-pets" class="page-content hidden">
+            <div class="card-design p-6 mb-6">
+                <h3 class="font-display font-bold text-2xl mb-4 text-ink-charcoal dark:text-white">My Pets</h3>
+                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400 mb-6">Manage profiles, health info, and care plans for each of your pets.</p>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+                    <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.1)] flex flex-col h-full">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="pet-avatar overflow-hidden">
+                                <img src="assets/pet-luna.jpg" alt="Luna" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <p class="font-display font-bold text-lg text-ink-charcoal dark:text-white">Luna</p>
+                                <p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Golden Retriever · 4 yrs · F</p>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5 text-sm mb-4">
+                            <p class="text-ink-charcoal/75 dark:text-gray-300"><span class="text-ink-charcoal/50 dark:text-gray-500">Weight:</span> 28.4 kg</p>
+                            <p class="text-ink-charcoal/75 dark:text-gray-300"><span class="text-ink-charcoal/50 dark:text-gray-500">Chip:</span> #981-000-4821</p>
+                            <p class="text-ink-charcoal/75 dark:text-gray-300"><span class="text-ink-charcoal/50 dark:text-gray-500">Next vaccine:</span> Oct 2026</p>
+                        </div>
+                        <div class="flex gap-2 mt-auto pt-2">
+                            <button class="btn-outline-design text-xs px-4 py-1.5 flex-1">Edit</button>
+                            <button class="btn-primary-design text-xs px-4 py-1.5 flex-1">View</button>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.1)] flex flex-col h-full">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="pet-avatar overflow-hidden">
+                                <img src="assets/pet-milo.jpg" alt="Milo" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <p class="font-display font-bold text-lg text-ink-charcoal dark:text-white">Milo</p>
+                                <p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Tabby Cat · 2 yrs · M</p>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5 text-sm mb-4">
+                            <p class="text-ink-charcoal/75 dark:text-gray-300"><span class="text-ink-charcoal/50 dark:text-gray-500">Weight:</span> 4.8 kg</p>
+                            <p class="text-ink-charcoal/75 dark:text-gray-300"><span class="text-ink-charcoal/50 dark:text-gray-500">Chip:</span> #981-000-5512</p>
+                            <p class="text-ink-charcoal/75 dark:text-gray-300"><span class="text-ink-charcoal/50 dark:text-gray-500">Next vaccine:</span> Jun 2026</p>
+                        </div>
+                        <div class="flex gap-2 mt-auto pt-2">
+                            <button class="btn-outline-design text-xs px-4 py-1.5 flex-1">Edit</button>
+                            <button class="btn-primary-design text-xs px-4 py-1.5 flex-1">View</button>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.1)] flex flex-col h-full">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="pet-avatar overflow-hidden">
+                                <img src="assets/pet-biscuit.jpg" alt="Biscuit" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <p class="font-display font-bold text-lg text-ink-charcoal dark:text-white">Biscuit</p>
+                                <p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Beagle · 8 yrs · M</p>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5 text-sm mb-4">
+                            <p class="text-ink-charcoal/75 dark:text-gray-300"><span class="text-ink-charcoal/50 dark:text-gray-500">Weight:</span> 12.1 kg</p>
+                            <p class="text-ink-charcoal/75 dark:text-gray-300"><span class="text-ink-charcoal/50 dark:text-gray-500">Chip:</span> #981-000-2098</p>
+                            <p class="text-ink-charcoal/75 dark:text-gray-300"><span class="text-ink-charcoal/50 dark:text-gray-500">Next vaccine:</span> <span class="text-coral-accent font-semibold">Overdue</span></p>
+                        </div>
+                        <div class="flex gap-2 mt-auto pt-2">
+                            <button class="btn-outline-design text-xs px-4 py-1.5 flex-1">Edit</button>
+                            <button class="btn-primary-design text-xs px-4 py-1.5 flex-1">View</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-coral-design w-full mt-6 py-3 text-sm inline-flex items-center justify-center gap-2">
+                    <i class="fas fa-plus"></i> Add a New Pet
+                </button>
+            </div>
+        </div>
+
+        <!-- ========== VACCINATIONS ========== -->
+        <div id="page-vaccinations" class="page-content hidden">
+            <div class="card-design p-6 mb-6">
+                <h3 class="font-display font-bold text-2xl mb-4 text-ink-charcoal dark:text-white">Vaccination Records</h3>
+                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400 mb-6">Track your pets' vaccines, boosters, and due dates.</p>
+
+                <!-- Luna -->
+                <div class="mb-8">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xl">🐕</span>
+                        <h4 class="font-display font-bold text-lg text-ink-charcoal dark:text-white">Luna (Golden Retriever)</h4>
+                        <span class="status-badge status-active text-xs ml-2">Up-to-Date</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="receipt-item flex justify-between items-center">
+                            <div><p class="font-bold text-sm text-ink-charcoal dark:text-white">Rabies</p><p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Given: Nov 15, 2025 · Next due: Nov 15, 2026</p></div>
+                            <span class="status-badge status-completed text-xs">Current</span>
+                        </div>
+                        <div class="receipt-item flex justify-between items-center">
+                            <div><p class="font-bold text-sm text-ink-charcoal dark:text-white">DHPP (Distemper, Hepatitis, Parvo, Parainfluenza)</p><p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Given: Nov 15, 2025 · Next due: Nov 15, 2026</p></div>
+                            <span class="status-badge status-completed text-xs">Current</span>
+                        </div>
+                        <div class="receipt-item flex justify-between items-center">
+                            <div><p class="font-bold text-sm text-ink-charcoal dark:text-white">Bordetella</p><p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Given: Jan 10, 2026 · Next due: Jan 10, 2027</p></div>
+                            <span class="status-badge status-completed text-xs">Current</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milo -->
+                <div class="mb-8">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xl">🐱</span>
+                        <h4 class="font-display font-bold text-lg text-ink-charcoal dark:text-white">Milo (Tabby Cat)</h4>
+                        <span class="status-badge status-pending text-xs ml-2">Booster Due</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="receipt-item flex justify-between items-center">
+                            <div><p class="font-bold text-sm text-ink-charcoal dark:text-white">Rabies</p><p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Given: Jun 20, 2025 · Next due: Jun 20, 2026</p></div>
+                            <span class="status-badge status-completed text-xs">Current</span>
+                        </div>
+                        <div class="receipt-item flex justify-between items-center">
+                            <div><p class="font-bold text-sm text-ink-charcoal dark:text-white">FVRCP</p><p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Given: Jun 20, 2025 · Next due: Jun 20, 2026</p></div>
+                            <span class="status-badge status-pending text-xs">Due Soon</span>
+                        </div>
+                        <div class="receipt-item flex justify-between items-center">
+                            <div><p class="font-bold text-sm text-ink-charcoal dark:text-white">FeLV (Feline Leukemia)</p><p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Given: Jun 20, 2025 · Next due: Jun 20, 2026</p></div>
+                            <span class="status-badge status-pending text-xs">Due Soon</span>
+                        </div>
+                    </div>
+                    <button data-nav="new-booking" class="btn-primary-design text-xs px-5 py-2 mt-4"><i class="fas fa-calendar-plus mr-1"></i>Book Booster</button>
+                </div>
+
+                <!-- Biscuit -->
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xl">🐶</span>
+                        <h4 class="font-display font-bold text-lg text-ink-charcoal dark:text-white">Biscuit (Beagle)</h4>
+                        <span class="status-badge status-expiring text-xs ml-2">Overdue</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="receipt-item flex justify-between items-center">
+                            <div><p class="font-bold text-sm text-ink-charcoal dark:text-white">Rabies</p><p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Given: Mar 2, 2025 · Overdue since Mar 2, 2026</p></div>
+                            <span class="status-badge status-expiring text-xs">Overdue</span>
+                        </div>
+                        <div class="receipt-item flex justify-between items-center">
+                            <div><p class="font-bold text-sm text-ink-charcoal dark:text-white">DHPP</p><p class="text-xs text-ink-charcoal/60 dark:text-gray-400">Given: Mar 2, 2025 · Overdue since Mar 2, 2026</p></div>
+                            <span class="status-badge status-expiring text-xs">Overdue</span>
+                        </div>
+                    </div>
+                    <button data-nav="new-booking" class="btn-coral-design text-xs px-5 py-2 mt-4"><i class="fas fa-exclamation-triangle mr-1"></i>Book Now — Overdue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== MEDICAL RECORDS ========== -->
+        <div id="page-records" class="page-content hidden">
+            <div class="card-design p-6 mb-6">
+                <h3 class="font-display font-bold text-2xl mb-4 text-ink-charcoal dark:text-white">Medical History</h3>
+                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400 mb-6">Complete health timeline for each of your pets.</p>
+
+                <!-- Filter pills -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <button class="status-badge status-active text-xs">All Pets</button>
+                    <button class="status-badge status-confirmed text-xs">🐕 Luna</button>
+                    <button class="status-badge status-confirmed text-xs">🐱 Milo</button>
+                    <button class="status-badge status-confirmed text-xs">🐶 Biscuit</button>
+                </div>
+
+                <!-- Timeline -->
+                <div class="space-y-4">
+                    <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border-l-4 border-teal-brand">
+                        <div class="flex flex-wrap justify-between items-start gap-2">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span>🐕</span>
+                                    <p class="font-display font-bold text-ink-charcoal dark:text-white">Luna — Annual Wellness Exam</p>
+                                </div>
+                                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">May 2, 2026 · Dr. Maya Collins</p>
+                                <p class="text-sm text-ink-charcoal/80 dark:text-gray-300 mt-2">All vitals normal. Weight stable at 28.4 kg. Dental health good. Recommended continued joint supplement.</p>
+                            </div>
+                            <button class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-file-pdf mr-1"></i>PDF</button>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border-l-4 border-teal-brand">
+                        <div class="flex flex-wrap justify-between items-start gap-2">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span>🐱</span>
+                                    <p class="font-display font-bold text-ink-charcoal dark:text-white">Milo — Sick Visit (Vomiting)</p>
+                                </div>
+                                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">Apr 18, 2026 · Dr. Aisha Bello</p>
+                                <p class="text-sm text-ink-charcoal/80 dark:text-gray-300 mt-2">Mild gastritis diagnosed. Prescribed anti-nausea medication and bland diet for 5 days. Recheck scheduled.</p>
+                            </div>
+                            <button class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-file-pdf mr-1"></i>PDF</button>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border-l-4 border-teal-brand">
+                        <div class="flex flex-wrap justify-between items-start gap-2">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span>🐕</span>
+                                    <p class="font-display font-bold text-ink-charcoal dark:text-white">Luna — Spay Surgery</p>
+                                </div>
+                                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">Apr 15, 2026 · Dr. James Park</p>
+                                <p class="text-sm text-ink-charcoal/80 dark:text-gray-300 mt-2">Routine spay procedure completed without complications. Discharged same day with pain management plan.</p>
+                            </div>
+                            <button class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-file-pdf mr-1"></i>PDF</button>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border-l-4 border-coral-accent">
+                        <div class="flex flex-wrap justify-between items-start gap-2">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span>🐶</span>
+                                    <p class="font-display font-bold text-ink-charcoal dark:text-white">Biscuit — Senior Wellness Panel</p>
+                                </div>
+                                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">Feb 10, 2026 · Dr. Maya Collins</p>
+                                <p class="text-sm text-ink-charcoal/80 dark:text-gray-300 mt-2">Mild arthritis detected in hind legs. Started on joint supplement. Bloodwork showed early kidney changes — monitoring recommended.</p>
+                            </div>
+                            <button class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-file-pdf mr-1"></i>PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== DOCUMENTS / INVOICES ========== -->
+        <div id="page-documents" class="page-content hidden">
+            <div class="card-design p-6">
+                <h3 class="font-display font-bold text-2xl mb-4 text-ink-charcoal dark:text-white">Invoices & Receipts</h3>
+                <p class="text-sm text-ink-charcoal/60 dark:text-gray-400 mb-6">Download receipts, insurance claims, and treatment records.</p>
+                <div class="space-y-2">
+                    <div class="receipt-item flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-ink-charcoal dark:text-white">Invoice #PC-2026-0481 — Luna Wellness Exam</p>
+                            <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">May 2, 2026 · $89.00 (Member discount applied)</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="status-badge status-completed text-xs">Paid</span>
+                            <button class="text-teal-brand hover:text-teal-dark"><i class="fas fa-download"></i></button>
+                        </div>
+                    </div>
+                    <div class="receipt-item flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-ink-charcoal dark:text-white">Invoice #PC-2026-0392 — Milo Sick Visit</p>
+                            <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">Apr 18, 2026 · $145.50 (Member discount applied)</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="status-badge status-completed text-xs">Paid</span>
+                            <button class="text-teal-brand hover:text-teal-dark"><i class="fas fa-download"></i></button>
+                        </div>
+                    </div>
+                    <div class="receipt-item flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-ink-charcoal dark:text-white">Invoice #PC-2026-0348 — Luna Spay Surgery</p>
+                            <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">Apr 15, 2026 · $349.00 (Member discount applied)</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="status-badge status-completed text-xs">Paid</span>
+                            <button class="text-teal-brand hover:text-teal-dark"><i class="fas fa-download"></i></button>
+                        </div>
+                    </div>
+                    <div class="receipt-item flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-ink-charcoal dark:text-white">Insurance Claim Form — Luna Surgery</p>
+                            <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">Submitted to Trupanion · Apr 16, 2026</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="status-badge status-active text-xs">Submitted</span>
+                            <button class="text-teal-brand hover:text-teal-dark"><i class="fas fa-download"></i></button>
+                        </div>
+                    </div>
+                    <div class="receipt-item flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-ink-charcoal dark:text-white">Vaccine Certificate — Luna 2025</p>
+                            <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">Rabies, DHPP, Bordetella · Nov 2025</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="status-badge status-completed text-xs">Available</span>
+                            <button class="text-teal-brand hover:text-teal-dark"><i class="fas fa-download"></i></button>
+                        </div>
+                    </div>
+                    <div class="receipt-item flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-ink-charcoal dark:text-white">Wellness Membership Agreement</p>
+                            <p class="text-sm text-ink-charcoal/60 dark:text-gray-400">Complete Plan · Effective Jan 1, 2026</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="status-badge status-completed text-xs">Active</span>
+                            <button class="text-teal-brand hover:text-teal-dark"><i class="fas fa-download"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // RTL Toggle
+            const rtlToggle = document.getElementById('rtl-toggle');
+            const rtlToggleMobile = document.getElementById('rtl-toggle-mobile');
+            function setRTL(isRTL) {
+                document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+                localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr');
+            }
+            const savedDir = localStorage.getItem('dir');
+            setRTL(savedDir === 'rtl');
+            if (rtlToggle) rtlToggle.addEventListener('click', () => setRTL(document.documentElement.getAttribute('dir') !== 'rtl'));
+            if (rtlToggleMobile) rtlToggleMobile.addEventListener('click', () => setRTL(document.documentElement.getAttribute('dir') !== 'rtl'));
+
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+            function setTheme(isDark) {
+                if (isDark) document.documentElement.classList.add('dark');
+                else document.documentElement.classList.remove('dark');
+                [themeToggle, themeToggleMobile].forEach(btn => {
+                    if (btn) {
+                        let moon = btn.querySelector('.fa-moon'), sun = btn.querySelector('.fa-sun');
+                        if (isDark) { moon?.classList.add('hidden'); sun?.classList.remove('hidden'); }
+                        else { moon?.classList.remove('hidden'); sun?.classList.add('hidden'); }
+                    }
+                });
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            }
+            const savedTheme = localStorage.getItem('theme');
+            setTheme(savedTheme === 'dark');
+            if (themeToggle) themeToggle.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+            if (themeToggleMobile) themeToggleMobile.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+
+            // Mobile Sidebar
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('open'); }
+            function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('open'); }
+            if (menuToggle) menuToggle.addEventListener('click', (e) => { e.stopPropagation(); sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); });
+            if (overlay) overlay.addEventListener('click', closeSidebar);
+            window.addEventListener('resize', () => { if (window.innerWidth > 768 && sidebar.classList.contains('open')) closeSidebar(); });
+
+            // Navigation
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            const pages = document.querySelectorAll('.page-content');
+            const pageTitle = document.getElementById('page-title');
+            const pageSubtitle = document.getElementById('page-subtitle');
+            const titles = {
+                dashboard: { title: 'Dashboard', subtitle: 'Welcome back, Isabella' },
+                appointments: { title: 'My Appointments', subtitle: 'Upcoming visits & treatment history' },
+                'new-booking': { title: 'Book a Visit', subtitle: 'Schedule your next appointment' },
+                pets: { title: 'My Pets', subtitle: 'Profiles, health info & care plans' },
+                vaccinations: { title: 'Vaccinations', subtitle: 'Records, boosters & due dates' },
+                records: { title: 'Medical Records', subtitle: 'Complete health timeline' },
+                documents: { title: 'Invoices', subtitle: 'Receipts, claims & certificates' }
+            };
+            function navigateTo(page) {
+                sidebarItems.forEach(i => i.classList.remove('active'));
+                document.querySelector(`.sidebar-item[data-page="${page}"]`)?.classList.add('active');
+                pages.forEach(p => p.classList.add('hidden'));
+                document.getElementById(`page-${page}`)?.classList.remove('hidden');
+                if (titles[page]) { pageTitle.textContent = titles[page].title; pageSubtitle.textContent = titles[page].subtitle; }
+                closeSidebar();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            sidebarItems.forEach(item => { item.addEventListener('click', () => { navigateTo(item.getAttribute('data-page')); }); });
+            document.querySelectorAll('[data-nav]').forEach(btn => { btn.addEventListener('click', () => { navigateTo(btn.getAttribute('data-nav')); }); });
+        });
+    </script>
+</body>
+</html>

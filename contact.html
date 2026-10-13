@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PawCare · Contact Us — Veterinary Clinic & Animal Hospital</title>
+
+  <!-- Favicon suite (simplified paw icon) -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='22' r='6' fill='%230d9488'/%3E%3Ccircle cx='8' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='24' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='12' cy='8' r='3.5' fill='%230d9488'/%3E%3Ccircle cx='20' cy='8' r='3.5' fill='%230d9488'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='22' r='6' fill='%230d9488'/%3E%3Ccircle cx='8' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='24' cy='14' r='4' fill='%230d9488'/%3E%3Ccircle cx='12' cy='8' r='3.5' fill='%230d9488'/%3E%3Ccircle cx='20' cy='8' r='3.5' fill='%230d9488'/%3E%3C/svg%3E" />
+
+  <!-- Tailwind CSS with CDN -->
+  <script src="tailwind.js"></script>
+
+  <!-- Prevent theme flash on page load -->
+  <script>
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+
+  <!-- Custom Tailwind Configuration — same palette as reference -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            teal: {
+              50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4',
+              400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e',
+              800: '#115e59', 900: '#134e4a',
+            },
+            coral: {
+              50: '#fff5f2', 100: '#ffe6df', 200: '#ffc9b8', 300: '#ffa38a',
+              400: '#ff7a5c', 500: '#ff5a36', 600: '#ed3b14', 700: '#c42d0e',
+              800: '#9c2812', 900: '#7f2513',
+            },
+            sand: {
+              50: '#fefdfb', 100: '#fdf9f0', 200: '#faf0dd', 300: '#f5e2c0',
+              400: '#edcd97', 500: '#e3b46e', 600: '#d49b4a', 700: '#b87e36',
+              800: '#96632e', 900: '#7a5229',
+            },
+            ink: {
+              50: '#f6f7f9', 100: '#eceef2', 200: '#d5dae1', 300: '#b0bac7',
+              400: '#8595a8', 500: '#66788d', 600: '#516074', 700: '#424e5e',
+              800: '#3a4350', 900: '#343a45',
+            },
+            mint: '#d1fae5',
+            fontFamily: {
+              'display': ['"Quicksand"', 'sans-serif'],
+              'body': ['"Inter"', 'system-ui', 'sans-serif'],
+            },
+          },
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Fonts — Quicksand + Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    body {
+      background-color: #fefdfb;
+      color: #343a45;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+    .dark body {
+      background-color: #1a1f2e;
+      color: #eceef2;
+    }
+
+    /* Elegant scrollbar */
+    body::-webkit-scrollbar { width: 6px; }
+    body::-webkit-scrollbar-track { background: #fefdfb; }
+    body::-webkit-scrollbar-thumb { background: #0d9488; border-radius: 20px; }
+
+    /* ===== CONTACT PAGE — UNIQUE DESIGN ELEMENTS ===== */
+
+    /* Hero — deep teal with curved bottom and mesh pattern */
+    .contact-hero {
+      position: relative;
+      padding-top: 9rem;
+      padding-bottom: 7.5rem;
+      background: linear-gradient(135deg, #115e59 0%, #0d9488 55%, #14b8a6 100%);
+      overflow: hidden;
+    }
+    .contact-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    .contact-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 110px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23fefdfb' fill-opacity='1' d='M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z'%3E%3C/path%3E%3C/svg%3E") no-repeat center bottom;
+      background-size: cover;
+      z-index: 3;
+    }
+    .dark .contact-hero::after {
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%231a1f2e' fill-opacity='1' d='M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z'%3E%3C/path%3E%3C/svg%3E") no-repeat center bottom;
+      background-size: cover;
+    }
+
+    /* Floating paw deco */
+    .paw-float {
+      position: absolute;
+      opacity: 0.08;
+      color: white;
+      animation: floatSlow 7s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* Contact info card — vertical accent */
+    .info-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.75rem;
+      border: 1px solid rgba(13,148,136,0.1);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+    }
+    .dark .info-card {
+      background: #232a3d;
+      border-color: rgba(13,148,136,0.2);
+    }
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, #14b8a6, #0d9488);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.5s;
+    }
+    .info-card:hover::before {
+      transform: scaleY(1);
+    }
+    .info-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 50px -15px rgba(13,148,136,0.22);
+      border-color: rgba(13,148,136,0.3);
+    }
+
+    /* Contact form — elevated card */
+    .form-card {
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 2.5rem;
+      border: 1px solid rgba(13,148,136,0.1);
+      box-shadow: 0 25px 60px -20px rgba(13,148,136,0.15);
+      position: relative;
+    }
+    .dark .form-card {
+      background: #232a3d;
+      border-color: rgba(13,148,136,0.2);
+      box-shadow: 0 25px 60px -20px rgba(0,0,0,0.4);
+    }
+
+    /* Form inputs */
+    .form-input {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      border-radius: 14px;
+      border: 1.5px solid rgba(13,148,136,0.15);
+      background: #fdf9f0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: #343a45;
+      transition: all 0.3s;
+      outline: none;
+    }
+    .dark .form-input {
+      background: #1a1f2e;
+      border-color: rgba(13,148,136,0.25);
+      color: #eceef2;
+    }
+    .form-input:focus {
+      border-color: #14b8a6;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(13,148,136,0.1);
+    }
+    .dark .form-input:focus {
+      background: #232a3d;
+      box-shadow: 0 0 0 4px rgba(45,212,191,0.15);
+    }
+    .form-input::placeholder {
+      color: #8595a8;
+    }
+    .form-label {
+      display: block;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #516074;
+      margin-bottom: 0.5rem;
+    }
+    .dark .form-label {
+      color: #b0bac7;
+    }
+
+    /* Map card */
+    .map-card {
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(13,148,136,0.1);
+      position: relative;
+      flex: 1;
+      min-height: 320px;
+      background: #f0fdfa;
+    }
+    .dark .map-card {
+      background: #1f2f2e;
+      border-color: rgba(13,148,136,0.2);
+    }
+    .map-card iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    .dark .map-card iframe {
+      filter: grayscale(0.3) invert(0.9) contrast(0.85);
+    }
+
+    /* Department card */
+    .dept-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid rgba(13,148,136,0.1);
+      transition: all 0.4s;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      height: 100%;
+    }
+    .dark .dept-card {
+      background: #232a3d;
+      border-color: rgba(13,148,136,0.2);
+    }
+    .dept-card:hover {
+      transform: translateX(6px);
+      border-color: #14b8a6;
+      box-shadow: 0 18px 40px -12px rgba(13,148,136,0.2);
+    }
+    .dept-card .dept-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      transition: all 0.35s;
+    }
+    .dept-card:hover .dept-icon {
+      transform: scale(1.1) rotate(-6deg);
+    }
+
+    /* Hours table row */
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 0;
+      border-bottom: 1px dashed rgba(13,148,136,0.15);
+    }
+    .dark .hours-row {
+      border-bottom-color: rgba(13,148,136,0.25);
+    }
+    .hours-row:last-child {
+      border-bottom: none;
+    }
+
+    /* Emergency banner */
+    .emergency-banner {
+      background: linear-gradient(135deg, #ff5a36 0%, #ed3b14 100%);
+      border-radius: 24px;
+      padding: 1.75rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .emergency-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .emergency-banner::after {
+      content: '';
+      position: absolute;
+      bottom: -60%;
+      left: -10%;
+      width: 250px;
+      height: 250px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    /* FAQ (reused) */
+    .faq-vet {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid rgba(13, 148, 136, 0.12);
+      transition: all 0.3s ease;
+    }
+    .dark .faq-vet {
+      background: #232a3d;
+      border-color: rgba(13, 148, 136, 0.25);
+    }
+    .faq-vet:hover {
+      border-color: rgba(13, 148, 136, 0.35);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.08);
+    }
+
+    /* Buttons (same as reference) */
+    .btn-teal {
+      background: #0d9488;
+      color: white;
+      font-weight: 600;
+      border-radius: 9999px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 14px rgba(13,148,136,0.3);
+      letter-spacing: 0.3px;
+      font-family: 'Quicksand', sans-serif;
+    }
+    .btn-teal:hover {
+      background: #0f766e;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(13,148,136,0.4);
+    }
+    .btn-coral {
+      background: #ff5a36;
+      color: white;
+      font-weight: 600;
+      border-radius: 9999px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 14px rgba(255,90,54,0.3);
+      font-family: 'Quicksand', sans-serif;
+    }
+    .btn-coral:hover {
+      background: #ed3b14;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(255,90,54,0.4);
+    }
+    .btn-ghost-vet {
+      border: 2px solid rgba(255,255,255,0.6);
+      color: white;
+      background: transparent;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: all 0.3s;
+      font-family: 'Quicksand', sans-serif;
+    }
+    .btn-ghost-vet:hover {
+      background: white;
+      color: #0d9488;
+      border-color: white;
+      transform: scale(1.03);
+    }
+
+    /* Navigation (copied exactly) */
+    .nav-link-vet {
+      position: relative;
+      font-weight: 500;
+      transition: all 0.25s;
+      text-decoration: none !important;
+      font-family: 'Quicksand', sans-serif;
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+    }
+    .nav-link-vet:hover {
+      background: rgba(13, 148, 136, 0.08);
+      color: #0d9488;
+    }
+    .nav-link-vet.active {
+      color: #0d9488 !important;
+      font-weight: 700;
+      background: rgba(13, 148, 136, 0.1);
+    }
+
+    .dropdown-vet {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 0.5rem 0;
+      box-shadow: 0 24px 48px rgba(13, 148, 136, 0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: all 0.25s;
+      z-index: 1000;
+      border: 1px solid rgba(13, 148, 136, 0.12);
+    }
+    .dropdown-vet::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+    }
+    .dark .dropdown-vet {
+      background: #232a3d;
+      border-color: rgba(13, 148, 136, 0.25);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+    }
+    .dropdown-parent:hover .dropdown-vet,
+    .dropdown-parent:focus-within .dropdown-vet,
+    .dropdown-parent.open .dropdown-vet {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-item-vet {
+      display: flex;
+      align-items: center;
+      padding: 0.6rem 1.4rem;
+      transition: all 0.2s;
+      color: #343a45;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      margin: 0 0.4rem;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 500;
+    }
+    .dark .dropdown-item-vet {
+      color: #eceef2;
+    }
+    .dropdown-item-vet:hover {
+      background: rgba(13, 148, 136, 0.08);
+      color: #0d9488;
+      padding-left: 1.7rem;
+    }
+    .dark .dropdown-item-vet:hover {
+      background: rgba(13, 148, 136, 0.15);
+      color: #5eead4;
+    }
+    .dropdown-item-vet i {
+      margin-right: 0.75rem;
+      width: 18px;
+      color: #0d9488;
+    }
+
+    .mobile-menu-vet {
+      background: #ffffff;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .dark .mobile-menu-vet {
+      background: #232a3d;
+    }
+    .mobile-menu-vet.open {
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .social-vet {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(13, 148, 136, 0.1);
+      color: #0d9488;
+      transition: all 0.3s;
+    }
+    .social-vet:hover {
+      background: #0d9488;
+      color: white;
+      transform: translateY(-3px) scale(1.05);
+    }
+    .dark .social-vet {
+      background: rgba(13, 148, 136, 0.2);
+      color: #5eead4;
+    }
+    .dark .social-vet:hover {
+      background: #0d9488;
+      color: white;
+    }
+
+    /* RTL adjustments */
+    [dir="rtl"] .ml-auto { margin-left: 0 !important; margin-right: auto !important; }
+    [dir="rtl"] .ms-1 { margin-left: 0 !important; margin-right: 0.25rem !important; }
+    [dir="rtl"] .dropdown-vet { left: auto; right: 0; }
+    [dir="rtl"] .dropdown-item-vet i { margin-right: 0; margin-left: 0.75rem; }
+    [dir="rtl"] .info-card::before { left: auto; right: 0; }
+    [dir="rtl"] .dept-card:hover { transform: translateX(-6px); }
+
+    .text-balance { text-wrap: balance; }
+  </style>
+</head>
+<body>
+
+<!-- ======== NAVIGATION — exactly copied from reference ======== -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl border-b border-teal-100/50 dark:border-teal-800/30">
+  <div class="container mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-20 md:h-22 relative">
+
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3 shrink-0 group">
+        <div class="w-11 h-11 bg-teal-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" class="w-6 h-6" fill="none">
+            <circle cx="18" cy="22" r="5" fill="white" opacity="0.95"/>
+            <circle cx="10" cy="15" r="3.5" fill="white" opacity="0.95"/>
+            <circle cx="26" cy="15" r="3.5" fill="white" opacity="0.95"/>
+            <circle cx="14" cy="9" r="3" fill="white" opacity="0.95"/>
+            <circle cx="22" cy="9" r="3" fill="white" opacity="0.95"/>
+          </svg>
+        </div>
+        <span class="flex flex-col items-start leading-tight">
+          <span class="text-xl md:text-2xl font-display font-bold tracking-tight text-teal-800 dark:text-teal-200">PawCare</span>
+          <span class="text-coral-500 text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase -mt-0.5">Veterinary Clinic</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden xl:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+        <div class="dropdown-parent relative">
+          <button type="button" class="nav-link-vet font-medium flex items-center gap-1 py-2 text-[15px] text-teal-800 dark:text-teal-200">
+            Home <i class="fas fa-chevron-down text-[10px] opacity-60"></i>
+          </button>
+          <div class="dropdown-vet">
+            <a class="dropdown-item-vet" href="index.html"> Home 1</a>
+            <a class="dropdown-item-vet" href="home2.html"> Home 2</a>
+          </div>
+        </div>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="about.html">About</a>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="services.html">Services</a>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="vets.html">Vets</a>
+        <a class="nav-link-vet text-teal-800 dark:text-teal-200 text-[15px]" href="membership.html">Membership</a>
+        <a class="nav-link-vet active text-teal-800 dark:text-teal-200 text-[15px]" href="contact.html">Contact</a>
+
+        <div class="dropdown-parent relative">
+          <button type="button" class="nav-link-vet text-teal-800 dark:text-teal-200 font-medium flex items-center gap-1 py-2 text-[15px]">
+            Portal <i class="fas fa-chevron-down text-[10px] opacity-60"></i>
+          </button>
+          <div class="dropdown-vet">
+            <a class="dropdown-item-vet" href="client.html">Client</a>
+            <a class="dropdown-item-vet" href="admin.html"> Admin</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right actions -->
+      <div class="flex items-center gap-2 xl:gap-3 ms-auto">
+        <a href="login.html" class="hidden xl:inline-flex btn-teal py-2.5 px-6 text-sm items-center gap-2">
+          <i class="fas fa-user-circle"></i> Login
+        </a>
+        <button id="theme-toggle" class="hidden xl:flex w-10 h-10 rounded-full bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 hover:scale-110 transition items-center justify-center">
+          <i class="fas fa-moon dark:hidden text-sm"></i>
+          <i class="fas fa-sun hidden dark:inline text-sm"></i>
+        </button>
+        <button id="rtl-toggle" class="hidden xl:flex w-10 h-10 rounded-full bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 hover:scale-110 transition items-center justify-center font-bold text-sm">
+          ⇄
+        </button>
+        <button id="mobile-toggle" class="xl:hidden w-11 h-11 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg shrink-0 hover:bg-teal-700 transition">
+          <i class="fas fa-bars text-base"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu-vet xl:hidden rounded-b-3xl border-t border-teal-100/50 dark:border-teal-800/30">
+      <div class="py-5 px-4 space-y-1.5">
+        <div class="py-1">
+          <button onclick="document.getElementById('home-mobile-drop').classList.toggle('hidden'); document.getElementById('home-mobile-icon').classList.toggle('rotate-180')" class="w-full flex items-center justify-between py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition cursor-pointer">
+            <span>Home</span>
+            <i id="home-mobile-icon" class="fas fa-chevron-down text-xs opacity-60 transition-transform duration-300"></i>
+          </button>
+          <div id="home-mobile-drop" class="hidden pl-2 space-y-1 mt-1.5 mb-2">
+            <a class="block py-3 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="index.html">Home 1</a>
+            <a class="block py-3 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="home2.html">Home 2</a>
+          </div>
+        </div>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="about.html">About</a>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="services.html">Services</a>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="vets.html">Vets</a>
+        <a class="block py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="membership.html">Membership</a>
+        <a class="block py-3.5 px-4 font-semibold text-teal-700 bg-teal-50 dark:bg-teal-900/30 rounded-2xl transition" href="contact.html">Contact</a>
+
+        <div class="py-1">
+          <button onclick="document.getElementById('dashboard-mobile-drop').classList.toggle('hidden'); document.getElementById('dashboard-mobile-icon').classList.toggle('rotate-180')" class="w-full flex items-center justify-between py-3.5 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition cursor-pointer">
+            <span>Portal</span>
+            <i id="dashboard-mobile-icon" class="fas fa-chevron-down text-xs opacity-60 transition-transform duration-300"></i>
+          </button>
+          <div id="dashboard-mobile-drop" class="hidden pl-2 space-y-1 mt-1.5 mb-2">
+            <a class="block py-3 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="client.html">Pet Owner</a>
+            <a class="block py-3 px-4 font-medium text-ink-600 dark:text-ink-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-2xl transition" href="admin.html">Admin</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3 pt-5 mt-3 border-t border-teal-100 dark:border-teal-800/40">
+          <a class="text-center btn-teal py-3 font-semibold flex items-center justify-center gap-2" href="login.html">
+            <i class="fas fa-user-circle"></i> Pet Owner Login
+          </a>
+          <div class="flex gap-3">
+            <button id="mobile-theme-toggle" class="flex-1 py-2.5 rounded-full bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 text-sm font-medium flex items-center gap-2 justify-center">
+              <i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i> Theme
+            </button>
+            <button id="mobile-rtl-toggle" class="flex-1 py-2.5 rounded-full bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 text-sm font-medium flex items-center gap-2 justify-center">
+              ⇄ RTL
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ======== CONTACT HERO ======== -->
+<section class="contact-hero">
+  <!-- Floating paws -->
+  <div class="paw-float" style="top: 22%; left: 6%; font-size: 7rem; animation-delay: 0s;">🐾</div>
+  <div class="paw-float" style="top: 55%; right: 8%; font-size: 9rem; animation-delay: 2s;">🐾</div>
+  <div class="paw-float" style="bottom: 20%; left: 25%; font-size: 5rem; animation-delay: 4s;">🐾</div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="max-w-3xl mx-auto text-center">
+      <!-- Reception Team Pill -->
+      <div class="inline-flex items-center gap-3 bg-white/15 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-6 shadow-sm">
+        <div class="flex -space-x-2">
+          <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="assets/nurse-6.jpg" alt="Reception Team">
+          <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="assets/nurse-1.jpg" alt="Care Coordinator">
+          <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="assets/nurse-4.jpg" alt="Support Lead">
+        </div>
+        <div class="text-left leading-tight text-white text-xs">
+          <span class="font-bold text-white block">Friendly Client Care Team</span>
+          <span class="text-white/80">Average response time: &lt; 15 mins</span>
+        </div>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] mb-6 text-white break-words">
+        Get in Touch<br/>
+        <span class="text-coral-300">With PawCare</span>
+      </h1>
+      <p class="text-base sm:text-lg md:text-xl text-white/90 font-light mb-10 max-w-2xl mx-auto leading-relaxed">
+        Whether you have a question, need to book an appointment, or want to check on your pet — our team responds quickly and with a smile.
+      </p>
+      <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
+        <a href="#contact-form" class="btn-coral px-8 py-4 text-sm sm:text-base inline-flex items-center justify-center gap-2 shadow-xl">
+          <i class="fas fa-paper-plane"></i> Send a Message
+        </a>
+        <a href="tel:+15557274729" class="btn-ghost-vet px-8 py-4 text-sm sm:text-base inline-flex items-center justify-center gap-2">
+          <i class="fas fa-phone"></i> Call Now
+        </a>
+      </div>
+
+      <!-- Quick trust indicators -->
+      <div class="flex flex-wrap items-center gap-8 mt-12 pt-8 border-t border-white/15 justify-center">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-clock text-coral-300 text-sm"></i>
+          <span class="text-white/85 text-sm">Reply in &lt; 2 hours</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fas fa-shield-halved text-coral-300 text-sm"></i>
+          <span class="text-white/85 text-sm">Secure & confidential</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fas fa-truck-medical text-coral-300 text-sm"></i>
+          <span class="text-white/85 text-sm">24/7 emergency line</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CONTACT INFO CARDS — 4 QUICK CARDS ======== -->
+<section class="relative z-20 pt-8 pb-4">
+  <div class="container mx-auto px-6">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto items-stretch">
+      <!-- Card 1: Visit -->
+      <div class="info-card">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="w-11 h-11 rounded-xl bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div>
+            <p class="text-[10px] uppercase tracking-wider text-ink-400 dark:text-ink-400 font-bold">Visit Us</p>
+            <h4 class="font-display font-bold text-base text-ink-800 dark:text-sand-100 mt-0.5">Our Clinic</h4>
+          </div>
+        </div>
+        <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed">
+          450 Pet Wellness Way<br/>
+          <span class="text-ink-400 dark:text-ink-400 text-xs">Animal District, AD 12345</span>
+        </p>
+      </div>
+      <!-- Card 2: Call -->
+      <div class="info-card">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="w-11 h-11 rounded-xl bg-coral-100 dark:bg-coral-900/40 text-coral-500 dark:text-coral-300 flex items-center justify-center shrink-0">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div>
+            <p class="text-[10px] uppercase tracking-wider text-ink-400 dark:text-ink-400 font-bold">Call Us</p>
+            <h4 class="font-display font-bold text-base text-ink-800 dark:text-sand-100 mt-0.5">Phone & Fax</h4>
+          </div>
+        </div>
+        <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed">
+          (555) 727-4PAW<br/>
+          <span class="text-ink-400 dark:text-ink-400 text-xs">Fax: (555) 727-4729</span>
+        </p>
+      </div>
+      <!-- Card 3: Email -->
+      <div class="info-card">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="w-11 h-11 rounded-xl bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div>
+            <p class="text-[10px] uppercase tracking-wider text-ink-400 dark:text-ink-400 font-bold">Email Us</p>
+            <h4 class="font-display font-bold text-base text-ink-800 dark:text-sand-100 mt-0.5">General Inbox</h4>
+          </div>
+        </div>
+        <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed break-all">
+          hello@pawcarevet.com<br/>
+          <span class="text-ink-400 dark:text-ink-400 text-xs">bookings@pawcarevet.com</span>
+        </p>
+      </div>
+      <!-- Card 4: Hours -->
+      <div class="info-card">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="w-11 h-11 rounded-xl bg-coral-100 dark:bg-coral-900/40 text-coral-500 dark:text-coral-300 flex items-center justify-center shrink-0">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div>
+            <p class="text-[10px] uppercase tracking-wider text-ink-400 dark:text-ink-400 font-bold">Hours</p>
+            <h4 class="font-display font-bold text-base text-ink-800 dark:text-sand-100 mt-0.5">Open Today</h4>
+          </div>
+        </div>
+        <p class="text-ink-500 dark:text-ink-300 text-sm leading-relaxed">
+          Mon–Fri: 8am – 7pm<br/>
+          <span class="text-ink-400 dark:text-ink-400 text-xs">Sat: 9am – 4pm · Sun: Emergency</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CONTACT FORM + MAP SECTION ======== -->
+<section id="contact-form" class="py-24 bg-sand-50 dark:bg-[#1a1f2e] relative overflow-hidden">
+  <div class="absolute top-20 left-0 w-full h-px border-t-2 border-dashed border-teal-200/30 dark:border-teal-800/20"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-16">
+      <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+        <span class="w-10 h-0.5 bg-teal-500"></span> Connect With Us <span class="w-10 h-0.5 bg-teal-500"></span>
+      </span>
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+        Visit or <span class="text-coral-500">Message Us</span>
+      </h2>
+      <p class="text-ink-500 dark:text-ink-300 mt-4 max-w-xl mx-auto text-base">
+        Book an appointment, ask a question, or find directions to our animal hospital.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-10 items-stretch max-w-6xl mx-auto">
+
+      <!-- Left: Form (3 columns) -->
+      <div class="lg:col-span-3 flex flex-col">
+        <div class="form-card flex-1 flex flex-col justify-between">
+          <div class="mb-8">
+            <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 text-xs font-bold uppercase tracking-[0.2em] mb-3">
+              <span class="w-10 h-0.5 bg-teal-500"></span> Send a Message <span class="w-10 h-0.5 bg-teal-500"></span>
+            </span>
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+              How Can We <span class="text-coral-500">Help Today?</span>
+            </h2>
+            <p class="text-ink-500 dark:text-ink-300 text-sm mt-3">Fill in the form and our team will get back to you as soon as possible.</p>
+          </div>
+
+          <form class="space-y-5" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent. We will reply shortly.');">
+            <!-- Name + Email row -->
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label for="contact-name" class="form-label">Full Name *</label>
+                <input type="text" id="contact-name" class="form-input" placeholder="Jane Smith" required />
+              </div>
+              <div>
+                <label for="contact-email" class="form-label">Email Address *</label>
+                <input type="email" id="contact-email" class="form-input" placeholder="jane@example.com" required />
+              </div>
+            </div>
+
+            <!-- Phone + Pet row -->
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label for="contact-phone" class="form-label">Phone Number</label>
+                <input type="tel" id="contact-phone" class="form-input" placeholder="(555) 000-0000" />
+              </div>
+              <div>
+                <label for="contact-pet" class="form-label">Pet Type</label>
+                <select id="contact-pet" class="form-input">
+                  <option value="">Select pet type…</option>
+                  <option value="dog">Dog</option>
+                  <option value="cat">Cat</option>
+                  <option value="rabbit">Rabbit</option>
+                  <option value="guinea-pig">Guinea Pig</option>
+                  <option value="hamster">Hamster</option>
+                  <option value="bird">Bird</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Subject -->
+            <div>
+              <label for="contact-subject" class="form-label">Subject *</label>
+              <select id="contact-subject" class="form-input" required>
+                <option value="">What is this regarding?</option>
+                <option value="appointment">Book an Appointment</option>
+                <option value="emergency">Emergency / Urgent Care</option>
+                <option value="question">General Question</option>
+                <option value="membership">Membership Inquiry</option>
+                <option value="records">Request Medical Records</option>
+                <option value="feedback">Feedback</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <!-- Message -->
+            <div>
+              <label for="contact-message" class="form-label">Message *</label>
+              <textarea id="contact-message" rows="5" class="form-input resize-none" placeholder="Tell us how we can help — please include your pet's name and any relevant details." required></textarea>
+            </div>
+
+            <!-- Consent + Submit -->
+            <div class="flex items-start gap-3 pt-2">
+              <input type="checkbox" id="contact-consent" class="mt-1 w-4 h-4 rounded border-teal-300 text-teal-600 focus:ring-teal-500" required />
+              <label for="contact-consent" class="text-ink-500 dark:text-ink-300 text-xs leading-relaxed">
+                I consent to PawCare contacting me regarding my inquiry. We never share your information with third parties.
+              </label>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 pt-4">
+              <button type="submit" class="btn-teal px-8 py-3.5 text-sm inline-flex items-center justify-center gap-2 flex-1 sm:flex-none">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+              <a href="tel:+15557274729" class="border-2 border-teal-600/40 dark:border-teal-400/40 text-teal-600 dark:text-teal-300 bg-transparent hover:bg-teal-600 hover:text-white hover:border-teal-600 dark:hover:bg-teal-600 dark:hover:text-white dark:hover:border-teal-600 rounded-full font-display font-semibold transition-all duration-300 hover:scale-[1.03] px-8 py-3.5 text-sm inline-flex items-center justify-center gap-2 flex-1 sm:flex-none">
+                <i class="fas fa-phone"></i> Call Instead
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Right: Map + info (2 columns) -->
+      <div class="lg:col-span-2 flex flex-col gap-6">
+
+        <!-- Map card -->
+        <div class="map-card">
+          <iframe 
+            src="https://maps.google.com/maps?q=San%20Francisco%2C%20CA&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            title="PawCare Clinic Location"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <!-- Floating pill -->
+          <div class="absolute bottom-4 left-4 right-4 z-10 bg-white dark:bg-[#232a3d] rounded-2xl px-4 py-3 shadow-lg border border-teal-100 dark:border-teal-800/40 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0">
+              <i class="fas fa-location-dot"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs text-ink-400 dark:text-ink-400 font-medium">450 Pet Wellness Way</p>
+              <p class="text-sm font-bold text-ink-800 dark:text-sand-100 truncate">Animal District, AD 12345</p>
+            </div>
+            <a href="https://maps.google.com/?q=San+Francisco,+CA" target="_blank" rel="noopener noreferrer" class="text-teal-600 dark:text-teal-400 text-sm font-bold shrink-0">Directions <i class="fas fa-arrow-right text-[10px]"></i></a>
+          </div>
+        </div>
+
+        <!-- Emergency banner -->
+        <div class="emergency-banner relative">
+          <div class="relative z-10">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0">
+                <i class="fas fa-truck-medical text-white text-lg"></i>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase tracking-wider text-white/80 font-bold">Emergency?</p>
+                <h4 class="font-display font-bold text-lg text-white">24/7 Hotline</h4>
+              </div>
+            </div>
+            <p class="text-white/90 text-sm leading-relaxed mb-5">
+              If your pet is in distress, call immediately. Our team is on standby day and night.
+            </p>
+            <a href="tel:+15557274729" class="bg-white text-coral-600 px-6 py-3 rounded-full font-bold hover:scale-105 transition inline-flex items-center gap-2 text-sm font-display">
+              <i class="fas fa-phone-volume"></i> (555) 727-4PAW
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick hours -->
+        <div class="bg-white dark:bg-[#232a3d] rounded-2xl p-6 border border-teal-100 dark:border-teal-800/40">
+          <div class="flex items-center gap-2 mb-4">
+            <i class="fas fa-clock text-teal-500 text-sm"></i>
+            <h4 class="font-display font-bold text-sm text-ink-800 dark:text-sand-100 uppercase tracking-wider">Clinic Hours</h4>
+          </div>
+          <div class="hours-row">
+            <span class="text-ink-500 dark:text-ink-300 text-sm">Monday – Friday</span>
+            <span class="font-semibold text-ink-800 dark:text-sand-100 text-sm">8:00 am – 7:00 pm</span>
+          </div>
+          <div class="hours-row">
+            <span class="text-ink-500 dark:text-ink-300 text-sm">Saturday</span>
+            <span class="font-semibold text-ink-800 dark:text-sand-100 text-sm">9:00 am – 4:00 pm</span>
+          </div>
+          <div class="hours-row">
+            <span class="text-ink-500 dark:text-ink-300 text-sm">Sunday</span>
+            <span class="font-semibold text-coral-500 text-sm">Emergency Only</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== DEPARTMENT CONTACTS — WHO TO REACH ======== -->
+<section class="py-24 bg-white dark:bg-[#1a1f2e] relative overflow-hidden">
+  <div class="absolute -top-32 -right-32 w-96 h-96 bg-teal-100/20 dark:bg-teal-900/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-16">
+      <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+        <span class="w-10 h-0.5 bg-teal-500"></span> Department Contacts <span class="w-10 h-0.5 bg-teal-500"></span>
+      </span>
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+        Reach the <span class="text-coral-500">Right Team</span>
+      </h2>
+      <p class="text-ink-500 dark:text-ink-300 mt-4 max-w-xl mx-auto text-base">
+        Direct lines for specific inquiries so you get answers faster.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+      <!-- Dept 1 -->
+      <div class="dept-card">
+        <div class="dept-icon bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-base text-ink-800 dark:text-sand-100">Appointments</h4>
+          <p class="text-coral-500 text-[11px] font-semibold uppercase tracking-wider mt-0.5">Book or Reschedule</p>
+          <a href="mailto:bookings@pawcarevet.com" class="text-teal-600 dark:text-teal-400 text-xs font-semibold mt-2 inline-flex items-center gap-1.5 hover:underline">
+            bookings@pawcarevet.com <i class="fas fa-arrow-right text-[9px]"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Dept 2 -->
+      <div class="dept-card">
+        <div class="dept-icon bg-coral-100 dark:bg-coral-900/40 text-coral-500 dark:text-coral-300">
+          <i class="fas fa-truck-medical"></i>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-base text-ink-800 dark:text-sand-100">Emergency</h4>
+          <p class="text-coral-500 text-[11px] font-semibold uppercase tracking-wider mt-0.5">24/7 Hotline</p>
+          <a href="tel:+15557274729" class="text-teal-600 dark:text-teal-400 text-xs font-semibold mt-2 inline-flex items-center gap-1.5 hover:underline">
+            (555) 727-4PAW <i class="fas fa-arrow-right text-[9px]"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Dept 3 -->
+      <div class="dept-card">
+        <div class="dept-icon bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300">
+          <i class="fas fa-crown"></i>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-base text-ink-800 dark:text-sand-100">Membership</h4>
+          <p class="text-coral-500 text-[11px] font-semibold uppercase tracking-wider mt-0.5">Plans & Billing</p>
+          <a href="mailto:membership@pawcarevet.com" class="text-teal-600 dark:text-teal-400 text-xs font-semibold mt-2 inline-flex items-center gap-1.5 hover:underline">
+            membership@pawcarevet.com <i class="fas fa-arrow-right text-[9px]"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Dept 4 -->
+      <div class="dept-card">
+        <div class="dept-icon bg-coral-100 dark:bg-coral-900/40 text-coral-500 dark:text-coral-300">
+          <i class="fas fa-file-medical"></i>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-base text-ink-800 dark:text-sand-100">Medical Records</h4>
+          <p class="text-coral-500 text-[11px] font-semibold uppercase tracking-wider mt-0.5">Request or Transfer</p>
+          <a href="mailto:records@pawcarevet.com" class="text-teal-600 dark:text-teal-400 text-xs font-semibold mt-2 inline-flex items-center gap-1.5 hover:underline">
+            records@pawcarevet.com <i class="fas fa-arrow-right text-[9px]"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Dept 5 -->
+      <div class="dept-card">
+        <div class="dept-icon bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300">
+          <i class="fas fa-briefcase"></i>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-base text-ink-800 dark:text-sand-100">Careers</h4>
+          <p class="text-coral-500 text-[11px] font-semibold uppercase tracking-wider mt-0.5">Join Our Team</p>
+          <a href="mailto:careers@pawcarevet.com" class="text-teal-600 dark:text-teal-400 text-xs font-semibold mt-2 inline-flex items-center gap-1.5 hover:underline">
+            careers@pawcarevet.com <i class="fas fa-arrow-right text-[9px]"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Dept 6 -->
+      <div class="dept-card">
+        <div class="dept-icon bg-coral-100 dark:bg-coral-900/40 text-coral-500 dark:text-coral-300">
+          <i class="fas fa-hand-holding-heart"></i>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-base text-ink-800 dark:text-sand-100">Feedback</h4>
+          <p class="text-coral-500 text-[11px] font-semibold uppercase tracking-wider mt-0.5">Share Your Experience</p>
+          <a href="mailto:feedback@pawcarevet.com" class="text-teal-600 dark:text-teal-400 text-xs font-semibold mt-2 inline-flex items-center gap-1.5 hover:underline">
+            feedback@pawcarevet.com <i class="fas fa-arrow-right text-[9px]"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== TRAVEL / VISIT INFO — SPLIT SECTION ======== -->
+<section class="py-24 bg-sand-100 dark:bg-[#1f2536] relative overflow-hidden">
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-14 items-center max-w-6xl mx-auto">
+
+      <!-- Left: Image -->
+      <div class="relative order-2 lg:order-1">
+        <div class="absolute -top-8 -left-8 w-32 h-32 bg-coral-200/30 dark:bg-coral-800/20 rounded-full blur-2xl"></div>
+        <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white dark:border-ink-800 bg-teal-800/20">
+          <img src="assets/clinic-exterior.jpg" alt="PawCare Clinic exterior" class="w-full h-auto object-cover" style="aspect-ratio: 4/3;"/>
+        </div>
+        <!-- Floating badge -->
+        <div class="absolute -bottom-6 -right-4 bg-white dark:bg-ink-800 rounded-2xl p-4 shadow-xl flex items-center gap-3 border border-teal-100 dark:border-teal-800/40">
+          <div class="w-11 h-11 bg-teal-100 dark:bg-teal-900/50 rounded-full flex items-center justify-center">
+            <i class="fas fa-car text-teal-600 dark:text-teal-300"></i>
+          </div>
+          <div>
+            <p class="text-[10px] uppercase tracking-wider text-ink-400 font-bold">Free Parking</p>
+            <p class="text-sm font-bold text-ink-800 dark:text-sand-100">On-Site</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Content -->
+      <div class="order-1 lg:order-2">
+        <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+          <span class="w-10 h-0.5 bg-teal-500"></span> Planning Your Visit <span class="w-10 h-0.5 bg-teal-500"></span>
+        </span>
+        <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight mb-6">
+          Easy to <span class="text-coral-500">Find & Park</span>
+        </h2>
+        <p class="text-ink-500 dark:text-ink-300 text-base leading-relaxed mb-8">
+          Located in the heart of the Animal District, our hospital is easy to reach by car, bus, or bike — and there's always free parking on-site.
+        </p>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-[#232a3d] border border-teal-100 dark:border-teal-800/40">
+            <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0">
+              <i class="fas fa-car"></i>
+            </div>
+            <div>
+              <h4 class="font-display font-bold text-sm text-ink-800 dark:text-sand-100 mb-1">By Car</h4>
+              <p class="text-ink-500 dark:text-ink-300 text-xs leading-relaxed">Take exit 12 off the Pawnee Highway. Free parking on-site — 40 spaces including 6 oversized for large vehicles.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-[#232a3d] border border-teal-100 dark:border-teal-800/40">
+            <div class="w-10 h-10 rounded-xl bg-coral-100 dark:bg-coral-900/40 text-coral-500 dark:text-coral-300 flex items-center justify-center shrink-0">
+              <i class="fas fa-bus"></i>
+            </div>
+            <div>
+              <h4 class="font-display font-bold text-sm text-ink-800 dark:text-sand-100 mb-1">By Public Transit</h4>
+              <p class="text-ink-500 dark:text-ink-300 text-xs leading-relaxed">Bus routes 14, 27, and 42 stop directly in front of the clinic. The Animal District light rail station is a 4-minute walk away.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-[#232a3d] border border-teal-100 dark:border-teal-800/40">
+            <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0">
+              <i class="fas fa-wheelchair"></i>
+            </div>
+            <div>
+              <h4 class="font-display font-bold text-sm text-ink-800 dark:text-sand-100 mb-1">Accessibility</h4>
+              <p class="text-ink-500 dark:text-ink-300 text-xs leading-relaxed">Step-free entrance, accessible restrooms, wide exam room doors, and extra-large tables for giant breeds and wheelchair access.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="#" class="btn-teal px-7 py-3 text-sm inline-flex items-center gap-2">
+          <i class="fas fa-directions"></i> Get Directions
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FAQ ======== -->
+<section class="py-24 bg-white dark:bg-[#1a1f2e] relative overflow-hidden">
+  <div class="container mx-auto px-6 relative z-10 max-w-4xl">
+    <div class="text-center mb-16">
+      <span class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+        <span class="w-10 h-0.5 bg-teal-500"></span> Contact Questions <span class="w-10 h-0.5 bg-teal-500"></span>
+      </span>
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-ink-800 dark:text-sand-100 leading-tight">
+        Frequently Asked <span class="text-coral-500">Questions</span>
+      </h2>
+      <p class="text-ink-500 dark:text-ink-300 mt-3 text-base max-w-xl mx-auto">
+        Common questions about reaching us, booking, and what to expect.
+      </p>
+    </div>
+
+    <div class="space-y-4" id="contact-faq-accordion">
+      <!-- Item 1 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>How quickly will I hear back after submitting the form?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">Our team responds to most inquiries within 2 business hours during clinic hours. For appointment requests and general questions, expect a reply the same day. Emergency submissions are prioritized immediately.</p>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>Can I book an appointment through the contact form?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">Yes! Select "Book an Appointment" in the Subject dropdown, and our front desk will reach out with available times. For faster booking, use our online portal or call (555) 727-4PAW directly.</p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>Is there someone available after hours for emergencies?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">Yes! Our emergency hotline (555) 727-4PAW is staffed 24/7. A licensed veterinary professional will answer, triage your pet's condition, and guide you to the nearest available care, including our own emergency department.</p>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>Do you accept walk-in visits?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">We accept walk-ins for emergencies and urgent concerns during opening hours. For routine care, appointments are strongly recommended so we can give your pet unhurried attention. Call ahead if possible.</p>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="faq-vet overflow-hidden transition-all duration-300 faq-item">
+        <button class="w-full text-left p-6 md:p-7 flex items-center justify-between gap-4 font-display font-bold text-lg text-ink-800 dark:text-sand-100 faq-toggle focus:outline-none">
+          <span>Can I send medical records from another clinic?</span>
+          <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 flex items-center justify-center shrink-0 transition-transform duration-300 faq-icon">
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="hidden px-6 md:px-7 pb-6 pt-0 text-sm leading-relaxed text-ink-500 dark:text-ink-300 border-t border-teal-100/60 dark:border-teal-800/40 faq-content">
+          <p class="pt-4">Absolutely. Email records to records@pawcarevet.com or ask your previous vet to fax them to (555) 727-4729. We'll review everything before your first visit so we can provide continuity of care.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CTA ======== -->
+<section class="py-20 bg-gradient-to-br from-teal-700 via-teal-600 to-teal-500 dark:from-teal-800 dark:via-teal-700 dark:to-teal-600 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 80% 20%, white 1px, transparent 1px); background-size: 28px 28px;"></div>
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="max-w-2xl mx-auto text-center">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm mb-6">
+        <i class="fas fa-comments text-white text-2xl"></i>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-5 leading-tight">We'd Love to Hear From You</h2>
+      <p class="text-white/85 text-base md:text-lg mb-10 max-w-xl mx-auto">
+        Whether it's a question, a compliment, or feedback — your voice helps us care better.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#contact-form" class="bg-white text-teal-700 px-8 py-3.5 rounded-full font-bold shadow-lg hover:scale-105 transition inline-flex items-center gap-2 text-sm font-display">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </a>
+        <a href="tel:+15557274729" class="border-2 border-white/60 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-white hover:text-teal-700 transition inline-flex items-center gap-2 text-sm font-display">
+          <i class="fas fa-phone"></i> Call Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FOOTER — exactly copied from reference ======== -->
+<footer class="bg-white dark:bg-[#1a1f2e] text-ink-600 dark:text-ink-300 pt-16 pb-8 border-t border-teal-100 dark:border-teal-900/30">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div class="text-center md:text-start">
+        <a href="index.html" class="inline-flex items-center justify-center md:justify-start gap-3 mb-6 group hover:opacity-90 transition">
+          <div class="w-11 h-11 bg-teal-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" class="w-6 h-6" fill="none">
+              <circle cx="18" cy="22" r="5" fill="white" opacity="0.95"/>
+              <circle cx="10" cy="15" r="3.5" fill="white" opacity="0.95"/>
+              <circle cx="26" cy="15" r="3.5" fill="white" opacity="0.95"/>
+              <circle cx="14" cy="9" r="3" fill="white" opacity="0.95"/>
+              <circle cx="22" cy="9" r="3" fill="white" opacity="0.95"/>
+            </svg>
+          </div>
+          <span class="flex flex-col items-start leading-tight">
+            <span class="text-xl md:text-2xl font-display font-bold tracking-tight text-teal-800 dark:text-teal-200">PawCare</span>
+            <span class="text-coral-500 text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase -mt-0.5">Veterinary Clinic</span>
+          </span>
+        </a>
+        <p class="mb-5 text-ink-500 dark:text-ink-300 text-sm">Compassionate veterinary medicine. Modern care, warm hearts.</p>
+        <div class="flex justify-center md:justify-start gap-3">
+          <a href="#" class="social-vet" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-vet" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-vet" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="text-center md:text-start">
+        <h4 class="text-teal-800 dark:text-teal-300 font-display font-bold text-sm mb-5 uppercase tracking-widest">Services</h4>
+        <ul class="space-y-2.5">
+          <li><a href="services.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Vaccinations</a></li>
+          <li><a href="services.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Surgery</a></li>
+          <li><a href="services.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Dentistry</a></li>
+          <li><a href="services.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Diagnostics</a></li>
+        </ul>
+      </div>
+      <div class="text-center md:text-start">
+        <h4 class="text-teal-800 dark:text-teal-300 font-display font-bold text-sm mb-5 uppercase tracking-widest">Clinic</h4>
+        <ul class="space-y-2.5">
+          <li><a href="about.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">About</a></li>
+          <li><a href="vets.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Vets</a></li>
+          <li><a href="membership.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Membership</a></li>
+          <li></li>
+          <li><a href="client.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Pet Owner Portal</a></li>
+          <li><a href="admin.html" class="hover:text-teal-600 dark:hover:text-teal-400 transition block text-ink-500 dark:text-ink-300 text-sm">Admin Portal</a></li>
+        </ul>
+      </div>
+      <div class="text-center md:text-start">
+        <h4 class="text-teal-800 dark:text-teal-300 font-display font-bold text-sm mb-5 uppercase tracking-widest">Visit</h4>
+        <ul class="space-y-3">
+          <li class="flex justify-center md:justify-start gap-3 text-ink-500 dark:text-ink-300 text-sm"><i class="fas fa-map-marker-alt text-teal-500 mt-0.5"></i><span>450 Pet Wellness Way, Animal District</span></li>
+          <li class="flex justify-center md:justify-start gap-3 text-ink-500 dark:text-ink-300 text-sm"><i class="fas fa-phone text-teal-500"></i><span>(555) 727-4PAW</span></li>
+          <li class="flex justify-center md:justify-start gap-3 text-ink-500 dark:text-ink-300 text-sm"><i class="fas fa-envelope text-teal-500"></i><span>hello@pawcarevet.com</span></li>
+          <li class="flex justify-center md:justify-start gap-3 text-ink-500 dark:text-ink-300 text-sm"><i class="fas fa-clock text-teal-500"></i><span>Mon–Fri 8am – 7pm · Sat 9am – 4pm</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-teal-100 dark:border-teal-900/30 text-center text-xs text-ink-400 dark:text-ink-400">
+      <p>&copy; 2026 PAWCARE VETERINARY CLINIC. <i class="fas fa-paw text-coral-400 mx-1"></i> Caring for pets, always.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ======== SCRIPTS ======== -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Theme toggle
+    const themeBtns = document.querySelectorAll('#theme-toggle, #mobile-theme-toggle');
+    themeBtns.forEach(btn => {
+      btn?.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      });
+    });
+    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+    // RTL
+    function setRTL(isRTL) {
+      const html = document.documentElement;
+      if (isRTL === 'rtl' || isRTL === true) { html.setAttribute('dir', 'rtl'); localStorage.setItem('dir', 'rtl'); } 
+      else { html.setAttribute('dir', 'ltr'); localStorage.setItem('dir', 'ltr'); }
+    }
+    const savedDir = localStorage.getItem('dir');
+    if (savedDir === 'rtl') document.documentElement.setAttribute('dir', 'rtl');
+    else document.documentElement.setAttribute('dir', 'ltr');
+
+    const rtlBtn = document.getElementById('rtl-toggle');
+    if (rtlBtn) {
+      rtlBtn.addEventListener('click', () => {
+        const currentDir = document.documentElement.getAttribute('dir');
+        setRTL(currentDir === 'rtl' ? 'ltr' : 'rtl');
+      });
+    }
+    const mobileRtlBtn = document.getElementById('mobile-rtl-toggle');
+    if (mobileRtlBtn) {
+      mobileRtlBtn.addEventListener('click', () => {
+        const currentDir = document.documentElement.getAttribute('dir');
+        setRTL(currentDir === 'rtl' ? 'ltr' : 'rtl');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileToggle = document.getElementById('mobile-toggle');
+        if (mobileMenu && mobileMenu.classList.contains('open')) {
+          mobileMenu.classList.remove('open');
+          if (mobileToggle && mobileToggle.querySelector('i')) {
+            mobileToggle.querySelector('i').classList.remove('fa-times');
+            mobileToggle.querySelector('i').classList.add('fa-bars');
+          }
+        }
+      });
+    }
+
+    // Mobile menu
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        const icon = mobileToggle.querySelector('i');
+        if (mobileMenu.classList.contains('open')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      });
+      mobileMenu.querySelectorAll('a:not(#mobile-rtl-toggle)').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          if (mobileToggle.querySelector('i')) {
+            mobileToggle.querySelector('i').classList.remove('fa-times');
+            mobileToggle.querySelector('i').classList.add('fa-bars');
+          }
+        });
+      });
+    }
+
+    // Desktop dropdown touch/click support (e.g. Nest Hub Max)
+    document.querySelectorAll('.dropdown-parent').forEach(parent => {
+      const btn = parent.querySelector('button');
+      if (btn) {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = parent.classList.contains('open');
+          document.querySelectorAll('.dropdown-parent.open').forEach(p => p.classList.remove('open'));
+          if (!isOpen) {
+            parent.classList.add('open');
+          } else {
+            btn.blur();
+          }
+        });
+      }
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.dropdown-parent.open').forEach(p => p.classList.remove('open'));
+    });
+
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const toggle = item.querySelector('.faq-toggle');
+      const content = item.querySelector('.faq-content');
+      const icon = item.querySelector('.faq-icon i');
+      toggle?.addEventListener('click', () => {
+        const isOpen = !content.classList.contains('hidden');
+        faqItems.forEach(other => {
+          other.querySelector('.faq-content')?.classList.add('hidden');
+          const otherIcon = other.querySelector('.faq-icon i');
+          if (otherIcon) {
+            otherIcon.classList.remove('fa-minus');
+            otherIcon.classList.add('fa-plus');
+          }
+        });
+        if (!isOpen) {
+          content.classList.remove('hidden');
+          if (icon) {
+            icon.classList.remove('fa-plus');
+            icon.classList.add('fa-minus');
+          }
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
