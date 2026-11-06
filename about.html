@@ -708,31 +708,37 @@
 
 <!-- ======== ABOUT HERO — SOFT ORGANIC ======== -->
 <section class="about-hero">
+  <!-- Hero Background Image & Atmospheric Overlays -->
+  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <img src="assets/clinic-exterior.jpg" alt="PawCare Clinic Exterior Background" class="w-full h-full object-cover object-center scale-105 opacity-35 dark:opacity-25 transition duration-700" />
+    <div class="absolute inset-0 bg-gradient-to-b from-teal-950/85 via-teal-900/75 to-teal-950/90 dark:from-[#134e4a]/90 dark:via-[#1a1f2e]/80 dark:to-[#1a1f2e]"></div>
+  </div>
+
   <!-- Animated background elements -->
   <div class="about-pulse-ring hidden sm:block" style="width: 340px; height: 340px; top: 12%; left: -120px;"></div>
   <div class="about-pulse-ring hidden sm:block" style="width: 280px; height: 280px; bottom: 8%; right: -90px; animation-direction: reverse;"></div>
-  <div class="about-float-item text-5xl sm:text-6xl" style="top: 22%; left: 7%; animation-delay: 0s;"><i class="fas fa-paw"></i></div>
-  <div class="about-float-item coral text-4xl sm:text-5xl" style="top: 26%; right: 9%; animation-delay: 1.8s;"><i class="fas fa-heart-pulse"></i></div>
-  <div class="about-float-item coral text-4xl sm:text-5xl" style="bottom: 16%; left: 12%; animation-delay: 3.2s;"><i class="fas fa-stethoscope"></i></div>
-  <div class="about-float-item text-5xl sm:text-6xl" style="bottom: 18%; right: 11%; animation-delay: 2.4s;"><i class="fas fa-paw"></i></div>
+  <div class="about-float-item text-5xl sm:text-6xl text-white/15" style="top: 22%; left: 7%; animation-delay: 0s;"><i class="fas fa-paw"></i></div>
+  <div class="about-float-item coral text-4xl sm:text-5xl text-coral-300/20" style="top: 26%; right: 9%; animation-delay: 1.8s;"><i class="fas fa-heart-pulse"></i></div>
+  <div class="about-float-item coral text-4xl sm:text-5xl text-coral-300/20" style="bottom: 16%; left: 12%; animation-delay: 3.2s;"><i class="fas fa-stethoscope"></i></div>
+  <div class="about-float-item text-5xl sm:text-6xl text-white/15" style="bottom: 18%; right: 11%; animation-delay: 2.4s;"><i class="fas fa-paw"></i></div>
 
   <div class="container mx-auto px-6 relative z-10">
     <div class="max-w-4xl mx-auto text-center animate-fade-up">
-      <span class="inline-flex items-center gap-2 bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-teal-200/50 dark:border-teal-700/50">
-        <i class="fas fa-paw text-coral-400"></i> Our Story
+      <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-white/20">
+        <i class="fas fa-paw text-coral-300"></i> Our Story
       </span>
-      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] mb-6 text-ink-800 dark:text-sand-100">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] mb-6 text-white">
         More Than a Clinic <br/>
-        <span class="text-teal-600 dark:text-teal-400">A Second Home</span>
+        <span class="text-coral-300">A Second Home</span>
       </h1>
-      <p class="text-base sm:text-lg md:text-xl text-ink-500 dark:text-ink-300 max-w-2xl mx-auto leading-relaxed mb-10">
+      <p class="text-base sm:text-lg md:text-xl text-white/90 font-light max-w-2xl mx-auto leading-relaxed mb-10">
         Since 2005, PawCare has been a place where pets are treated like family and pet parents are treated like partners. We combine advanced medicine with genuine warmth.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="#our-story" class="btn-coral px-8 py-4 text-sm inline-flex items-center gap-2 shadow-xl">
           <i class="fas fa-book-open"></i> Read Our Story
         </a>
-        <a href="contact.html" class="btn-ghost-vet px-8 py-4 text-sm inline-flex items-center gap-2">
+        <a href="contact.html" class="btn-ghost-vet border-white/60 text-white hover:bg-white hover:text-teal-900 px-8 py-4 text-sm inline-flex items-center gap-2">
           <i class="fas fa-calendar-check"></i> Visit Us
         </a>
       </div>

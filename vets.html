@@ -683,43 +683,49 @@
 
 <!-- ======== VETS HERO — SPLIT WITH PHOTO GRID ======== -->
 <section class="vets-hero">
+  <!-- Hero Background Image & Atmospheric Overlays -->
+  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <img src="assets/d5.jpg" alt="PawCare Vets Team Background" class="w-full h-full object-cover object-center scale-105 opacity-30 dark:opacity-20 transition duration-700" />
+    <div class="absolute inset-0 bg-gradient-to-r from-teal-950/90 via-teal-900/80 to-teal-950/85 dark:from-[#115e59]/95 dark:via-[#0f766e]/80 dark:to-[#1a1f2e]/95"></div>
+  </div>
+
   <div class="container mx-auto px-6 relative z-10">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       
       <!-- Left: Content -->
       <div class="text-center lg:text-left">
-        <span class="inline-flex items-center gap-2 bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-teal-200/50 dark:border-teal-700/50">
-          <i class="fas fa-user-doctor text-coral-400"></i> Meet The Team
+        <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md text-white px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-white/20">
+          <i class="fas fa-user-doctor text-coral-300"></i> Meet The Team
         </span>
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-display font-bold leading-[1.1] mb-6 text-ink-800 dark:text-sand-100">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-display font-bold leading-[1.1] mb-6 text-white">
           Compassionate<br/>
-          <span class="text-teal-600 dark:text-teal-400">Veterinary Experts</span>
+          <span class="text-coral-300">Veterinary Experts</span>
         </h1>
-        <p class="text-base sm:text-lg text-ink-500 dark:text-ink-300 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+        <p class="text-base sm:text-lg text-white/90 font-light mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
           25+ board-certified veterinarians, surgeons, and nurses who treat every pet like their own. Fear-Free certified, endlessly curious, and always learning.
         </p>
         <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start">
           <a href="contact.html" class="btn-coral px-8 py-4 text-sm inline-flex items-center justify-center gap-2 shadow-xl">
             <i class="fas fa-calendar-check"></i> Book With a Vet
           </a>
-          <a href="#meet-the-team" class="btn-ghost-vet px-8 py-4 text-sm inline-flex items-center justify-center gap-2">
+          <a href="#meet-the-team" class="btn-ghost-vet border-white/60 text-white hover:bg-white hover:text-teal-900 px-8 py-4 text-sm inline-flex items-center justify-center gap-2">
             <i class="fas fa-users"></i> Meet Everyone
           </a>
         </div>
 
         <!-- Trust row -->
-        <div class="flex flex-wrap items-center gap-6 mt-10 pt-8 border-t border-teal-100 dark:border-teal-800/30 justify-center lg:justify-start">
+        <div class="flex flex-wrap items-center gap-6 mt-10 pt-8 border-t border-white/20 justify-center lg:justify-start">
           <div class="flex items-center gap-2">
-            <i class="fas fa-certificate text-teal-500 text-sm"></i>
-            <span class="text-ink-500 dark:text-ink-300 text-sm">AAHA Accredited</span>
+            <i class="fas fa-certificate text-teal-300 text-sm"></i>
+            <span class="text-white/85 text-sm">AAHA Accredited</span>
           </div>
           <div class="flex items-center gap-2">
-            <i class="fas fa-shield-heart text-teal-500 text-sm"></i>
-            <span class="text-ink-500 dark:text-ink-300 text-sm">Fear-Free Certified</span>
+            <i class="fas fa-shield-heart text-coral-300 text-sm"></i>
+            <span class="text-white/85 text-sm">Fear-Free Certified</span>
           </div>
           <div class="flex items-center gap-2">
-            <i class="fas fa-graduation-cap text-teal-500 text-sm"></i>
-            <span class="text-ink-500 dark:text-ink-300 text-sm">Board-Certified Specialists</span>
+            <i class="fas fa-graduation-cap text-teal-300 text-sm"></i>
+            <span class="text-white/85 text-sm">Board-Certified Specialists</span>
           </div>
         </div>
       </div>
@@ -727,30 +733,21 @@
       <!-- Right: Photo grid collage -->
       <div class="relative">
         <div class="grid grid-cols-2 gap-4">
-          <div class="rounded-3xl overflow-hidden shadow-lg border-4 border-white dark:border-ink-800 mt-8 bg-teal-800/20">
+          <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 mt-8 bg-teal-800/20">
             <img src="assets/vet-1.jpg" alt="Dr. Maya Collins" class="w-full h-44 md:h-56 object-cover object-top"/>
           </div>
-          <div class="rounded-3xl overflow-hidden shadow-lg border-4 border-white dark:border-ink-800 bg-teal-800/20">
+          <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 bg-teal-800/20">
             <img src="assets/vet-2.jpg" alt="Dr. James Park" class="w-full h-52 md:h-64 object-cover object-top"/>
           </div>
-          <div class="rounded-3xl overflow-hidden shadow-lg border-4 border-white dark:border-ink-800 bg-teal-800/20">
+          <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 bg-teal-800/20">
             <img src="assets/vet-3.jpg" alt="Dr. Aisha Bello" class="w-full h-52 md:h-64 object-cover object-top"/>
           </div>
-          <div class="rounded-3xl overflow-hidden shadow-lg border-4 border-white dark:border-ink-800 mt-8 bg-teal-800/20">
+          <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 mt-8 bg-teal-800/20">
             <img src="assets/vet-4.jpg" alt="Dr. Emily Rivera" class="w-full h-44 md:h-56 object-cover object-[center_35%]" style="object-position: center 35%;"/>
           </div>
         </div>
-        <!-- Floating badge -->
-        <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-white dark:bg-ink-800 rounded-2xl px-6 py-4 shadow-xl border border-teal-100 dark:border-teal-800/40 flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full bg-teal-100 dark:bg-teal-900/50 flex items-center justify-center">
-            <i class="fas fa-user-doctor text-teal-600 dark:text-teal-300"></i>
-          </div>
-          <div>
-            <p class="text-[10px] uppercase tracking-wider text-ink-400 font-semibold">Full Team</p>
-            <p class="text-sm font-bold text-ink-800 dark:text-sand-100">25+ Specialists</p>
-          </div>
-        </div>
       </div>
+
     </div>
   </div>
 </section>

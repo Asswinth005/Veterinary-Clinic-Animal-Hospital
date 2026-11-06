@@ -679,26 +679,30 @@
 
 <!-- ======== HOME2 — CENTERED HERO ======== -->
 <section class="hero-split dot-grid pt-32 pb-20 lg:pt-36 lg:pb-24 relative overflow-hidden">
-  <!-- Subtle ambient decorative glow (centered) -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-teal-500/10 dark:bg-teal-400/10 rounded-full blur-3xl pointer-events-none -z-0"></div>
-  <div class="absolute top-24 left-6 sm:left-12 text-6xl sm:text-7xl opacity-15 dark:opacity-10 text-teal-600 pointer-events-none select-none">🐾</div>
-  <div class="absolute bottom-6 right-6 sm:bottom-10 sm:right-12 text-6xl sm:text-7xl opacity-15 dark:opacity-10 text-coral-500 pointer-events-none select-none">🐾</div>
+  <!-- Hero Background Image & Atmospheric Overlays -->
+  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <img src="assets/h1.jpg" alt="PawCare Hero Background" class="w-full h-full object-cover object-center scale-105 opacity-40 dark:opacity-30 transition duration-700" />
+    <div class="absolute inset-0 bg-gradient-to-b from-teal-950/80 via-ink-950/70 to-teal-950/85 dark:from-[#1a1f2e]/90 dark:via-[#1a1f2e]/80 dark:to-[#1a1f2e]"></div>
+  </div>
+
+  <div class="absolute top-24 left-6 sm:left-12 text-6xl sm:text-7xl opacity-15 dark:opacity-10 text-teal-400 pointer-events-none select-none">🐾</div>
+  <div class="absolute bottom-6 right-6 sm:bottom-10 sm:right-12 text-6xl sm:text-7xl opacity-15 dark:opacity-10 text-coral-400 pointer-events-none select-none">🐾</div>
 
   <div class="container mx-auto px-6 relative z-10 w-full">
     <div class="max-w-3xl lg:max-w-4xl mx-auto text-center">
       
       <!-- Top Badge -->
-      <div class="inline-flex items-center gap-2 bg-teal-50 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-teal-200/50 dark:border-teal-700/50 shadow-sm">
-        <i class="fas fa-wand-magic-sparkles text-coral-400"></i> Welcome to PawCare
+      <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-white/20 shadow-sm">
+        <i class="fas fa-wand-magic-sparkles text-coral-300"></i> Welcome to PawCare
       </div>
 
       <!-- Main Headline -->
-      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.12] mb-6 text-ink-800 dark:text-sand-100 text-balance">
-        Where <span class="text-teal-600 dark:text-teal-400">Paws</span> Meet <span class="text-coral-500">Purpose</span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.12] mb-6 text-white text-balance">
+        Where <span class="text-teal-300">Paws</span> Meet <span class="text-coral-400">Purpose</span>
       </h1>
 
-      <!-- Supporting Subtitle -->
-      <p class="text-base sm:text-lg md:text-xl text-ink-500 dark:text-ink-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+      <!-- Supporting Subtitle (Clean pure text, no box/card) -->
+      <p class="text-base sm:text-lg md:text-xl text-white/90 font-light mb-10 max-w-2xl mx-auto leading-relaxed">
         We blend cutting-edge veterinary medicine with a gentle, fear-free approach. Your pet's health journey starts here — with tail wags, purrs, and trusted care.
       </p>
 
@@ -707,38 +711,39 @@
         <a href="contact.html" class="btn-coral px-8 py-4 text-sm sm:text-base inline-flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl">
           <i class="fas fa-calendar-check"></i> Book a Visit
         </a>
-        <a href="services.html" class="btn-ghost-vet px-8 py-4 text-sm sm:text-base inline-flex items-center justify-center gap-2">
+        <a href="services.html" class="btn-ghost-vet border-white/60 text-white hover:bg-white hover:text-teal-900 px-8 py-4 text-sm sm:text-base inline-flex items-center justify-center gap-2">
           <i class="fas fa-arrow-right"></i> Explore Services
         </a>
       </div>
 
       <!-- Trust Row -->
-      <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 pt-8 border-t border-teal-100 dark:border-teal-800/30 max-w-2xl mx-auto">
+      <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 pt-8 border-t border-white/20 max-w-2xl mx-auto">
         <div class="flex items-center gap-2.5">
           <div class="flex -space-x-2">
             <img class="w-8 h-8 rounded-full object-cover border-2 border-white dark:border-ink-800" src="assets/review-sarah.jpg" alt="Pet Parent">
             <img class="w-8 h-8 rounded-full object-cover border-2 border-white dark:border-ink-800" src="assets/review-david.jpg" alt="Pet Parent">
             <img class="w-8 h-8 rounded-full object-cover border-2 border-white dark:border-ink-800" src="assets/review-maya.jpg" alt="Pet Parent">
           </div>
-          <span class="text-ink-600 dark:text-ink-300 text-sm font-medium ms-1">2,400+ happy pets</span>
+          <span class="text-white/90 text-sm font-medium ms-1">2,400+ happy pets</span>
         </div>
         <div class="flex items-center gap-1.5">
-          <div class="flex text-amber-400 text-sm">
+          <div class="flex text-amber-300 text-sm">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
           </div>
-          <span class="text-ink-600 dark:text-ink-300 text-sm font-medium">4.9 rating</span>
+          <span class="text-white/90 text-sm font-medium">4.9 rating</span>
         </div>
         <div class="flex items-center gap-2">
-          <i class="fas fa-heart-pulse text-coral-500 text-sm"></i>
-          <span class="text-ink-600 dark:text-ink-300 text-sm font-medium">24/7 Ready</span>
+          <i class="fas fa-heart-pulse text-coral-400 text-sm"></i>
+          <span class="text-white/90 text-sm font-medium">24/7 Ready</span>
         </div>
       </div>
 
     </div>
+
   </div>
 </section>
 
